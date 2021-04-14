@@ -2,78 +2,88 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use App\Http\Requests\RequestArticle;
+use App\Models\Article;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class AdminArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin::index');
-    }
+        $articles = Article::whereRaw(1);
+        if($request->name) $articles->where('a_name', 'like', '%'.$request->name.'%');
+        $articles = $articles->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+        $viewData = [ 'articles' => $articles];
+        return view('admin::article.index', $viewData);
+    }
     public function create()
     {
-        return view('admin::create');
+        return view('admin::article.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function store(RequestArticle $requestArticle)
     {
-        //
-    }
+        $this->insertOrUpdate($requestArticle);
+        return redirect()->back();
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function edit($id)
     {
-        return view('admin::edit');
+        $article = Article::find($id);
+        return view('admin::article.create', compact('article'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function update(RequestArticle $requestArticle, $id)
     {
-        //
+        $this->insertOrUpdate($requestArticle, $id);
+        return redirect()->back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function insertOrUpdate($requestArticle, $id='')
     {
-        //
+        $article = new Article();
+        if ($id) {
+            $article = Article::find($id);
+        }
+        $article->a_name = $requestArticle->a_name;
+        $article->a_slug = Str::slug($requestArticle->a_name);
+        $article->a_description = $requestArticle->a_description;
+        $article->a_content = $requestArticle->a_content;
+        $article->a_title_seo = $requestArticle->a_title_seo ? $requestArticle->a_title_seo : $requestArticle->a_name;
+        $article->a_description_seo = $requestArticle->a_description_seo ? $requestArticle->a_description_seo : $requestArticle->a_name;
+
+        if ($requestArticle->hasFile('a_avatar')) 
+        {
+            $file = upload_image('a_avatar');
+
+            if(isset($file['name']))
+            {
+                $article->a_avatar = $file['name'];
+            }
+        }
+        $article->save();
+    }
+    public function action($action, $id)
+    {
+        if($action)
+        {
+            $article = Article::find($id);
+            switch($action)
+            {
+                case 'delete':
+                    $article->delete();
+                break;
+                case 'active':
+                    $article->a_active = $article->a_active ? 0 : 1 ;
+                    $article->save();
+                break;
+                case 'hot':
+                    $article->a_hot = $article->a_hot ? 0 : 1;
+                    $article->save();
+                break;
+            }
+        }
+        return redirect()->back();
     }
 }

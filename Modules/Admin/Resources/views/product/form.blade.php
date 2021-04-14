@@ -54,10 +54,12 @@
                 <select name="pro_category_id" id="" class="form-control">
                     <option value="">--Chọn loại sản phẩm--</option>
                     @if (isset($categories))
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ old('pro_category_id', (isset($product->pro_category_id) ? $product->pro_category_id : '')== $category->id ? "selected='selected'" : "" ) }} > {{ $category->c_name }} </option>    
-                    @endforeach
-                @endif
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('pro_category_id', (isset($product->pro_category_id) ? $product->pro_category_id : '') == $category->id ? "selected='selected'" : '') }}>
+                                {{ $category->c_name }} </option>
+                        @endforeach
+                    @endif
                 </select>
                 @if ($errors->has('pro_category_id'))
                     <span class="font-weight-bold font-italic text-danger small">
@@ -68,8 +70,8 @@
 
             <div class="form-group">
                 <label for="pro_price" class="form-label">Giá sản phẩm:</label>
-                <input type="number" name="pro_price" class="form-control" placeholder="Giá sản phẩm" id="" 
-                    value="{{ old('pro_price', isset($product->pro_price) ? $product->pro_price : '') }}" >
+                <input type="number" name="pro_price" class="form-control" placeholder="Giá sản phẩm" id=""
+                    value="{{ old('pro_price', isset($product->pro_price) ? $product->pro_price : '') }}">
                 @if ($errors->has('pro_price'))
                     <span class="font-weight-bold font-italic text-danger small">
                         {{ $errors->first('pro_price') }}
@@ -83,11 +85,18 @@
             </div>
 
             <div class="form-group">
-                <label for="c_description_seo" class="form-label">Avatar</label>
-                <input type="file" name="avatar" class="form-control" id="">
+                @if (isset($product))
+                    <img id="output_img" src=" {{ pare_url_file($product->pro_avatar) }}" class="img-fluid" alt="">
+                @else
+                    <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="img-fluid" alt="">
+                @endif
             </div>
-            <div class="form-group">
 
+            <div class="form-group">
+                <input type="file" name="avatar" class="form-control" id="input_img">
+            </div>
+
+            <div class="form-group">
                 <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
                     Nổi bật</label>
             </div>
