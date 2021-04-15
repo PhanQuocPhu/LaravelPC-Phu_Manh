@@ -8,12 +8,12 @@
                     <!-- language division start -->
                     <div class="disflow">
                         <div class="expand lang-all disflow">
-                            <a href="#"><img src="img/country/en.gif" alt="">English</a>
+                            <a href="#"><img src="{{asset('img/country')}}/en.gif" alt="">English</a>
                             <ul class="restrain language">
-                                <li><a href="#"><img src="img/country/it.gif" alt="">Italiano</a></li>
-                                <li><a href="#"><img src="img/country/nl_nl.gif" alt="">Nederlands</a></li>
-                                <li><a href="#"><img src="img/country/de_de.gif" alt="">Deutsch</a></li>
-                                <li><a href="#"><img src="img/country/en.gif" alt="">English</a></li>
+                                <li><a href="#"><img src="{{asset('img/country')}}/it.gif" alt="">Italiano</a></li>
+                                <li><a href="#"><img src="{{asset('img/country')}}/nl_nl.gif" alt="">Nederlands</a></li>
+                                <li><a href="#"><img src="{{asset('img/country')}}/de_de.gif" alt="">Deutsch</a></li>
+                                <li><a href="#"><img src="{{asset('img/country')}}/en.gif" alt="">English</a></li>
                             </ul>
                         </div>
                         <div class="expand lang-all disflow">
@@ -32,7 +32,7 @@
             <!-- logo start -->
             <div class="col-md-4 text-center">
                 <div class="top-logo">
-                    <a href="index.html"><img src="img/logo.gif" alt="" /></a>
+                    <a href="index.html"><img src="{{asset('img/logo.gif')}}" alt="" /></a>
                 </div>
             </div>
             <!-- logo end -->
@@ -71,15 +71,9 @@
                     <div class="mainmenu">
                         <nav>
                             <ul>
-                                <li class="expand"><a href="index.html">Trang chủ</a>
+                                <li class="expand"><a href="{{route('home')}}">Trang chủ</a>
                                     <ul class="restrain sub-menu">
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                        <li><a href="index-5.html">Home 5</a></li>
-                                        <li><a href="index-6.html">Home 6</a></li>
-                                        <li><a href="index-7.html">Home 7</a></li>
-                                        <li><a href="index-8.html">Home 8</a></li>
+                                        {{-- <li><a href="index-8.html">Home 8</a></li> --}}
                                     </ul>									
                                 </li>
                                 
@@ -189,22 +183,22 @@
                                         <ul class="cart-list">
                                             <li>
                                                 <a class="sm-cart-product" href="product-details.html">
-                                                    <img src="img/products/sm-products/cart1.jpg" alt="">
+                                                    <img src="{{asset('img/products/sm-products/cart1.jpg')}}" alt="">
                                                 </a>
                                                 <div class="small-cart-detail">
                                                     <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    <a href="#" class="edit-btn"><img src="img/btn_edit.gif" alt="Edit Button" /></a>
+                                                    <a href="#" class="edit-btn"><img src="{{asset('img/btn_edit.gif')}}" alt="Edit Button" /></a>
                                                     <a class="small-cart-name" href="product-details.html">Voluptas nulla</a>
                                                     <span class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <a class="sm-cart-product" href="product-details.html">
-                                                    <img src="img/products/sm-products/cart2.jpg" alt="">
+                                                    <img src="{{asset('img/products/sm-products/cart2.jpg')}}" alt="">
                                                 </a>
                                                 <div class="small-cart-detail">
                                                     <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    <a href="#" class="edit-btn"><img src="img/btn_edit.gif" alt="Edit Button" /></a>
+                                                    <a href="#" class="edit-btn"><img src="{{asset('img/btn_edit.gif')}}" alt="Edit Button" /></a>
                                                     <a class="small-cart-name" href="product-details.html">Donec ac tempus</a>
                                                     <span class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
                                                 </div>

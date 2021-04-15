@@ -16,7 +16,7 @@ class ProductDetailController extends Controller
         {
             $productDetail = Product::where('pro_active', Product::STATUS_PUBLIC)->find($id);
             $viewData = [
-                'productDetail'=>$productDetail
+                'productDetail'=>$productDetail,
             ];
 
             return view('product.detail', $viewData);

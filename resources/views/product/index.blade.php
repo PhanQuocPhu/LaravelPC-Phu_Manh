@@ -208,7 +208,7 @@
                     <div class="container-inner">
                         <ul>
                             <li class="home">
-                                <a href="index.html">Home</a>
+                                <a href="{{route('home')}}">Home</a>
                                 <span><i class="fa fa-angle-right"></i></span>
                             </li>
                             <li class="category3"><span>{{ $cateProduct->c_name }}</span></li>
@@ -229,7 +229,7 @@
                     <div class="topbar-left">
                         <aside class="widge-topbar">
                             <div class="bar-title">
-                                <div class="bar-ping"><img src="" alt=""></div>
+                                <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt=""></div>
                                 <h2>Shop by</h2>
                             </div>
                         </aside>
@@ -336,7 +336,7 @@
                         </aside>
                         <aside class="widge-topbar">
                             <div class="bar-title">
-                                <div class="bar-ping"><img src="img/bar-ping.png" alt=""></div>
+                                <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt=""></div>
                                 <h2>Tags</h2>
                             </div>
                             <div class="exp-tags">
@@ -424,7 +424,7 @@
                                                         </a>
                                                         <div class="action-zoom">
                                                             <div class="add-to-cart">
-                                                                <a href="#" title="Quick View"><i
+                                                                <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}" title="Quick View"><i
                                                                         class="fa fa-search-plus"></i></a>
                                                             </div>
                                                         </div>
@@ -432,11 +432,11 @@
                                                             <div class="action-buttons">
                                                                 <div class="add-to-links">
                                                                     <div class="add-to-wishlist">
-                                                                        <a href="#" title="Add to Wishlist"><i
+                                                                        <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}" title="Add to Wishlist"><i
                                                                                 class="fa fa-heart"></i></a>
                                                                     </div>
                                                                     <div class="compare-button">
-                                                                        <a href="#" title="Add to Cart"><i
+                                                                        <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}" title="Add to Cart"><i
                                                                                 class="icon-bag"></i></a>
                                                                     </div>
                                                                 </div>
@@ -448,7 +448,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="price-box">
-                                                            <span class="new-price">{{ $product->pro_price }}</span>
+                                                            <span class="new-price">{{number_format( $product->pro_price,0,',','.') }}đ</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-content">
@@ -528,14 +528,14 @@
         <div class="container">
             <div class="row">
                 <div class="brand-carousel">
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg1-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg2-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg3-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg4-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg5-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg2-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg3-brand.jpg" alt="" /></a></div>
-                    <div class="brand-item"><a href="#"><img src="img/brand/bg4-brand.jpg" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg1-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg2-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg3-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg4-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg5-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg2-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg3-brand.jpg')}}" alt="" /></a></div>
+                    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg4-brand.jpg')}}" alt="" /></a></div>
                 </div>
             </div>
         </div>

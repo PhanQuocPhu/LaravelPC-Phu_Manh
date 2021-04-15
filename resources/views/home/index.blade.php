@@ -23,7 +23,7 @@
                             <!-- featured block start -->
                             <!-- block title start -->
                             <div class="bar-title">
-                                <div class="bar-ping"><img src="img/bar-ping.png" alt="" /></div>
+                                <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt="" /></div>
                                 <h2>Sản phẩm nổi bật</h2>
                             </div>
                             <!-- block title end -->
@@ -147,7 +147,7 @@
                     <div class="aboutthumb-area">
                         <!-- block title start -->
                         <div class="bar-title rox-title">
-                            <div class="bar-ping"><img src="img/bar-ping.png" alt="" /></div>
+                            <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt="" /></div>
                             <h2>About Us</h2>
                         </div>
                         <!-- block title end -->

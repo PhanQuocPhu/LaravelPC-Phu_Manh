@@ -806,7 +806,7 @@ span.amount {
     width: 32px;
     height: 32px;
     position: absolute;
-    background: url(img/title-top.png) no-repeat center center;
+    background: url('img/title-top.png') no-repeat center center;
     position: absolute;
     left: 0;
     right: 0;
