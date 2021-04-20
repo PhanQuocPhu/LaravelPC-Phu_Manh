@@ -1,77 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- breadcrumbs area start -->
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="container-inner">
+                                <ul>
+                                    <li class="home">
+                                        <a href="index.html">Home</a>
+                                        <span><i class="fa fa-angle-right"></i></span>
+                                    </li>
+                                    <li class="category3"><span>Register</span></li>
+                                </ul>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+            <!-- breadcrumbs area end -->
+            <!-- account-details Area Start -->
+            <div class="customer-login-area">
+                <div class="container">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="customer-register my-account">
+                            <form method="post" class="register" action="">
+                                @csrf
+                                <div class="form-fields">
+                                    <h2>Register</h2>
+                                    <p class="form-row form-row-wide">
+                                        <label for="reg_name">Họ tên<span class="required">*</span></label>
+                                        <input type="text" class="input-text" name="name" id="reg_name" value="">
+                                    </p>
+                                    <p class="form-row form-row-wide">
+                                        <label for="reg_email">Email address <span class="required">*</span></label>
+                                        <input type="email" class="input-text" name="email" id="reg_email" value="">
+                                    </p>
+                                    <p class="form-row form-row-wide">
+                                        <label for="reg_password">Password <span class="required">*</span></label>
+                                        <input type="password" class="input-text" name="password" id="reg_password">
+                                    </p>
+                                    <p class="form-row form-row-wide">
+                                        <label for="reg_phone">Phone Number<span class="required">*</span></label>
+                                        <input type="text" class="input-text" name="phone" id="reg_phone" value="">
+                                    </p>
+                                    <div style="left: -999em; position: absolute;">
+                                        <label for="trap">Anti-spam</label>
+                                        <input type="text" name="email_2" id="trap" tabindex="-1">
+                                    </div>
+                                </div>
+                                <div class="form-action">
+                                    <div class="actions-log">
+                                        <input type="submit" class="button" name="register" value="Register">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- account-details Area end -->
         </div>
     </div>
-</div>
 @endsection

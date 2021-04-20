@@ -75,8 +75,8 @@
             </li>
             <!-- Nav Item - Đơn Hàng -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.get.list.category') }}">
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.transaction' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.transaction') }}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Đơn Hàng</span>
                 </a>
@@ -86,6 +86,13 @@
                 <a class="nav-link" href="{{ route('admin.get.list.article') }}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Tin Tức</span>
+                </a>
+            </li>
+             <!-- Nav Item - Thành viên -->
+             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.user') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Thành viên</span>
                 </a>
             </li>
 
