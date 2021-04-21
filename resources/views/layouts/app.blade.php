@@ -35,7 +35,8 @@
         <link rel="stylesheet" href="{{ asset('theme_admin/css/owl.transitions.css') }} ">
         
 		<!-- font-awesome.min CSS
-		============================================ -->      
+		============================================ -->  
+		<link href=" {{ asset('theme_admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">    
         <link rel="stylesheet" href="{{ asset('theme_admin/css/font-awesome.min.css') }}">
 		
 		<!-- font-icon CSS

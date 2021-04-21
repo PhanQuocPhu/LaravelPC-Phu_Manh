@@ -30,4 +30,5 @@ Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController
 Route::prefix('shopping')->group(function ()
 {
     Route::get('/add/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
+    Route::get('/danh-sach',[App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
 });

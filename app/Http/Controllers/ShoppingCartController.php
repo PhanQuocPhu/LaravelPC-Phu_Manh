@@ -26,4 +26,10 @@ class ShoppingCartController extends Controller
         return redirect()->back();
 
     }
+
+    public function getListShoppingCart()
+    {
+        $products = \Cart::content();
+        return view('shopping.index', compact('products'));
+    }
 }
