@@ -24,7 +24,10 @@ Route::get('dang-xuat', [App\Http\Controllers\Auth\LoginController::class, 'getL
 }); */
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/* Route::get('/', 'HomeController@index')->name('home'); */
-
 Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
 Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
+
+Route::prefix('shopping')->group(function ()
+{
+    Route::get('/add/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
+});

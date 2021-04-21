@@ -458,7 +458,7 @@
                                                                                     class="fa fa-heart"></i></a>
                                                                         </div>
                                                                         <div class="compare-button">
-                                                                            <a href="#" title="Add to Cart"><i
+                                                                            <a href="{{route('add.shopping.cart',$pronew->id)}}" title="Add to Cart"><i
                                                                                     class="icon-bag"></i></a>
                                                                         </div>
                                                                     </div>

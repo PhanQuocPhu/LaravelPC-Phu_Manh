@@ -158,17 +158,17 @@
                 <!-- mainmenu area end -->
                 <div class="col-md-6 text-right">
                     <div class="top-detail crt-edt">
-                        
                         <!-- addcart top start -->
                         <div class="disflow crt-edt">
                             <div class="circle-shopping expand">
                                 <div class="shopping-carts text-right">
                                     <div class="cart-toggler">
                                         <a href="#"><i class="icon-bag"></i></a>
-                                        <a href=""><span class="cart-quantity">2</span></a>
+                                        <a href=""><span class="cart-quantity">{{ \Cart::count() }}</span></a>
                                     </div>
                                     <div class="restrain small-cart-content">
                                         <ul class="cart-list">
+                                            {{-- Cart Product contain start --}}
                                             <li>
                                                 <a class="sm-cart-product" href="product-details.html">
                                                     <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
@@ -185,24 +185,9 @@
                                                         class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <a class="sm-cart-product" href="product-details.html">
-                                                    <img src="{{ asset('img/products/sm-products/cart2.jpg') }}"
-                                                        alt="">
-                                                </a>
-                                                <div class="small-cart-detail">
-                                                    <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    <a href="#" class="edit-btn"><img
-                                                            src="{{ asset('img/btn_edit.gif') }}"
-                                                            alt="Edit Button" /></a>
-                                                    <a class="small-cart-name" href="product-details.html">Donec ac
-                                                        tempus</a>
-                                                    <span
-                                                        class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
-                                                </div>
-                                            </li>
+                                            {{-- Cart Product contain end --}}
                                         </ul>
-                                        <p class="total">Subtotal: <span class="amount">$155.00</span></p>
+                                        <p class="total">Subtotal: <span class="amount">{{ \Cart::subtotal() }} vnđ</span></p>
                                         <p class="buttons">
                                             <a href="checkout.html" class="button">Checkout</a>
                                         </p>
@@ -221,7 +206,7 @@
                                         <li><a href="cart.html">My Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="#">Testimonial</a></li>
-                                        <li><a href="{{route('get.logout.user')}}">Log Out</a></li>
+                                        <li><a href="{{ route('get.logout.user') }}">Log Out</a></li>
                                     @else
                                         <li><a href="{{ route('get.register') }}">Register</a></li>
                                         <li><a href="{{ route('get.login') }}">Log In</a></li>

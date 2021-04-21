@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
     protected $guarded = ['*'];
     
     protected $hidden = [
@@ -19,3 +20,4 @@ class User extends Authenticatable
     ];
 
 }
+
