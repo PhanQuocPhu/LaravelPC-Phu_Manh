@@ -17,12 +17,12 @@
                     </div>
                     <!-- category menu end -->
 
-                    <!-- Sản phẩm nổi bật -->
+                    <!-- Sản phẩm nổi bật start -->
                     @if (@isset($productHot))
                         <div class="block-category side-area">
                             <!-- featured block start -->
                             <!-- block title start -->
-                            <div class="bar-title">
+                            <div class="bar-title row">
                                 <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt="" /></div>
                                 <h2>Sản phẩm nổi bật</h2>
                             </div>
@@ -41,8 +41,8 @@
                                             </div>
                                             <div class="category-info">
                                                 <h3><a href="product-details.html">{{ $hot->pro_name }}</a></h3>
-                                                <div class="cat-price">$235.00 <span
-                                                        class="old-price">{{ $hot->pro_price }}</span></div>
+                                                <div class="cat-price">{{ number_format($hot->pro_price - ($hot->pro_price * $hot->pro_sale), 0, '.', '.')}} vnđ <span
+                                                        class="old-price">{{ number_format($hot->pro_price, 0, '.', '.')}} vnđ</span></div>
                                                 <div class="cat-rating">
                                                     <a href="#"><i class="fa fa-star"></i></a>
                                                     <a href="#"><i class="fa fa-star"></i></a>
@@ -139,7 +139,7 @@
 
                         </div>
                     @endif
-                    <!-- Sản phẩm nổi bật -->
+                    <!-- Sản phẩm nổi bật end -->
 
 
 
@@ -469,7 +469,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="price-box">
-                                                                <span class="new-price">{{ $pronew->pro_price }}</span>
+                                                                <span class="new-price">{{ number_format($pronew->pro_price, 0, '.', '.') }} vnđ</span>
                                                             </div>
                                                         </div>
                                                         <div class="product-content">

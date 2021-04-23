@@ -169,7 +169,27 @@
                                     <div class="restrain small-cart-content">
                                         <ul class="cart-list">
                                             {{-- Cart Product contain start --}}
-                                            <li>
+                                            @if (isset($products))
+                                                @foreach ($products as $procart)
+                                                <li>
+                                                    <a class="sm-cart-product" href="product-details.html">
+                                                        <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
+                                                            alt="">
+                                                    </a>
+                                                    <div class="small-cart-detail">
+                                                        <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
+                                                        <a href="#" class="edit-btn"><img
+                                                                src="{{ asset('img/btn_edit.gif') }}"
+                                                                alt="Edit Button" /></a>
+                                                        <a class="small-cart-name" href="product-details.html">Voluptas
+                                                            nulla</a>
+                                                        <span
+                                                            class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            @endif
+                                           {{--  <li>
                                                 <a class="sm-cart-product" href="product-details.html">
                                                     <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
                                                         alt="">
@@ -184,7 +204,7 @@
                                                     <span
                                                         class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
                                                 </div>
-                                            </li>
+                                            </li> --}}
                                             {{-- Cart Product contain end --}}
                                         </ul>
                                         <p class="total">Subtotal: <span class="amount">{{ \Cart::subtotal() }} vnđ</span></p>
