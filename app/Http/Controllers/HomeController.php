@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class HomeController extends FrontendController
@@ -16,7 +17,7 @@ class HomeController extends FrontendController
     {
         $productHot = Product::where(['pro_hot'=>Product::HOT_ON, 'pro_active'=>Product::STATUS_PUBLIC])->limit(5)->get();
         $productActive = Product::where(['pro_active'=>Product::STATUS_PUBLIC])->limit(5)->get();
-        $productNews = $productActive->sortByDesc('id');
+        $productNews = Product::where(['pro_active'=>Product::STATUS_PUBLIC])->limit(5)->orderBy('id', 'DESC')->get();
         $articleNews = Article::orderBy('id', 'DESC')->limit(6)->get();
         $latestNews = $articleNews->last();
         

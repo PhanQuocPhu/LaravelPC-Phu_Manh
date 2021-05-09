@@ -5,8 +5,7 @@
             <div class="form-group">
                 <label for="pro_name" class="form-label">Tên bài viết:</label>
                 <input type="text" class="form-control" placeholder="Tên bài viết"
-                    value="{{ old('a_name', isset($article->a_name) ? $article->a_name : '') }}"
-                    name="a_name">
+                    value="{{ old('a_name', isset($article->a_name) ? $article->a_name : '') }}" name="a_name">
                 @if ($errors->has('a_name'))
                     <span class="font-weight-bold font-italic text-danger small">
                         {{ $errors->first('a_name') }}
@@ -26,7 +25,8 @@
             </div>
             <div class="form-group">
                 <label for="a_content" class="form-label">Nội dung bài viết:</label>
-                <textarea name="a_content" class="form-control" id="" cols="30" rows="3" placeholder="Nội dung">
+                <textarea name="a_content" class="form-control" id="a_content" cols="30" rows="3"
+                    placeholder="Nội dung">
                     {{ old('a_content', isset($article->a_content) ? $article->a_content : '') }}
                 </textarea>
             </div>
@@ -53,6 +53,10 @@
             <button type="submit" class="btn btn-primary text-center">Lưu bài viết</button>
         </div>
     </div>
-    
-</form>
 
+</form>
+@section('script')
+    <script type="text/javascript">
+        CKEDITOR.replace('a_content');
+    </script>
+@endsection

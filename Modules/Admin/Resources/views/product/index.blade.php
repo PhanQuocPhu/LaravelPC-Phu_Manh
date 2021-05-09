@@ -1,6 +1,20 @@
 @extends('admin::layouts.master')
 
 @section('content')
+    <style>
+        .table .active {
+            color: #ff9705 !important;
+        }
+
+        #edit {
+            font-size: 12px;
+        }
+
+        #delete {
+            font-size: 12px;
+        }
+
+    </style>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -48,40 +62,58 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @if (isset($products))
-                        @foreach ($products as $product)
-                <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>
-                        {{ $product->pro_name }}
-                        <ul>
-                            <li><span><i class="fas fa-dollar-sign"></i>120.000</span></li>
-                        </ul>
-                    </td>
-                    <td>{{ isset($product->category->c_name) ? $product->category->c_name : '[N/A]' }}</td>
-                    <td>
-                        <img src="{{ pare_url_file($product->pro_avatar) }}" alt="" class="img img-responsive" style="height: 80px; width:80px">
-                    </td>
-                    <td>
-                        <a class="badge {{ $product->getStatus($product->pro_active)['class'] }}" href="{{ route('admin.get.action.product', ['active', $product->id]) }}">{{ $product->getStatus($product->pro_active)['name'] }}</a>
-                    </td>
-                    <td>
-                        <a class="badge {{ $product->getHot($product->pro_hot)['class'] }}" href="{{ route('admin.get.action.product', ['hot', $product->id]) }}">{{ $product->getHot($product->pro_hot)['name'] }} </a>
-                    </td>
-                    <td>
-                        <a style="padding: 5px 10px" class="border-right"
-                            href="{{ route('admin.get.edit.product', $product->id) }}"><i
-                                class="far fa-edit text-primary"></i></a>
-                        <a style="padding: 5px 10px" class="border-left"
-                            href="{{ route('admin.get.action.product', ['delete', $product->id]) }}"><i
-                                class="far fa-trash-alt text-danger"></i></a>
-                    </td>
-                </tr>
-                @endforeach
+                @if (isset($products))
+                    @foreach ($products as $product)
+                        <?php
+                        $age = 0;
+                        if ($product->pro_total_rating) {
+                        $age = round($product->pro_total_number / $product->pro_total_rating, 2);
+                        }
+                        ?>
+                        <tr>
+                            <td>{{ $product->id }}</td>
+                            <td>
+                                {{ $product->pro_name }}
+                                <ul>
+                                    <li><span>{{ number_format($product->pro_price, 0, '.', ',') }} vnđ</span></li>
+                                    <li><span>{{ $product->pro_sale }} (%)</span></li>
+                                    <li> <span>Đánh giá:</span>
+                                        <span>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star {{ $i <= $age ? 'active' : '' }}"
+                                                    style="color: #999"></i>
+                                            @endfor
+                                        </span>
+                                        <span> {{ $age }}</span>
+                                    </li>
+                                    <li><span>Số lượng: </span> <span>{{ $product->pro_number }}</span></li>
+                                </ul>
+                            </td>
+                            <td>{{ isset($product->category->c_name) ? $product->category->c_name : '[N/A]' }}</td>
+                            <td>
+                                <img src="{{ pare_url_file($product->pro_avatar) }}" alt="" class="img img-responsive"
+                                    style="height: 80px; width:80px">
+                            </td>
+                            <td>
+                                <a class="badge {{ $product->getStatus($product->pro_active)['class'] }}"
+                                    href="{{ route('admin.get.action.product', ['active', $product->id]) }}">{{ $product->getStatus($product->pro_active)['name'] }}</a>
+                            </td>
+                            <td>
+                                <a class="badge {{ $product->getHot($product->pro_hot)['class'] }}"
+                                    href="{{ route('admin.get.action.product', ['hot', $product->id]) }}">{{ $product->getHot($product->pro_hot)['name'] }}
+                                </a>
+                            </td>
+                            <td>
+                                <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
+                                    href="{{ route('admin.get.edit.product', $product->id) }}"><i
+                                        class="far fa-edit text-primary"></i> Edit</a>
+                                <a style="padding: 5px 10px" class="btn btn-outline-danger" id="delete"
+                                    href="{{ route('admin.get.action.product', ['delete', $product->id]) }}"><i
+                                        class="far fa-trash-alt text-danger"></i> Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
-
-                </tr>
             </tbody>
         </table>
     </div>

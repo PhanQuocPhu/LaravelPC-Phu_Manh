@@ -29,8 +29,9 @@
                     </div>
                     <!-- language division end -->
                 </div>
-                <!-- language division end -->
+
             </div>
+            <!-- language division end -->
             <!-- logo start -->
             <div class="col-md-4 text-center">
                 <div class="top-logo">
@@ -95,7 +96,7 @@
                                 </li>
 
                                 <li class="expand"><a href="about-us.html">Giới thiệu</a></li>
-                                <li class="expand"><a href="contact-us.html">Liên hệ</a></li>
+                                <li class="expand"><a href="{{ route('get.contact') }}">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -171,45 +172,33 @@
                                             {{-- Cart Product contain start --}}
                                             @if (isset($products))
                                                 @foreach ($products as $procart)
-                                                <li>
-                                                    <a class="sm-cart-product" href="product-details.html">
-                                                        <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
-                                                            alt="">
-                                                    </a>
-                                                    <div class="small-cart-detail">
-                                                        <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                                                        <a href="#" class="edit-btn"><img
-                                                                src="{{ asset('img/btn_edit.gif') }}"
-                                                                alt="Edit Button" /></a>
-                                                        <a class="small-cart-name" href="product-details.html">Voluptas
-                                                            nulla</a>
-                                                        <span
-                                                            class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
-                                                    </div>
-                                                </li>
+                                                    <li>
+                                                        <a class="sm-cart-product" href="product-details.html">
+                                                            <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
+                                                                alt="">
+                                                        </a>
+                                                        <div class="small-cart-detail">
+                                                            <a class="remove" href="#"><i
+                                                                    class="fa fa-times-circle"></i></a>
+                                                            <a href="#" class="edit-btn"><img
+                                                                    src="{{ asset('img/btn_edit.gif') }}"
+                                                                    alt="Edit Button" /></a>
+                                                            <a class="small-cart-name"
+                                                                href="product-details.html">Voluptas
+                                                                nulla</a>
+                                                            <span
+                                                                class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
+                                                        </div>
+                                                    </li>
                                                 @endforeach
                                             @endif
-                                           {{--  <li>
-                                                <a class="sm-cart-product" href="product-details.html">
-                                                    <img src="{{ asset('img/products/sm-products/cart1.jpg') }}"
-                                                        alt="">
-                                                </a>
-                                                <div class="small-cart-detail">
-                                                    <a class="remove" href="#"><i class="fa fa-times-circle"></i></a>
-                                                    <a href="#" class="edit-btn"><img
-                                                            src="{{ asset('img/btn_edit.gif') }}"
-                                                            alt="Edit Button" /></a>
-                                                    <a class="small-cart-name" href="product-details.html">Voluptas
-                                                        nulla</a>
-                                                    <span
-                                                        class="quantitys"><strong>1</strong>x<span>$75.00</span></span>
-                                                </div>
-                                            </li> --}}
                                             {{-- Cart Product contain end --}}
                                         </ul>
-                                        <p class="total">Subtotal: <span class="amount">{{ \Cart::subtotal() }} vnđ</span></p>
+                                        <p class="total">Subtotal: <span class="amount">{{ \Cart::subtotal() }}
+                                                vnđ</span></p>
                                         <p class="buttons">
-                                            <a href="checkout.html" class="button">Checkout</a>
+                                            <a href="{{ route('get.list.shopping.cart') }}"
+                                                class="button">Checkout</a>
                                         </p>
                                     </div>
                                 </div>

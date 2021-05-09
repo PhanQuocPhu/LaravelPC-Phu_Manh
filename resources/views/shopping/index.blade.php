@@ -1,5 +1,25 @@
 @extends('layouts.app')
 @section('content')
+
+    <!-- breadcrumbs area start -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container-inner">
+                        <ul>
+                            <li class="home">
+                                <a href="{{ route('home') }}">Home</a>
+                                <span><i class="fa fa-angle-right"></i></span>
+                            </li>
+                            <li class="category3"><span>Thanh toán</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumbs area end -->
     <!-- New product section start -->
     <div class="our-product-area new-product">
         <div class="container">
@@ -41,7 +61,7 @@
                                             href="{{ route('admin.get.edit.product', $product->id) }}"><i
                                                 class="far fa-edit"></i></a>
                                         <a style="padding: 5px 10px" class="border-left"
-                                            href="{{ route('admin.get.action.product', ['delete', $product->id]) }}"><i
+                                            href="{{ route('delete.shopping.cart', $key) }}"><i
                                                 class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
@@ -49,13 +69,18 @@
                             @endforeach
                             <tr>
                                 <td></td>
-                                <td colspan="4" ><h5>Tổng giá trị đơn hàng:</h5></td>
-                                <td colspan="2" ><h5>{{ Cart::subtotal() }}</h5></td>
+                                <td colspan="4">
+                                    <h5>Tổng giá trị đơn hàng:</h5>
+                                </td>
+                                <td colspan="2">
+                                    <h5>{{ Cart::subtotal() }}</h5>
+                                </td>
                             </tr>
                         @endif
                     </tbody>
-                </table>  
-                <div class="text-center"><a href="" class="btn btn-success justify-content-center"> Thanh toán</a></div>
+                </table>
+                <div class="text-center"><a href="{{ route('get.form.pay') }}"
+                        class="btn btn-success justify-content-center"> Thanh toán</a></div>
             </div>
             <!-- our-product area end -->
         </div>

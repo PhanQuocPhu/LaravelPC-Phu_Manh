@@ -2,6 +2,8 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Rating;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,7 +16,16 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin::index');
+        /* Đánh giá mới nhất */
+        $ratings = Rating::with('user:id,name', 'product:id,pro_name')->orderBy('created_at', 'desc')->limit(10)->get();
+
+        /* Đơn hàng chưa xử lý */
+
+        /* Liên hệ */
+        $contacts = Contact::limit(10)->get();
+
+        $viewData = ['ratings'=>$ratings, 'contacts'=>$contacts]; 
+        return view('admin::index', $viewData);
     }
 
     /**

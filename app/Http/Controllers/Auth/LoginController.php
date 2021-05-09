@@ -14,8 +14,8 @@ class LoginController extends Controller
 
     public function getLogin(Request $request)
     {
+        session(['link' => url()->previous()]);
         return view('auth.login');
-
     }
     public function postLogin(Request $request)
     {
@@ -23,7 +23,8 @@ class LoginController extends Controller
 
         if (\Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->route('home');
+            return redirect(session('link'));
+            /* return redirect()->route('home'); */
         }
     }
     public function getLogout()

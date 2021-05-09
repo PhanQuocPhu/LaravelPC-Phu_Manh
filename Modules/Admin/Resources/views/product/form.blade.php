@@ -26,7 +26,8 @@
             </div>
             <div class="form-group">
                 <label for="pro_content" class="form-label">Nội dung:</label>
-                <textarea name="pro_content" class="form-control" id="" cols="30" rows="3" placeholder="Nội dung">
+                <textarea name="pro_content" class="form-control" id="pro_content" cols="30" rows="3"
+                    placeholder="Nội dung">
                     {{ old('pro_content', isset($product->pro_content) ? $product->pro_content : '') }}
                 </textarea>
             </div>
@@ -67,7 +68,7 @@
                     </span>
                 @endif
             </div>
-
+            {{-- Giá sản phẩm --}}
             <div class="form-group">
                 <label for="pro_price" class="form-label">Giá sản phẩm:</label>
                 <input type="number" name="pro_price" class="form-control" placeholder="Giá sản phẩm" id=""
@@ -78,10 +79,16 @@
                     </span>
                 @endif
             </div>
-
+            {{-- Khuyến mãi --}}
             <div class="form-group">
                 <label for="pro_sale" class="form-label">% Khuyến mãi:</label>
-                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id="" value="0">
+                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id="" value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : '0') }}">
+            </div>
+
+            {{-- Số lượng --}}
+            <div class="form-group">
+                <label for="pro_sale" class="form-label">Số lượng sản phẩm:</label>
+                <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id="" value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
             </div>
 
             <div class="form-group">
@@ -104,3 +111,9 @@
     </div>
     <button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
 </form>
+@section('script')
+    <script type="text/javascript">
+        CKEDITOR.replace('pro_content');
+
+    </script>
+@endsection

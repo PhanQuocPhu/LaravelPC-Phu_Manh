@@ -44,13 +44,13 @@ class AdminProductController extends Controller
     {
         $this->insertOrUpdate($requestProduct, $id);
 
-        return redirect()->back(); 
+        return redirect()->back()->with('success', 'Cập nhật thành công'); 
     }
 
     public function store(RequestProduct $requestProduct)
     {
         $this->insertOrUpdate($requestProduct);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Lưu thành công');
     }
 
 
@@ -66,6 +66,7 @@ class AdminProductController extends Controller
         $product->pro_category_id = $requestProduct->pro_category_id;
         $product->pro_price = $requestProduct->pro_price;
         $product->pro_sale = $requestProduct->pro_sale;
+        $product->pro_number = $requestProduct->pro_number;
         $product->pro_description = $requestProduct->pro_description;
         $product->pro_content = $requestProduct->pro_content;
         $product->pro_title_seo = $requestProduct->pro_title_seo ? $requestProduct->pro_title_seo : $requestProduct->pro_name;
@@ -88,13 +89,15 @@ class AdminProductController extends Controller
 
     public function action($action, $id)
     {
+        $message = '';
         if($action)
         {
             $product = Product::find($id);
             switch($action)
             {
                 case 'delete':
-                    $product->delete();
+                    $message = 'Xóa thành công';
+                    $product->delete()->with('success', $message);
                 break;
                 case 'active':
                     $product->pro_active = $product->pro_active ? 0 : 1 ;

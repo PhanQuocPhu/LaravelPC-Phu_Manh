@@ -993,10 +993,6 @@ span.amount {
     color: #fff;
 }
 
-.action-zoom a {
-    background:
-}
-
 .single-product:hover .product-img a img.secondary-image {
     opacity: 1
 }
@@ -4209,3 +4205,6 @@ input#rememberme {
     color: #3f3f3f;
     transition: .3s;
 }
+
+
+/* Gearvn clone css */

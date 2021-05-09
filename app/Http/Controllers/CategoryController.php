@@ -6,10 +6,16 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends FrontendController
 {
+    public function _construct()
+    {
+        parent::_contruct();
+    }
+    
     public function getListProduct(Request $request)
     {
+        
         $url = $request->segment(2);
         $url = preg_split('/(-)/i', $url);
 

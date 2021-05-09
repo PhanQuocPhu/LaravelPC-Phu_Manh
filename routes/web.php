@@ -27,8 +27,27 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
 Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
 
+
+/* Shopping cart - giỏ hàng */
 Route::prefix('shopping')->group(function ()
 {
     Route::get('/add/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
+    Route::get('/delete/{id}',[App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
     Route::get('/danh-sach',[App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
 });
+/* Thanh toán */
+Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], function ()
+{
+    Route::get('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'getFormPay'])->name('get.form.pay');
+    Route::post('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'saveInfoShoppingCart']);
+});
+
+/* Đánh giá sản phẩm */
+Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function ()
+{
+    Route::post('/danh-gia/{id}',[App\Http\Controllers\RatingController::class, 'saveRating'])->name('post.rating.product');
+});
+
+/* Liên hệ */
+Route::get('/lien-he',[App\Http\Controllers\ContactController::class, 'getContact'])->name('get.contact');
+Route::post('/lien-he',[App\Http\Controllers\ContactController::class, 'saveContact']);

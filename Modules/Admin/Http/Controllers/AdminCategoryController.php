@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
     {
         $this->insertOrUpdate($requestCategory);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Thêm mới thành công');
     }
     public function edit($id)
     {
@@ -41,6 +41,7 @@ class AdminCategoryController extends Controller
 
         return redirect()->back();
     }
+
     public function insertOrUpdate($requestCategory, $id='')
     {
         $code = 1;
@@ -67,6 +68,7 @@ class AdminCategoryController extends Controller
     }
     public function action($action, $id)
     {
+        $message = '';
         if($action)
         {
             $category = Category::find($id);
@@ -74,9 +76,10 @@ class AdminCategoryController extends Controller
             {
                 case 'delete':
                     $category->delete();
+                    $message = 'Xóa dữ liệu thành công';
                 break;
             }
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', $message);
     }
 }

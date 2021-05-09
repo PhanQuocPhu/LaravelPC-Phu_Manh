@@ -73,6 +73,15 @@
                     <span>Sản Phẩm</span>
                 </a>
             </li>
+
+            <!-- Nav Item - Đánh giá -->
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.rating' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.rating') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Đánh giá sản phẩm</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Đơn Hàng -->
 
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.transaction' ? 'active' : '' }}">
@@ -88,8 +97,15 @@
                     <span>Tin Tức</span>
                 </a>
             </li>
-             <!-- Nav Item - Thành viên -->
-             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
+            <!-- Nav Item - Liên hệ -->
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.contact' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.contact') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Liên hệ</span>
+                </a>
+            </li>
+            <!-- Nav Item - Thành viên -->
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.get.list.user') }}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Thành viên</span>
@@ -234,7 +250,8 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="">
+                                        <img class="rounded-circle"
+                                            src=" {{ asset('theme_admin/img/undraw_profile_1.svg') }}" alt="">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -245,7 +262,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="">
+                                        <img class="rounded-circle"
+                                            src="{{ asset('theme_admin/img/undraw_profile_2.svg') }}" alt="">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -256,7 +274,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="">
+                                        <img class="rounded-circle"
+                                            src="{{ asset('theme_admin/img/undraw_profile_3.svg') }}" alt="">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -288,7 +307,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -318,8 +337,22 @@
                 </nav>
                 <!-- End of Topbar -->
 
+
                 <!-- Begin Page Content -->
                 <div class="col-md-11 mx-auto">
+                    <!-- Begin alert -->
+                    @if (\Session::has('success'))
+                        <div class="alert alert-success" role="alert" style="position: fixed; right:20px">
+                            <strong>Success!</strong> {{ \Session::get('success') }}
+                        </div>
+                    @endif
+                    @if (\Session::has('error'))
+                        <div class="alert alert-danger" role="alert" style="position: fixed; right:20px">
+                            <strong>Error</strong> {{ \Session::get('error') }}Vui lòng kiểm tra lại dữ liệu nhập!
+                        </div>
+                    @endif
+
+                    <!-- End alert -->
                     @yield('content')
                 </div>
 
@@ -371,14 +404,30 @@
 
 
 
-
 </body>
 
 <footer>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
     <script>
-        CKEDITOR.replace('pro_content');
-        CKEDITOR.replace('a_content');
+        $(function() {
+            $(".js_order_item").click(function(event) {
+                let $this = $(this);
+                let url = $this.attr('href');
+                let md = $this.attr('data-id');
+                $("#md_content").html('');
+                $("#trid").text(md);
+                $.ajax({
+                    url: url,
+                }).done(function(result) {
+                    console.log(result);
+                    if (result) {
+                        $("#md_content").append(result);
+                    }
+                });
+            });
+        })
+
     </script>
 
     <script>
@@ -397,6 +446,8 @@
         });
 
     </script>
+
+
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src=" {{ asset('theme_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -413,6 +464,7 @@
     <!-- Page level custom scripts -->
     <script src=" {{ asset('theme_admin/js/demo/chart-area-demo.js') }}"></script>
     <script src=" {{ asset('theme_admin/js/demo/chart-pie-demo.js') }}"></script>
+    @yield('script')
 
 </footer>
 

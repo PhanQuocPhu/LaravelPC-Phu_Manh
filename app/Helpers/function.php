@@ -77,3 +77,4 @@ if (!function_exists('get_data_user')) {
         return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';
     }
 }
+
