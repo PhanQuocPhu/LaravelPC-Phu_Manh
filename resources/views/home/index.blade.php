@@ -198,16 +198,16 @@
         }
 
         .new-product-percent {
-            background: url(icon-saleoff.png) no-repeat scroll center center transparent;
+            background: url('{{ asset('img/Sale-off.png') }}') no-repeat scroll center center transparent;
             position: absolute;
-            width: 48px;
-            height: 51px;
+            width: 50px;
+            height: 50px;
             bottom: 35px;
             right: 22px;
             text-align: center;
             vertical-align: middle;
             color: #180733;
-            font-size: 16px;
+            font-size: 14px;
             padding-top: 14px;
         }
 
@@ -317,21 +317,21 @@
                                         {{-- Chi tiết sản phẩm start --}}
                                         <h2 class="product-row-name">{{ $pronew->pro_name }}</h2>
                                         <div class="product-row-info">
-                                            @if ($pronew->pro_sale)
-                                                <div class="product-row-price pull-left">
+                                            <div class="product-row-price pull-left">
+                                                @if ($pronew->pro_sale)
                                                     <del>{{ number_format($pronew->pro_price, 0, '.', '.') }}₫</del>
-                                                    <br>
-                                                    <span class="product-row-sale">17,290,000₫ </span>
-                                                </div>
-                                                <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
-                                                <div class="clearfix"></div>
-                                                <div class="new-product-percent">-6%</div>
-                                            @else
-                                                <div class="product-row-price pull-left">
-                                                    <span class="product-row-sale">{{ number_format($pronew->pro_price, 0, '.', '.') }}₫ </span>
-                                                </div>
-                                                <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
-                                                <div class="clearfix"></div>
+                                                @else
+                                                    <del> </del>
+                                                @endif
+                                                <br>
+                                                <span
+                                                    class="product-row-sale">{{ number_format(($pronew->pro_price * (100 - $pronew->pro_sale)) / 100, 0, '.', '.') }}₫
+                                                </span>
+                                            </div>
+                                            <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
+                                            <div class="clearfix"></div>
+                                            @if ($pronew->pro_sale)
+                                                <div class="new-product-percent">-{{$pronew->pro_sale}}%</div>
                                             @endif
 
                                         </div>
@@ -344,160 +344,69 @@
                     </div>
                 </div>
             </div>
-
             {{-- Sản phẩm mới end --}}
 
-            <!-- Sản phẩm mới section start -->
-            <div class="our-product-area new-product">
-                <div class="area-title">
-                    <h2>Các sản phẩm mới</h2>
-                </div>
-                <!-- our-product area start -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="featuresthree-curosel">
-                                @if (isset($productNews))
-                                    @foreach ($productNews as $pronew)
-                                        <!-- single-product start -->
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="single-product ex-pro">
-                                                <div class="product-img">
-                                                    @if ($pronew->pro_number == 0)
-                                                        <div
-                                                            style="position: absolute; background: #FF4500; color:white; padding: 5px 10px; border-radius:5px;font-size: 10px">
-                                                            <span>Tạm hết hàng</span>
-                                                        </div>
-                                                    @endif
-
-                                                    </span>
-                                                    <a
-                                                        href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
-                                                        <img class="primary-image img-fluid"
-                                                            src="{{ asset(pare_url_file($pronew->pro_avatar)) }}"
-                                                            alt="" />
-                                                        <img class="secondary-image img-fluid"
-                                                            src="{{ asset(pare_url_file($pronew->pro_avatar)) }}"
-                                                            alt="" />
-                                                    </a>
-                                                    <div class="action-zoom">
-                                                        <div class="add-to-cart">
-                                                            <a href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}"
-                                                                title="Quick View"><i class="fa fa-search-plus"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="actions">
-                                                        <div class="action-buttons">
-                                                            <div class="add-to-links">
-                                                                <div class="add-to-wishlist">
-                                                                    <a href="#" title="Add to Wishlist"><i
-                                                                            class="fa fa-heart"></i></a>
-                                                                </div>
-                                                                <div class="compare-button">
-                                                                    <a href="{{ route('add.shopping.cart', $pronew->id) }}"
-                                                                        title="Add to Cart"><i class="icon-bag"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="quickviewbtn">
-                                                                <a href="#" title="Add to Compare"><i
-                                                                        class="fa fa-retweet"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price-box">
-                                                        <span
-                                                            class="new-price">{{ number_format($pronew->pro_price, 0, '.', '.') }}
-                                                            vnđ</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h2 class="product-name"><a href="#">{{ $pronew->pro_name }}</a></h2>
-                                                    <p>{{ $pronew->pro_description }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- single-product end -->
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- our-product area end -->
-            </div>
-            <!-- Sản phẩm mới section end -->
-
-
-
             <!-- CPU section start -->
-            <div class="our-product-area new-product">
-                <div class="area-title">
-                    <h2>CPU</h2>
+            <div id="featured-product">
+                <div style="position: relative">
+                    <h2 class="product-group-tittle">Vi xử lý bán chạy</h2>
+                    <a class="products-hot-view-all" href="#">
+                        Xem tất cả <i class="fa fa-chevron-right"></i>
+                    </a>
                 </div>
-                <!-- our-product area start -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="">
-                                @if (isset($productNews))
-                                    @foreach ($productNews as $pronew)
-                                        <!-- single-product start -->
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="single-product ex-pro">
-                                                <div class="product-img">
-                                                    <a
-                                                        href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
-                                                        <img class="primary-image img-fluid"
-                                                            src="{{ asset(pare_url_file($pronew->pro_avatar)) }}"
-                                                            alt="" />
-                                                        <img class="secondary-image img-fluid"
-                                                            src="{{ asset(pare_url_file($pronew->pro_avatar)) }}"
-                                                            alt="" />
-                                                    </a>
-                                                    <div class="action-zoom">
-                                                        <div class="add-to-cart">
-                                                            <a href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}"
-                                                                title="Quick View"><i class="fa fa-search-plus"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="actions">
-                                                        <div class="action-buttons">
-                                                            <div class="add-to-links">
-                                                                <div class="add-to-wishlist">
-                                                                    <a href="#" title="Add to Wishlist"><i
-                                                                            class="fa fa-heart"></i></a>
-                                                                </div>
-                                                                <div class="compare-button">
-                                                                    <a href="{{ route('add.shopping.cart', $pronew->id) }}"
-                                                                        title="Add to Cart"><i class="icon-bag"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="quickviewbtn">
-                                                                <a href="#" title="Add to Compare"><i
-                                                                        class="fa fa-retweet"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price-box">
-                                                        <span
-                                                            class="new-price">{{ number_format($pronew->pro_price, 0, '.', '.') }}
-                                                            vnđ</span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h2 class="product-name"><a href="#">{{ $pronew->pro_name }}</a></h2>
-                                                    <p>{{ $pronew->pro_description }}</p>
-                                                </div>
+                <div class="products-group">
+                    <div class="module-products row">
+                        @if (isset($productNews))
+                            @foreach ($productNews as $pronew)
+                                <div class="col-sm-4 col-xs-12 padding-none col-fix20">
+                                    <div class="product-row">
+                                        <a href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}"></a>
+                                        {{-- Hình ảnh sản phẩm start --}}
+                                        <div class="product-row-img">
+                                            <a href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
+                                                <img class="product-row-thumbnail"
+                                                    src="{{ asset(pare_url_file($pronew->pro_avatar)) }}" alt="">
+                                            </a>
+                                            <div class="product-row-price-hover">
+                                                <a
+                                                    href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
+                                                    <div class="product-row-note pull-left">Click để xem chi tiết</div>
+                                                </a>
+                                                <a href="{{ route('add.shopping.cart', $pronew->id) }}"
+                                                    class="product-row-btnbuy pull-right"><i
+                                                        class="fas fa-cart-plus"></i></a>
                                             </div>
                                         </div>
-                                        <!-- single-product end -->
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
+                                        {{-- Hình ảnh sản phẩm end --}}
+                                        {{-- Chi tiết sản phẩm start --}}
+                                        <h2 class="product-row-name">{{ $pronew->pro_name }}</h2>
+                                        <div class="product-row-info">
+                                            <div class="product-row-price pull-left">
+                                                @if ($pronew->pro_sale)
+                                                    <del>{{ number_format($pronew->pro_price, 0, '.', '.') }}₫</del>
+                                                @else
+                                                    <del> </del>
+                                                @endif
+                                                <br>
+                                                <span
+                                                    class="product-row-sale">{{ number_format(($pronew->pro_price * (100 - $pronew->pro_sale)) / 100, 0, '.', '.') }}₫
+                                                </span>
+                                            </div>
+                                            <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
+                                            <div class="clearfix"></div>
+                                            @if ($pronew->pro_sale)
+                                                <div class="new-product-percent">-{{$pronew->pro_sale}}%</div>
+                                            @endif
+
+                                        </div>
+                                        {{-- Chi tiết sản phẩm end --}}
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
                     </div>
                 </div>
-                <!-- our-product area end -->
             </div>
             <!-- CPU section end -->
 
