@@ -18,7 +18,6 @@
     </style>
 
     <div class="main-area">
-
         <div class="container">
             {{-- khung mở đầu start --}}
             <div class="start-home-modules row">

@@ -99,7 +99,7 @@
                         <div id="img-1" class="zoomWrapper single-zoom">
                             <a href="#">
                                 <img id="zoom1" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
-                                    data-zoom-image="img/product-details/ex-big-1-1.jpg" alt="big-1">
+                                    data-zoom-image="" alt="big-1">
                             </a>
                         </div>
                         {{-- <div class="single-zoom-thumb">
@@ -213,9 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="singl-share">
-                                    <a href="#"><img src="img/single-share.png" alt=""></a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -333,11 +331,7 @@
 @stop
 @section('script')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        
         $(function() {
             let listStart = $(".list_start .fa");
             $listRatingText = {
@@ -363,10 +357,10 @@
             $(".js_rating_action").click(function(event) {
                 event.preventDefault();
                 if ($(".form_rating").hasClass('hide')) {
-                        $(".form_rating").addClass('active').removeClass('hide');
-                    } else {
-                        $(".form_rating").addClass('hide').removeClass('active');
-                    }
+                    $(".form_rating").addClass('active').removeClass('hide');
+                } else {
+                    $(".form_rating").addClass('hide').removeClass('active');
+                }
 
             });
             $('.js_rating_product').click(function(e) {
