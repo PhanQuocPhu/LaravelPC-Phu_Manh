@@ -64,6 +64,32 @@
         }
 
     </style>
+    <!-- breadcrumbs area start -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container-inner">
+                        <ul>
+                            <li class="home">
+                                <a href="{{ route('home') }}">Home</a>
+                                <span><i class="fa fa-angle-right"></i></span>
+                            </li>
+                            <li class="home">
+                                <a
+                                    href="{{ route('get.list.product', [$cateProduct->c_slug, $cateProduct->id]) }}">{{ $cateProduct->c_name }}</a>
+                                <span><i class="fa fa-angle-right"></i></span>
+                            </li>
+                            <li class="home">
+                                <span>{{ $productDetail->pro_name }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumbs area end -->
     <!-- product-details Area Start -->
     <div class="product-details-area">
         <div class="container">
@@ -128,7 +154,10 @@
                         <div class="single-product">
                             <div class="product-content">
                                 <h2 class="product-name"><a href="#">{{ $productDetail->pro_name }}</a></h2>
-                                <div class="rating-price">
+                                <div class="rating-price row">
+                                    <div class="col-md-3">
+                                        <strong>Đánh giá:</strong>
+                                    </div>
                                     <?php
                                     $ageDetail = 0;
                                     if ($productDetail->pro_total_rating) {
@@ -143,36 +172,44 @@
                                                     class="fa fa-star {{ $i <= $ageDetail ? 'active' : '' }}"></i></a>
                                         @endfor
                                     </div>
-                                    <div class="price-boxes">
-                                        <span
-                                            class="new-price">{{ number_format($productDetail->pro_price, 0, '.', '.') }}vnđ</span>
-                                    </div>
                                 </div>
                                 <div class="product-desc">
+                                    <strong>Thông tin chung: </strong>
                                     <p>
                                         {{ $productDetail->pro_description }}
                                     </p>
                                 </div>
-                                <p class="availability in-stock">Availability: <span>In stock</span></p>
+                                <div class="price-boxes row">
+                                    <span class="col-md-2" style="display: inline-block; font-size:16px;">
+                                        Giá:
+                                    </span>
+                                    <div class="product-row-price pull-left">
+                                        @if ($productDetail->pro_sale)
+                                            <del
+                                                style="font-size: 12px">{{ number_format($productDetail->pro_price, 0, '.', '.') }}₫</del>
+                                        @else
+                                            <del> </del>
+                                        @endif
+                                        <br>
+                                        <span class="product-row-sale"
+                                            style="font-size: 30px">{{ number_format(($productDetail->pro_price * (100 - $productDetail->pro_sale)) / 100, 0, '.', '.') }}₫
+                                        </span>
+                                    </div>
+                                    {{-- <span class="new-price" style="font-size: 22px;color: #e61010; font-weight: 700;">
+                                        {{ number_format($productDetail->pro_price, 0, '.', '.') }}vnđ
+                                    </span> --}}
+                                </div>
+                                <p class="availability in-stock">Availability:
+                                    @if ($productDetail->pro_number >> 0)
+                                        <span> Còn hàng</span>
+                                    @else
+                                        <span style="color: #e61010"> Hết hàng</span>
+                                    @endif
+                                </p>
                                 <div class="actions-e">
-                                    <div class="action-buttons-single">
-                                        <div class="inputx-content">
-                                            <label for="qty">Quantity:</label>
-                                            <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Qty"
-                                                class="input-text qty">
-                                        </div>
+                                    <div class="action-buttons-single" style="border-radius:8px">
                                         <div class="add-to-cart">
-                                            <a href="#">Add to cart</a>
-                                        </div>
-                                        <div class="add-to-links">
-                                            <div class="add-to-wishlist">
-                                                <a href="#" data-toggle="tooltip" title=""
-                                                    data-original-title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                                            </div>
-                                            <div class="compare-button">
-                                                <a href="#" data-toggle="tooltip" title="" data-original-title="Compare"><i
-                                                        class="fa fa-refresh"></i></a>
-                                            </div>
+                                            <a href="{{ route('add.shopping.cart', $productDetail->id) }}">Đặt hàng</a>
                                         </div>
                                     </div>
                                 </div>
@@ -260,6 +297,7 @@
                     </div>
                     {{-- Bình luận đánh giá sản phẩm --}}
                     <div class="component_list_rating">
+                        <h2>Bình luận</h2>
                         @if (isset($ratings))
                             @foreach ($ratings as $rating)
                                 <div class="rating_item" style="margin: 10px 0">
@@ -325,10 +363,11 @@
             $(".js_rating_action").click(function(event) {
                 event.preventDefault();
                 if ($(".form_rating").hasClass('hide')) {
-                    $(".form_rating").addClass('active').removeClass('hide');
-                } else {
-                    $(".form_rating").addClass('hide').removeClass('active');
-                }
+                        $(".form_rating").addClass('active').removeClass('hide');
+                    } else {
+                        $(".form_rating").addClass('hide').removeClass('active');
+                    }
+
             });
             $('.js_rating_product').click(function(e) {
                 event.preventDefault();

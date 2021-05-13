@@ -134,56 +134,6 @@
         </div>
     </div>
     <!-- info footer end -->
-    <!-- banner footer area start -->
-    <div class="banner-footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2 col-sm-2 col-xs-3 nopadding">
-                    <div class="single-bannerfooter">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-1.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-3 nopadding">
-                    <div class="single-bannerfooter">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-2.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-3 nopadding">
-                    <div class="single-bannerfooter">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-3.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-3 nopadding">
-                    <div class="single-bannerfooter">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-4.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 hidden-xs nopadding">
-                    <div class="single-bannerfooter">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-5.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2 hidden-xs nopadding">
-                    <div class="single-bannerfooter last-single">
-                        <a href="#">
-                            <img src="{{asset('img/banner/footer-6.jpg')}}" alt="" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner footer area end -->
     <!-- footer address area start -->
     <div class="address-footer">
         <div class="container">

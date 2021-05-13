@@ -6,8 +6,12 @@ use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class ContactController extends FrontendController
 {
+    public function _construct()
+    {
+        parent::_contruct();
+    }
     public function getContact()
     {
         return view('contact');

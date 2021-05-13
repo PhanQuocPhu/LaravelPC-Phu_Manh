@@ -40,7 +40,8 @@
                     <td>{{ $category->c_name }}</td>
                     <td>{{ $category->c_title_seo }}</td>
                     <td>
-                        {{ $category->getStatus($category->c_active)['name'] }}
+                        <a class="badge {{ $category->getStatus($category->c_active)['class'] }}"
+                            href="{{ route('admin.get.action.category', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}</a>
                     </td>
                     <td>
                         <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
@@ -59,3 +60,4 @@
         </table>
     </div>
 @endsection
+@section('script')

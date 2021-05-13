@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Admin PcOnline</title>
 
     <!-- Custom fonts for this template-->
@@ -85,7 +85,7 @@
             <!-- Nav Item - Đơn Hàng -->
 
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.transaction' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.get.list.transaction') }}">
+                <a class="nav-link" href="{{ route('admin.get.list.transaction') }}" id="Trans">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Đơn Hàng</span>
                 </a>
@@ -337,22 +337,23 @@
                 </nav>
                 <!-- End of Topbar -->
 
+                <!-- Begin alert -->
+                @if (\Session::has('success'))
+                    <div class="alert alert-success" role="alert"
+                        style="position: fixed; right:20px; z-index: 99999999999999;">
+                        <strong>Success!</strong> {{ \Session::get('success') }}
+                    </div>
+                @endif
+                @if (\Session::has('error'))
+                    <div class="alert alert-danger" role="alert"
+                        style="position: fixed; right:20px; z-index: 99999999999999;">
+                        <strong>Error</strong> {{ \Session::get('error') }}
+                    </div>
+                @endif
 
+                <!-- End alert -->
                 <!-- Begin Page Content -->
-                <div class="col-md-11 mx-auto">
-                    <!-- Begin alert -->
-                    @if (\Session::has('success'))
-                        <div class="alert alert-success" role="alert" style="position: fixed; right:20px">
-                            <strong>Success!</strong> {{ \Session::get('success') }}
-                        </div>
-                    @endif
-                    @if (\Session::has('error'))
-                        <div class="alert alert-danger" role="alert" style="position: fixed; right:20px">
-                            <strong>Error</strong> {{ \Session::get('error') }}Vui lòng kiểm tra lại dữ liệu nhập!
-                        </div>
-                    @endif
-
-                    <!-- End alert -->
+                <div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 mx-auto" id="HomeContent">
                     @yield('content')
                 </div>
 
@@ -409,28 +410,31 @@
 <footer>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
+
+
     <script>
-        $(function() {
-            $(".js_order_item").click(function(event) {
+        /*  $(function() {
+            console.log("ready!");
+            $("#Trans").click(function(event) {
                 let $this = $(this);
                 let url = $this.attr('href');
                 let md = $this.attr('data-id');
-                $("#md_content").html('');
-                $("#trid").text(md);
+                $("#HomeContent").html('');
                 $.ajax({
                     url: url,
                 }).done(function(result) {
-                    console.log(result);
                     if (result) {
-                        $("#md_content").append(result);
+                        $("#HomeContent").append(result);
                     }
                 });
             });
-        })
+        }) */
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 2000);
 
-    </script>
-
-    <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -446,7 +450,14 @@
         });
 
     </script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>

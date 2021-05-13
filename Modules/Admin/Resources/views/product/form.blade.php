@@ -82,13 +82,13 @@
             {{-- Khuyến mãi --}}
             <div class="form-group">
                 <label for="pro_sale" class="form-label">% Khuyến mãi:</label>
-                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id="" value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : '0') }}">
+                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id=""  min="0" value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : '0') }}">
             </div>
 
             {{-- Số lượng --}}
             <div class="form-group">
                 <label for="pro_sale" class="form-label">Số lượng sản phẩm:</label>
-                <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id="" value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
+                <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id=""  min="0" value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
             </div>
 
             <div class="form-group">

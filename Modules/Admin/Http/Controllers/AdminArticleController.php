@@ -27,7 +27,7 @@ class AdminArticleController extends Controller
     public function store(RequestArticle $requestArticle)
     {
         $this->insertOrUpdate($requestArticle);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Lưu bài viết thành công');
 
     }
     public function edit($id)
@@ -38,7 +38,7 @@ class AdminArticleController extends Controller
     public function update(RequestArticle $requestArticle, $id)
     {
         $this->insertOrUpdate($requestArticle, $id);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Chỉnh sửa bài viết thành công');
     }
     public function insertOrUpdate($requestArticle, $id='')
     {
@@ -66,6 +66,7 @@ class AdminArticleController extends Controller
     }
     public function action($action, $id)
     {
+        $message = '';
         if($action)
         {
             $article = Article::find($id);
@@ -73,10 +74,12 @@ class AdminArticleController extends Controller
             {
                 case 'delete':
                     $article->delete();
+                    $message = 'Xóa bài viết thành công';
                 break;
                 case 'active':
                     $article->a_active = $article->a_active ? 0 : 1 ;
                     $article->save();
+                    $message = 'Kích hoạt bài viết thành công';
                 break;
                 case 'hot':
                     $article->a_hot = $article->a_hot ? 0 : 1;
@@ -84,6 +87,6 @@ class AdminArticleController extends Controller
                 break;
             }
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', $message);
     }
 }

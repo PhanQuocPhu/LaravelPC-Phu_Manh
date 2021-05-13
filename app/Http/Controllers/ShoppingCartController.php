@@ -11,12 +11,16 @@ use Illuminate\Http\Request;
 use DB;
 use function GuzzleHttp\Promise\all;
 
-class ShoppingCartController extends Controller
+class ShoppingCartController extends FrontendController
 {
+    public function _construct()
+    {
+        parent::_contruct();
+    }
     //Thêm giỏ hàng
     public function addProduct(Request $request, $id)
     {
-        $product = Product::select('pro_name', 'id', 'pro_price', 'pro_sale', 'pro_avatar')->find($id);
+        $product = Product::select('pro_name', 'id', 'pro_price', 'pro_sale', 'pro_avatar', 'pro_number')->find($id);
 
         if (!$product) {
             return redirect('/');
@@ -26,6 +30,11 @@ class ShoppingCartController extends Controller
         if($product->pro_sale)
         {
             $price = $price * (100 - $product->pro_sale)/100;
+        }
+
+        if($product->pro_number == 0)
+        {
+            return redirect()->back()->with('warning', 'Sản phẩm đang tạm hết hàng');
         }
         \Cart::add([
             'id' => $id,
@@ -37,7 +46,7 @@ class ShoppingCartController extends Controller
                             'sale' => $product->pro_sale, 
                             'price_old' => $product->pro_price],
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng thành công');
 
     }
     public function deleteProductItem($key)
@@ -50,6 +59,7 @@ class ShoppingCartController extends Controller
     public function getListShoppingCart()
     {
         $products = \Cart::content();
+        /* return View::make('shopping.index', compact('products'))->nest('home', compact('products')); */
         return view('shopping.index', compact('products'));
     }
 

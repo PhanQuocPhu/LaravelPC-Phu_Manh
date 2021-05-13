@@ -16,11 +16,11 @@ class Category extends Model
     protected $status = [
         1=>[
             'name'=> 'Public',
-            'class' => ''
+            'class' => 'badge-success',
         ],
         0=>[
             'name'=> 'Private',
-            'class' => ''
+            'class' => 'badge-danger',
         ]
     ];
 

@@ -23,6 +23,9 @@ class LoginController extends Controller
 
         if (\Auth::attempt($credentials)) {
             // Authentication passed...
+            if (Auth::check()) {
+                // The user is logged in...
+            }
             return redirect(session('link'));
             /* return redirect()->route('home'); */
         }

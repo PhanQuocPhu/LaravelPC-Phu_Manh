@@ -71,13 +71,16 @@
   ============================================ -->
     <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
 
+    <!-- header CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/header.css') }}">
     <!-- responsive CSS
   ============================================ -->
     <link rel="stylesheet" href="{{ asset('theme_admin/css/responsive.css') }}">
 
     <script src="{{ asset('theme_admin/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
-    
+
 </head>
 
 <body class="home-four" {{-- style="background-color: #f1f0f1 !important" --}}>
@@ -90,6 +93,39 @@
     @include('components.header')
     <!-- Header end -->
 
+    <!-- Begin alert -->
+    <div>
+        @if (\Session::has('success'))
+            <div class=" alert alert-success alert-dismissible" role="alert"
+                style="position: fixed; right:20px; top:20px; left:50%; transform: translateX(-50%); z-index:99999999999">
+                <strong>Success!</strong> {{ \Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if (\Session::has('warning'))
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                style="position: fixed; right:20px; top:20px; left:50%; transform: translateX(-50%); z-index:99999999999">
+                {{ \Session::get('warning') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if (\Session::has('danger'))
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                style="position: fixed; right:20px; top:20px; left:50%; transform: translateX(-50%); z-index:99999999999">
+                <strong>Error</strong> {{ \Session::get('error') }}Vui lòng kiểm tra lại dữ liệu nhập!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    </div>
+
+
+    <!-- End alert -->
 
     <!-- main area start -->
     @yield('content')
@@ -106,8 +142,22 @@
 
 </body>
 <footer>
-    
 
+    {{-- Script --}}
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 2000);
+
+    </script>
     <!-- JS -->
 
     <!-- jquery-1.11.3.min js
@@ -159,7 +209,7 @@
   ============================================ -->
     <script src="{{ asset('theme_admin/js/main.js') }}"></script>
 
-	@yield('script')
+    @yield('script')
 </footer>
 
 </html>

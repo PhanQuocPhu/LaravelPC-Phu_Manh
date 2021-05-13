@@ -7,8 +7,12 @@ use App\Models\Rating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class RatingController extends Controller
+class RatingController extends FrontendController
 {
+    public function _construct()
+    {
+        parent::_contruct();
+    }
     public function saveRating(Request $request, $id)
     {
         if($request -> ajax())
