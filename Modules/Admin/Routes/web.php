@@ -1,7 +1,10 @@
 <?php
+Route::prefix('authenticate')->group(function(){
+    Route::get('/login', 'AdminAuthController@getLogin')->name('admin.login');
+    Route::post('/login', 'AdminAuthController@postLogin');
+});
 
-
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
     Route::get('/', 'AdminController@index')->name('admin.home');
 
     //quản lý danh mục
