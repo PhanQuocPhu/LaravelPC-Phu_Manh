@@ -160,7 +160,7 @@
                                     <div class="col-md-2" style="padding-left: 5px; padding-right:0px">
                                         <li style="padding: 1px;border: 1px solid #505050; border-radius: 5px; width:100%"
                                             id="header-button">
-                                            <a href="{{ route('get.contact') }}"> <i class="fas fa-newspaper"></i>
+                                            <a href="{{ route('get.list.article') }}"> <i class="fas fa-newspaper"></i>
                                                 Tổng hợp tin tức</a>
                                         </li>
                                     </div>

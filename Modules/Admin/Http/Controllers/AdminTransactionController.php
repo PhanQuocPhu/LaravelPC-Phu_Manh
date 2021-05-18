@@ -31,8 +31,12 @@ class AdminTransactionController extends Controller
     {
         if ($request->ajax()) {
             $orders = Order::with('product')->where('or_transaction_id', $id)->get();
-           
-            $html = view('admin::components.order', compact('orders'))->render();
+            $transnote = Transaction::find($id);
+            $viewData = [
+                'orders'=>$orders,
+                'transnote'=>$transnote
+            ];
+            $html = view('admin::components.order', $viewData)->render();
             return response()->json($html);
         }
     }

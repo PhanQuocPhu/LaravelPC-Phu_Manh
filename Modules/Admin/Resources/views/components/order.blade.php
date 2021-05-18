@@ -39,6 +39,6 @@
         </table>
         <h5>Ghi chú:</h5>
         <p>
-            
+            {{$transnote->tr_note}}
         </p>
 @endif

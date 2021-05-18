@@ -54,6 +54,7 @@
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Số điện thoại</th>
                         <th scope="col">Tổng giá trị</th>
+                        <th scope="col">Ngày đặt hàng</th>
                         <th scope="col">Status</th>
                         <th scope="col">Thao tác</th>
                     </tr>
@@ -74,6 +75,9 @@
                                 </td>
                                 <td>
                                     {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
+                                </td>
+                                <td>
+                                    {{ $transaction->created_at->format('d-m-y') }}
                                 </td>
                                 <td>
                                     @if ($transaction->tr_status == 1)

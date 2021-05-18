@@ -26,11 +26,11 @@
                     <div class="slider-area hm-1">
                         <!-- slider -->
                         @if (isset($articleNews))
-                            <div class="bend niceties preview-2" >
+                            <div class="bend niceties preview-2">
                                 <div id="ensign-nivoslider-2" class="slides" style="height:530px">
                                     @foreach ($articleNews as $articleNew)
                                         <img src="{{ asset(pare_url_file($articleNew->a_avatar)) }}" alt=""
-                                            title="#slider-direction-2" style="display: inline; height:530px"  />
+                                            title="#slider-direction-2" style="display: inline; height:530px" />
                                     @endforeach
                                 </div>
                                 <!-- direction 1 -->
@@ -70,6 +70,13 @@
             </div>
             {{-- khung mở đầu end --}}
 
+
+            {{-- Sản phẩm vừa xem --}}
+            <div id="storage-products" style="margin-top: 5px">
+
+            </div>
+            {{-- Sản vừa xem end --}}
+
             {{-- Sản phẩm mới --}}
             <div id="featured-product">
                 <div style="position: relative">
@@ -82,7 +89,7 @@
                     <div class="module-products row">
                         @if (isset($productNews))
                             @foreach ($productNews as $pronew)
-                                <div class="col-sm-4 col-xs-12 padding-none col-fix20">
+                                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12 padding-none col-fix20">
                                     <div class="product-row">
                                         <a href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}"></a>
                                         {{-- Hình ảnh sản phẩm start --}}
@@ -140,79 +147,131 @@
             </div>
             {{-- Sản phẩm mới end --}}
 
-            <!-- CPU section start -->
-            <div id="featured-product">
-                <div style="position: relative">
-                    <h2 class="product-group-tittle">Vi xử lý bán chạy</h2>
-                    <a class="products-hot-view-all" href="#">
-                        Xem tất cả <i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>
-                <div class="products-group">
-                    <div class="module-products row">
-                        @if (isset($productNews))
-                            @foreach ($productNews as $pronew)
-                                <div class="col-sm-4 col-xs-12 padding-none col-fix20">
-                                    <div class="product-row">
-                                        <a
-                                            href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}"></a>
-                                        {{-- Hình ảnh sản phẩm start --}}
-                                        <div class="product-row-img">
-                                            @if ($pronew->pro_number == 0)
-                                                <span
-                                                    style="position: absolute; background:#e91e63; color: white; border-radius:5px; white-space:nowrap; font-size:11px; padding: 0 5px; margin-left:2px">Tạm
-                                                    hết hàng
-                                                </span>
-                                            @endif
-                                            <a
-                                                href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
-                                                <img class="product-row-thumbnail"
-                                                    src="{{ asset(pare_url_file($pronew->pro_avatar)) }}" alt="">
-                                            </a>
-                                            <div class="product-row-price-hover">
-                                                <a
-                                                    href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
-                                                    <div class="product-row-note pull-left">Click để xem chi tiết</div>
-                                                </a>
-                                                <a href="{{ route('add.shopping.cart', $pronew->id) }}"
-                                                    class="product-row-btnbuy pull-right"><i
-                                                        class="fas fa-cart-plus"></i></a>
-                                            </div>
-                                        </div>
-                                        {{-- Hình ảnh sản phẩm end --}}
-                                        {{-- Chi tiết sản phẩm start --}}
-                                        <h2 class="product-row-name">{{ $pronew->pro_name }}</h2>
-                                        <div class="product-row-info">
-                                            <div class="product-row-price pull-left">
-                                                @if ($pronew->pro_sale)
-                                                    <del>{{ number_format($pronew->pro_price, 0, '.', '.') }}₫</del>
-                                                @else
-                                                    <del> </del>
-                                                @endif
-                                                <br>
-                                                <span
-                                                    class="product-row-sale">{{ number_format(($pronew->pro_price * (100 - $pronew->pro_sale)) / 100, 0, '.', '.') }}₫
-                                                </span>
-                                            </div>
-                                            <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
-                                            <div class="clearfix"></div>
-                                            @if ($pronew->pro_sale)
-                                                <div class="new-product-percent">-{{ $pronew->pro_sale }}%</div>
-                                            @endif
+            {{-- Danh mục nổi bật --}}
+            @if (isset($categoriesHome))
+                @foreach ($categoriesHome as $categoriHome)
+                    <div class="our-product-area new-product">
+                        <div id="featured-product">
+                            <div style="position: relative">
+                                <h2 class="product-group-tittle">{{ $categoriHome->c_name }}</h2>
+                                <a class="products-hot-view-all" href="#">
+                                    Xem tất cả <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </div>
+                            <!-- our-product area start -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="features-curosel" id="featured-product">
+                                            @if (isset($categoriHome->products))
+                                                @foreach ($categoriHome->products as $product)
+                                                    <!-- product section start -->
+                                                    <div class="col-md-12 col-lg-12 padding-none" style="margin: 0%">
+                                                        <div class="product-row text-center">
+                                                            <a
+                                                                href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}"></a>
+                                                            {{-- Hình ảnh sản phẩm start --}}
+                                                            <div class="product-row-img">
+                                                                @if ($product->pro_number == 0)
+                                                                    <span
+                                                                        style="position: absolute; background:#e91e63; color: white; border-radius:5px; white-space:nowrap; font-size:11px; padding: 0 5px; margin-left:2px">Tạm
+                                                                        hết hàng
+                                                                    </span>
+                                                                @endif
+                                                                <a
+                                                                    href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
+                                                                    <img class="product-row-thumbnail col-fix100"
+                                                                        style="width: 85%;"
+                                                                        src="{{ asset(pare_url_file($product->pro_avatar)) }}"
+                                                                        alt="">
+                                                                </a>
+                                                                <div class="product-row-price-hover">
+                                                                    <a
+                                                                        href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
+                                                                        <div class="product-row-note pull-left">Click để xem
+                                                                            chi
+                                                                            tiết</div>
+                                                                    </a>
+                                                                    <a href="{{ route('add.shopping.cart', $product->id) }}"
+                                                                        class="product-row-btnbuy pull-right"><i
+                                                                            class="fas fa-cart-plus "></i></a>
+                                                                </div>
+                                                            </div>
+                                                            {{-- Hình ảnh sản phẩm end --}}
+                                                            {{-- Chi tiết sản phẩm start --}}
+                                                            <h2 class="product-row-name">{{ $product->pro_name }}</h2>
+                                                            <div class="product-row-info">
+                                                                <div class="product-row-price pull-left">
+                                                                    @if ($product->pro_sale)
+                                                                        <del>{{ number_format($product->pro_price, 0, '.', '.') }}₫</del>
+                                                                    @else
+                                                                        <del> </del>
+                                                                    @endif
+                                                                    <br>
+                                                                    <span
+                                                                        class="product-row-sale">{{ number_format(($product->pro_price * (100 - $product->pro_sale)) / 100, 0, '.', '.') }}₫
+                                                                    </span>
+                                                                </div>
+                                                                <!--<span class="product-row-buyer pull-right"><i class="fa fa-user"></i><br/>185</span>-->
+                                                                <div class="clearfix"></div>
+                                                                @if ($product->pro_sale)
+                                                                    <div class="new-product-percent">
+                                                                        -{{ $product->pro_sale }}%
+                                                                    </div>
+                                                                @endif
 
+                                                            </div>
+                                                            {{-- Chi tiết sản phẩm end --}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- product section end -->
+                                                @endforeach
+                                            @endif
                                         </div>
-                                        {{-- Chi tiết sản phẩm end --}}
                                     </div>
                                 </div>
-                            @endforeach
-                        @endif
-
+                            </div>
+                            <!-- our-product area end -->
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- CPU section end -->
+                @endforeach
 
+            @endif
         </div>
     </div>
+@stop
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(function() {
+            let routeRenderProduct = '{{ route('post.view.product') }}';
+            checkRender = false;
+            $(document).ready(function() {
+                if (checkRender == false) {
+                    checkRender = true;
+                    let products = localStorage.getItem('products');
+                    products = $.parseJSON(products);
 
+                    if (products.length > 0) {
+                        $.ajax({
+                            method: "POST",
+                            url: routeRenderProduct,
+                            data: {
+                                id: products
+                            },
+                            success: function(result) {
+                                console.log(result);
+                                $("#storage-products").html('').append(result.data);
+                            }
+                        });
+                    }
+                }
+            });
+        })
+
+    </script>
 @stop

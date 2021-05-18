@@ -28,6 +28,11 @@ Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::cla
 Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
 
 
+/* Bài viết */
+Route::get('bai-viet',[App\Http\Controllers\ArticleController::class, 'getListArticle'])->name('get.list.article');
+Route::get('bai-viet/{slug}-{id}',[App\Http\Controllers\ArticleController::class, 'getDetailArticle'])->name('get.detail.article');
+
+
 /* Shopping cart - giỏ hàng */
 Route::prefix('shopping')->group(function ()
 {
@@ -35,6 +40,7 @@ Route::prefix('shopping')->group(function ()
     Route::get('/delete/{id}',[App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
     Route::get('/danh-sach',[App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
 });
+
 /* Thanh toán */
 Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], function ()
 {
@@ -46,6 +52,12 @@ Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], functio
 Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function ()
 {
     Route::post('/danh-gia/{id}',[App\Http\Controllers\RatingController::class, 'saveRating'])->name('post.rating.product');
+});
+
+/* Đánh giá sản phẩm */
+Route::group(['prefix' => 'ajax'], function ()
+{
+    Route::post('/view-product',[App\Http\Controllers\HomeController::class, 'renderProductView'])->name('post.view.product');
 });
 
 /* Liên hệ */

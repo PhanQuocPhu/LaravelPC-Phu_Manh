@@ -91,7 +91,7 @@
     </div>
     <!-- breadcrumbs area end -->
     <!-- product-details Area Start -->
-    <div class="product-details-area">
+    <div class="product-details-area" id="content_product" data-id="{{ $productDetail->id}}">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-sm-5 col-xs-12">
@@ -166,7 +166,6 @@
                                     }
                                     ?>
                                     <div class="pro-rating">
-
                                         @for ($i = 1; $i <= 5; $i++)
                                             <a href="#"><i
                                                     class="fa fa-star {{ $i <= $ageDetail ? 'active' : '' }}"></i></a>
@@ -213,7 +212,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -239,24 +238,29 @@
                                 <span class="fa fa-star"
                                     style="font-size: 100px; display:block;color:#ff9785;margin: 0 auto; text-align: center"></span>
                                 <b
-                                    style="position: absolute; top:50%; left:50%; transform: translateX(-50%) translateY(-50%); color:white; font-size: 20px">2.5</b>
+                                    style="position: absolute; top:50%; left:50%; transform: translateX(-50%) translateY(-50%); color:white; font-size: 20px">{{ $ageDetail }}</b>
                             </div>
                             <div class="list_rating" style="width: 60%; padding:20px">
-                                @for ($i = 1; $i <= 5; $i++)
+                                @foreach ($arrayRatings as $key => $arrayRating)
+                                    <?php $itemAge = round(($arrayRating['total'] /
+                                    $productDetail->pro_total_rating) * 100, 0); ?>
                                     <div class="item_rating" style="display: flex; align_items:center">
+                                        {{-- {{dd($arrayRating)}} --}}
                                         <div style="width: 10%; font-size:14px">
-                                            {{ $i }} <span class="fa fa-star"> </span>
+                                            {{ $key }} <span class="fa fa-star"> </span>
                                         </div>
                                         <div style="width: 70%; margin: 6px 20px">
                                             <span
                                                 style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
-                                                    style="width: 30%; background-color:#f25800; display:block; height:100%;border-radius:5px"></b></span>
+                                                    style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                            </span>
                                         </div>
                                         <div style="width: 20%">
-                                            <a href="">290 đánh giá</a>
+                                            <a href="">{{ $arrayRating['total'] }} đánh giá ({{ $itemAge }}%)</a>
                                         </div>
                                     </div>
-                                @endfor
+                                @endforeach
+
                             </div>
                             <div style="width: 20%">
                                 <button class="btn btn-primary js_rating_action"
@@ -315,7 +319,7 @@
                                         {{ $rating->ra_content }}
                                     </span>
                                     <div>
-                                        <span><i class="fa fa-clock-o"></i> {{ $rating->created__at }}</span>
+                                        <span><i class="fa fa-clock-o"></i> {{ $rating->created_at }}</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -331,7 +335,11 @@
 @stop
 @section('script')
     <script>
-        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $(function() {
             let listStart = $(".list_start .fa");
             $listRatingText = {
@@ -380,11 +388,36 @@
                         if (result.code == 1) {
                             alert("Cảm ơn bạn đã đánh giá sản phẩm");
                             location.reload();
+                        } else{
+                            alert("Vui lòng đăng nhập để đánh giá sản phẩm");
+                            location.href = "/dang-nhap";
                         }
                     });
                 }
 
             });
+
+            //Lưu id sản phẩm
+            let idProduct = $("#content_product").attr('data-id');
+            //Lấy giá trị trong storage
+            let products = localStorage.getItem('products');
+
+            if(products == null)
+            {
+                arrayProduct = new Array();
+                arrayProduct.push(idProduct);
+                localStorage.setItem('products', JSON.stringify(arrayProduct));
+                
+            } else{
+                //Chuyển về mảng
+                products = $.parseJSON(products);
+                if(products.indexOf(idProduct) == -1)
+                {
+                    products.push(idProduct);
+                    localStorage.setItem('products', JSON.stringify(products));
+                }
+                console.log(products);
+            }
         });
 
     </script>

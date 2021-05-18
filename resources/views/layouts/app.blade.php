@@ -145,12 +145,8 @@
 
     {{-- Script --}}
 
+    
     <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
                 $(this).remove();
@@ -158,11 +154,12 @@
         }, 2000);
 
     </script>
+
     <!-- JS -->
 
     <!-- jquery-1.11.3.min js
   ============================================ -->
-    <script src="{{ asset('theme_admin/js/vendor/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
 
     <!-- bootstrap js
   ============================================ -->

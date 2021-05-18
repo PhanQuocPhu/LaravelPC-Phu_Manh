@@ -27,6 +27,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Tên danh mục</th>
                     <th scope="col">Title SEO</th>
+                    <th scope="col">HomePage</th>
                     <th scope="col">Status</th>
                     <th scope="col">Thao tác</th>
                 </tr>
@@ -40,8 +41,14 @@
                     <td>{{ $category->c_name }}</td>
                     <td>{{ $category->c_title_seo }}</td>
                     <td>
+                        <a class="badge {{ $category->getHome($category->c_home)['class'] }}"
+                            href="{{ route('admin.get.action.category', ['home', $category->id]) }}">{{ $category->getHome($category->c_home)['name'] }}
+                        </a>
+                    </td>
+                    <td>
                         <a class="badge {{ $category->getStatus($category->c_active)['class'] }}"
-                            href="{{ route('admin.get.action.category', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}</a>
+                            href="{{ route('admin.get.action.category', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}
+                        </a>
                     </td>
                     <td>
                         <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"

@@ -16,7 +16,7 @@
         }
 
     </style>
-    
+
     <!-- breadcrumbs area start -->
     <div class="breadcrumbs">
         <div class="container">
@@ -47,21 +47,17 @@
                     <div class="shop-content-area">
                         <div class="shop-toolbar">
                             <div class="col-md-12 col-sm-12 col-xs-12 nopadding-left text-right">
-                                <form class="tree-most" method="get">
+                                <form class="tree-most" id="order-by" method="get">
                                     <div class="orderby-wrapper">
                                         <label>Sắp xếp theo: </label>
-                                        <select name="orderby" class="orderby">
-                                            <option value="menu_order" selected="selected">Giá tăng dần</option>
-                                            <option value="popularity">Sort by popularity</option>
-                                            <option value="rating">Sort by average rating</option>
-                                            <option value="date">Sort by newness</option>
-                                            <option value="price">Sort by price: low to high</option>
-                                            <option value="price-desc">Sort by price: high to low</option>
+                                        <select name="orderby" id="orderby" class="orderby">
+                                            <option {{Request::get('orderby') == "price" || !Request::get('orderby') ?  "selected = 'selected" : ""}} value="price">Giá tăng dần</option>
+                                            <option {{Request::get('orderby') == "price-desc" ?  "selected = 'selected" : ""}} value="price-desc">Giá giảm dần</option>
+                                            <option {{Request::get('orderby') == "popularity" ?  "selected = 'selected" : ""}} value="popularity">Độ yêu thích</option>
                                         </select>
-                                    </div>
                                 </form>
                             </div>
-                             
+
                         </div>
                     </div>
                     <!-- shop toolbar end -->
@@ -72,7 +68,8 @@
                                     @foreach ($products as $product)
                                         <div class="col-sm-4 col-xs-12 padding-none col-fix20">
                                             <div class="product-row">
-                                                <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}"></a>
+                                                <a
+                                                    href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}"></a>
                                                 {{-- Hình ảnh sản phẩm start --}}
                                                 <div class="product-row-img">
                                                     @if ($product->pro_number == 0)
@@ -81,14 +78,16 @@
                                                             hết hàng
                                                         </span>
                                                     @endif
-                                                    <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
+                                                    <a
+                                                        href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
                                                         <img class="product-row-thumbnail"
                                                             src="{{ asset(pare_url_file($product->pro_avatar)) }}" alt="">
                                                     </a>
                                                     <div class="product-row-price-hover">
                                                         <a
                                                             href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
-                                                            <div class="product-row-note pull-left">Click để xem chi tiết</div>
+                                                            <div class="product-row-note pull-left">Click để xem chi tiết
+                                                            </div>
                                                         </a>
                                                         <a href="{{ route('add.shopping.cart', $product->id) }}"
                                                             class="product-row-btnbuy pull-right"><i
@@ -115,24 +114,34 @@
                                                     @if ($product->pro_sale)
                                                         <div class="new-product-percent">-{{ $product->pro_sale }}%</div>
                                                     @endif
-        
+
                                                 </div>
                                                 {{-- Chi tiết sản phẩm end --}}
                                             </div>
                                         </div>
                                     @endforeach
                                 @endif
-        
+
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
                 <!-- right sidebar end -->
             </div>
         </div>
     </div>
     <!-- shop-with-sidebar end -->
+@endsection
 
+@section('script')
+    <script>
+        $(function() {
+            $('.orderby').change(function() {
+                $('#order-by').submit();
+            });
+        });
 
-@stop
+    </script>
+
+@endsection

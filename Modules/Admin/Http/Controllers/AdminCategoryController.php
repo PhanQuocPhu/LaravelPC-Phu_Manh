@@ -13,7 +13,7 @@ class AdminCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active')->get();
+        $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->get();
         
 
         $viewData = [ 'categories' => $categories ];
@@ -81,6 +81,12 @@ class AdminCategoryController extends Controller
                 case 'active':
                     $category->c_active = $category->c_active ? 0 : 1 ;
                     $category->save();
+                    $message = 'Sửa trạng thái thành công';
+                break;
+                case 'home':
+                    $category->c_home = $category->c_home ? 0 : 1 ;
+                    $category->save();
+                    $message = 'Sửa trạng thái thành công';
                 break;
             }
         }

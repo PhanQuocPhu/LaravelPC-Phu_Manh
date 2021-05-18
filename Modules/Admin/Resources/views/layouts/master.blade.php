@@ -20,7 +20,8 @@
     <!-- Custom styles for this template-->
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body id="page-top">
@@ -408,27 +409,16 @@
 </body>
 
 <footer>
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-
+    </script>
     <script>
-        /*  $(function() {
-            console.log("ready!");
-            $("#Trans").click(function(event) {
-                let $this = $(this);
-                let url = $this.attr('href');
-                let md = $this.attr('data-id');
-                $("#HomeContent").html('');
-                $.ajax({
-                    url: url,
-                }).done(function(result) {
-                    if (result) {
-                        $("#HomeContent").append(result);
-                    }
-                });
-            });
-        }) */
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
                 $(this).remove();
@@ -450,14 +440,17 @@
         });
 
     </script>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-    </script>
+
+
+    {{-- Ck-editor --}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    {{-- Chart --}}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
@@ -476,6 +469,7 @@
     <script src=" {{ asset('theme_admin/js/demo/chart-area-demo.js') }}"></script>
     <script src=" {{ asset('theme_admin/js/demo/chart-pie-demo.js') }}"></script>
     @yield('script')
+
 
 </footer>
 

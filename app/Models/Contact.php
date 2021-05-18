@@ -10,6 +10,8 @@ class Contact extends Model
 {
     protected $table = 'contacts';
     protected $guarded = ['*'];
+    const STATUS_DONE = 1;
+    const STATUS_DEFAULT = 0;
     protected $status = [
         1 => [
             'name' => 'Đã xử lý',
@@ -20,6 +22,7 @@ class Contact extends Model
             'class' => 'badge-secondary',
         ],
     ];
+    
     public function getStatus()
     {
         return Arr::get($this->status, $this->c_status, '[N\A]');
