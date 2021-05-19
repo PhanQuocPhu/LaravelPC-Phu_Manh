@@ -5,9 +5,10 @@ use App\Http\Controllers;
 
 Auth::routes();
 
+//Đăng ký 
 Route::get('dang-ky', [App\Http\Controllers\Auth\RegisterController::class, 'getRegister'])->name('get.register');
 Route::post('dang-ky', [App\Http\Controllers\Auth\RegisterController::class, 'postRegister'])->name('post.register');
-
+//Đăng nhập
 Route::get('dang-nhap', [App\Http\Controllers\Auth\LoginController::class, 'getLogin'])->name('get.login');
 Route::post('dang-nhap', [App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('post.login');
 
@@ -63,3 +64,10 @@ Route::group(['prefix' => 'ajax'], function ()
 /* Liên hệ */
 Route::get('/lien-he',[App\Http\Controllers\ContactController::class, 'getContact'])->name('get.contact');
 Route::post('/lien-he',[App\Http\Controllers\ContactController::class, 'saveContact']);
+
+
+/* Đánh giá sản phẩm */
+Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function ()
+{
+    Route::get('/',[App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+});

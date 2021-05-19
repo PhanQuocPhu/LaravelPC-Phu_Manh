@@ -29,21 +29,9 @@
                 <div class="col-md-4 text-left" style="margin-top: 15px; padding:0">
                     {{-- Đăng ký đăng nhập --}}
                     @if (Auth::check())
-                        {{-- <div class="col-md-6 row" style="padding: 0">
-                            <li class="" style="padding: 1px; width:100%; list-style-type: none">
-                                <a href="#" style="color:black!important;" id="header-top-button">
-                                    <div class="col-md-2">
-                                        <i class="fas fa-user-circle" style="font-size: 20px; color: black; padding-left:5px; padding-top:5px"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
-                                    </div>
-                                </a>
-                            </li>
-                        </div> --}}
                         <div class="col-md-6" style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
-                                <a href="{{ route('get.logout.user') }}" style="color:black!important;"
+                                <a href="{{ route('user.index') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-user-circle"></i>
                                     {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
                                 </a>

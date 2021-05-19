@@ -15,6 +15,10 @@ class LoginController extends Controller
     public function getLogin(Request $request)
     {
         session(['link' => url()->previous()]);
+        if(Auth::check())
+        {
+            return redirect(session('link'));
+        }
         return view('auth.login');
     }
     public function postLogin(Request $request)
