@@ -152,9 +152,9 @@
         -webkit-border-radius: 5px 5px 5px 5px;
         border-radius: 5px 5px 5px 5px;
     }
-   
 
-    
+
+
     input:focus {
         background-color: #fff;
         border-bottom: 2px solid #5fbae9;
@@ -315,9 +315,9 @@
             <!-- Tabs Titles -->
 
             <!-- Icon -->
-            <div class="fadeIn first">
+            {{-- <div class="fadeIn first">
                 <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-            </div>
+            </div> --}}
 
             <!-- Login Form -->
             <form action="" method="POST">
@@ -327,7 +327,7 @@
                 <input type="submit" class="fadeIn fourth" value="Đăng nhập">
             </form>
 
-            <!-- Remind Passowrd -->
+            <!-- Remind Password -->
             <div id="formFooter">
                 <a class="underlineHover" href="#">Forgot Password?</a>
             </div>
