@@ -25,7 +25,7 @@
                     </form>
                 </div>
                 <!-- search end -->
-                <!-- top details area start -->
+                <!-- Đăng ký - Đặng nhập - Giỏ hàng -->
                 <div class="col-md-4 text-left" style="margin-top: 15px; padding:0">
                     {{-- Đăng ký đăng nhập --}}
                     @if (Auth::check())
@@ -78,7 +78,9 @@
                     <div class="col-md-3" style="padding: 0">
                         <li class="expand" style="padding: 1px; width:100%; list-style-type: none">
                             <div>
-                                <a href=""><span class="cart-quantity">{{ \Cart::count() }}</span></a>
+                                @if (\Cart::count() != 0)
+                                    <a href=""><span class="cart-quantity">{{ \Cart::count() }}</span></a>
+                                @endif
                                 <a href="{{ route('get.list.shopping.cart') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-shopping-cart"></i>
                                     Giỏ hàng
@@ -119,7 +121,7 @@
                     </div>
 
                 </div>
-                <!-- top details area end -->
+                <!-- Đăng ký - Đặng nhập - Giỏ hàng -->
             </div>
         </div>
         <hr style="margin-top: 8px; margin-bottom:0px; backgrounf:#d4d4d4">
@@ -160,7 +162,8 @@
                                     <div class="col-md-2" style="padding-left: 5px; padding-right:0px">
                                         <li style="padding: 1px;border: 1px solid #505050; border-radius: 5px; width:100%"
                                             id="header-button">
-                                            <a href="{{ route('get.list.article') }}"> <i class="fas fa-newspaper"></i>
+                                            <a href="{{ route('get.list.article') }}"> <i
+                                                    class="fas fa-newspaper"></i>
                                                 Tổng hợp tin tức</a>
                                         </li>
                                     </div>

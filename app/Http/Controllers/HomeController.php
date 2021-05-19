@@ -28,6 +28,7 @@ class HomeController extends FrontendController
 
         $latestNews = $articleNews->last();
 
+        $productSugests = [];
         //Kiểm tra người dùng đăng nhập
         if (get_data_user('web')) {
             $transactions = Transaction::where([
@@ -41,11 +42,10 @@ class HomeController extends FrontendController
                     $listIDCatedory = Product::whereIn('id', $listID)->distinct()->pluck('pro_category_id');
                     if (!empty($listIDCatedory)) 
                     {
-                        $productSugests = Product::whereIn('pro_category_id', $listIDCatedory)->limit(6)->get();
+                        $productSugests = Product::whereIn('pro_category_id', $listIDCatedory)->limit(5)->get();
                     }
                 }
             }
-            dump($listIDCatedory);
         };
 
         $viewData = [

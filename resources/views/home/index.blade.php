@@ -81,9 +81,9 @@
             <div id="featured-product">
                 <div style="position: relative">
                     <h2 class="product-group-tittle">Sản phẩm mới</h2>
-                    <a class="products-hot-view-all" href="#">
+                    {{-- <a class="products-hot-view-all" href="#">
                         Xem tất cả <i class="fa fa-chevron-right"></i>
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="products-group">
                     <div class="module-products row">
@@ -154,7 +154,7 @@
                         <div id="featured-product">
                             <div style="position: relative">
                                 <h2 class="product-group-tittle">{{ $categoriHome->c_name }}</h2>
-                                <a class="products-hot-view-all" href="#">
+                                <a class="products-hot-view-all" href="{{ route('get.list.product', [$categoriHome->c_slug, $categoriHome->id]) }}">
                                     Xem tất cả <i class="fa fa-chevron-right"></i>
                                 </a>
                             </div>
