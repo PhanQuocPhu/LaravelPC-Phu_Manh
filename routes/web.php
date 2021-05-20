@@ -70,7 +70,8 @@ Route::post('/lien-he',[App\Http\Controllers\ContactController::class, 'saveCont
 Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function ()
 {
     Route::get('/',[App\Http\Controllers\UserController::class, 'info'])->name('user.info');
-    Route::post('/',[App\Http\Controllers\UserController::class, 'saveInfo']);
+    Route::get('/info',[App\Http\Controllers\UserController::class, 'updateInfo'])->name('user.update.info');
+    Route::post('/info',[App\Http\Controllers\UserController::class, 'saveInfo']);
 
     Route::get('/don-hang',[App\Http\Controllers\UserController::class, 'UserTransaction'])->name('user.transaction');
 
