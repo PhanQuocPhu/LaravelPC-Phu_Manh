@@ -28,11 +28,11 @@ class LoginController extends Controller
         if (\Auth::attempt($credentials)) {
             // Authentication passed...
             if (Auth::check()) {
-                return redirect(session('link'));
+                return redirect(session('link'))->with('success', "Đăng nhập thành công");
             }
             return redirect(session('link'));
             /* return redirect()->route('home'); */
-        } return view('auth.login');
+        } return view('auth.login')->with('error', "Sai tài khoản hoặc mật khẩu");
     }
     public function getLogout()
     {

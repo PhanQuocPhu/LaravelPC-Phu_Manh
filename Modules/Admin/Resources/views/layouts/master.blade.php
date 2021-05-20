@@ -21,6 +21,7 @@
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
@@ -449,7 +450,6 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src=" {{ asset('theme_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->

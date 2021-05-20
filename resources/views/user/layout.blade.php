@@ -21,6 +21,7 @@
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
@@ -99,6 +100,12 @@
                 <a class="nav-link text-secondary" href="{{ route('user.info') }}">
                     <i class="fas fa-fw fa-tachometer-alt text-secondary "></i>
                     <span>Thông tin cá nhân</span></a>
+            </li>
+
+            <li class="nav-item {{ \Request::route()->getName() == 'user.update.password' ? 'active' : '' }} ">
+                <a class="nav-link text-secondary" href="{{ route('user.update.password') }}">
+                    <i class="fas fa-fw fa-tachometer-alt text-secondary "></i>
+                    <span>Đổi mật khẩu</span></a>
             </li>
 
             <!-- Nav Item - Đơn hàng -->
@@ -242,7 +249,6 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src=" {{ asset('theme_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->

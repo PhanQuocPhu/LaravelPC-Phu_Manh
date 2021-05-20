@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestPassword;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -33,6 +35,25 @@ class UserController extends Controller
         $user = User::where('id', get_data_user('web'))->update($request->except('_token'));
         return redirect()->route('user.info')->with('success', 'Cập nhật thông tin thành công');
     }
+
+    //Đổi mật khẩu
+    public function updatePassword()
+    {
+        $user = User::find(get_data_user('web'));
+
+        return view('user.password', compact('user'));
+    }
+
+    public function savePassword(RequestPassword $requestPassword)
+    {
+        if (Hash::check($requestPassword->password, get_data_user('web', 'password'))) {
+            $user = User::find(get_data_user('web'));
+            $user->password = bcrypt($requestPassword->newpassword);
+            return redirect()->route('user.info')->with('success', 'Cập nhật thành công');
+        }
+        return redirect()->back()->with('danger', 'Mật khẩu không chính xác');
+    }
+
 
     //Thông tin về đơn hàng
     public function UserTransaction()
