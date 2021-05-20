@@ -66,8 +66,12 @@ Route::get('/lien-he',[App\Http\Controllers\ContactController::class, 'getContac
 Route::post('/lien-he',[App\Http\Controllers\ContactController::class, 'saveContact']);
 
 
-/* Đánh giá sản phẩm */
+/* Thông tin user */
 Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function ()
 {
-    Route::get('/',[App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+    Route::get('/',[App\Http\Controllers\UserController::class, 'info'])->name('user.info');
+    Route::post('/',[App\Http\Controllers\UserController::class, 'saveInfo']);
+
+    Route::get('/don-hang',[App\Http\Controllers\UserController::class, 'UserTransaction'])->name('user.transaction');
+
 });

@@ -2,6 +2,8 @@
 Route::prefix('authenticate')->group(function(){
     Route::get('/login', 'AdminAuthController@getLogin')->name('admin.login');
     Route::post('/login', 'AdminAuthController@postLogin');
+
+    Route::get('/logout', 'AdminAuthController@logoutAdmin')->name('admin.logout');
 });
 
 Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
