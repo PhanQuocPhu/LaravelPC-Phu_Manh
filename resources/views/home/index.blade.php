@@ -109,9 +109,9 @@
                                                     href="{{ route('get.detail.product', [$pronew->pro_slug, $pronew->id]) }}">
                                                     <div class="product-row-note pull-left">Click để xem chi tiết</div>
                                                 </a>
-                                                <a href="{{ route('add.shopping.cart', $pronew->id) }}"
-                                                    class="product-row-btnbuy pull-right"><i
-                                                        class="fas fa-cart-plus"></i></a>
+                                                <a href="{{-- {{ route('add.shopping.cart', $product->id) }} --}} {{ route('add.shopping.cart.ajax', $pronew->id) }}"
+                                                    class="product-row-btnbuy pull-right add-to-cart"><i
+                                                        class=" fas fa-cart-plus "></i></a>
                                             </div>
                                         </div>
                                         {{-- Hình ảnh sản phẩm end --}}
@@ -154,7 +154,8 @@
                         <div id="featured-product">
                             <div style="position: relative">
                                 <h2 class="product-group-tittle">{{ $categoriHome->c_name }}</h2>
-                                <a class="products-hot-view-all" href="{{ route('get.list.product', [$categoriHome->c_slug, $categoriHome->id]) }}">
+                                <a class="products-hot-view-all"
+                                    href="{{ route('get.list.product', [$categoriHome->c_slug, $categoriHome->id]) }}">
                                     Xem tất cả <i class="fa fa-chevron-right"></i>
                                 </a>
                             </div>
@@ -189,17 +190,17 @@
                                                                     <a
                                                                         href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
                                                                         <div class="product-row-note pull-left">Click để xem
-                                                                            chi
-                                                                            tiết</div>
+                                                                            chi tiết</div>
                                                                     </a>
-                                                                    <a href="{{ route('add.shopping.cart', $product->id) }}"
-                                                                        class="product-row-btnbuy pull-right"><i
-                                                                            class="fas fa-cart-plus "></i></a>
+                                                                    <a href="{{-- {{ route('add.shopping.cart', $product->id) }} --}} {{ route('add.shopping.cart.ajax', $product->id) }}"
+                                                                        class="product-row-btnbuy pull-right add-to-cart"><i
+                                                                            class=" fas fa-cart-plus "></i></a>
                                                                 </div>
                                                             </div>
                                                             {{-- Hình ảnh sản phẩm end --}}
                                                             {{-- Chi tiết sản phẩm start --}}
-                                                            <h2 class="product-row-name">{{ $product->pro_name }}</h2>
+                                                            <h2 class=" product-row-name">{{ $product->pro_name }}
+                                                            </h2>
                                                             <div class="product-row-info">
                                                                 <div class="product-row-price pull-left">
                                                                     @if ($product->pro_sale)
@@ -247,6 +248,20 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $('.add-to-cart').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let id = $this.attr('data-id');
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Thêm sản phẩm thành công")
+                    $("#cart-count").html(response);
+                }
+            });
+        });
         $(function() {
             let routeRenderProduct = '{{ route('post.view.product') }}';
             checkRender = false;
@@ -270,8 +285,10 @@
                         });
                     }
                 }
+                console.log('ready');
             });
         })
 
     </script>
+
 @stop

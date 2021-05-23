@@ -23,6 +23,7 @@ Route::get('dang-xuat', [App\Http\Controllers\Auth\LoginController::class, 'getL
     Route::get('dang-nhap', 'LoginController@getLogin')->name('get.login');
     Route::post('dang-nhap', 'LoginController@postLogin')->name('post.login');
 }); */
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
@@ -40,6 +41,8 @@ Route::prefix('shopping')->group(function ()
     Route::get('/add/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
     Route::get('/delete/{id}',[App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
     Route::get('/danh-sach',[App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
+
+    Route::post('/add-ajax/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProductAjax'])->name('add.shopping.cart.ajax');
 });
 
 /* Thanh toán */
@@ -55,7 +58,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function ()
     Route::post('/danh-gia/{id}',[App\Http\Controllers\RatingController::class, 'saveRating'])->name('post.rating.product');
 });
 
-/* Đánh giá sản phẩm */
+/* Sản phẩm vừa xem */
 Route::group(['prefix' => 'ajax'], function ()
 {
     Route::post('/view-product',[App\Http\Controllers\HomeController::class, 'renderProductView'])->name('post.view.product');
@@ -78,5 +81,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function ()
     Route::post('/password',[App\Http\Controllers\UserController::class, 'savePassword']);
 
     Route::get('/don-hang',[App\Http\Controllers\UserController::class, 'UserTransaction'])->name('user.transaction');
+    Route::get('/don-hang/{id}', [App\Http\Controllers\UserController::class, 'viewOrder'])->name('user.get.view.order');
 
 });

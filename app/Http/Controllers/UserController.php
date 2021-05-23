@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestPassword;
+use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class UserController extends Controller
         //Thông tin các đơn hàng trong quá khứ
         $transactions = Transaction::where('tr_user_id', get_data_user('web'));
         $transactions = $transactions->addSelect('id', 'tr_total', 'tr_address', 'tr_phone', 'tr_status', 'created_at')->paginate(10);
-        $listTransactions = $transactions;
+        /* $listTransactions = $transactions; */
         //Tổng số đơn hàng
         $totalTrans = Transaction::where('tr_user_id', get_data_user('web'))
             ->select('id')
@@ -72,15 +73,29 @@ class UserController extends Controller
             ->select('id')
             ->count();
         //Tổng số tiền đã tiêu
-        $totalMoney = Transaction::where('tr_status', Transaction::STATUS_DONE)->sum('tr_total');
+        $totalMoney = Transaction::where('tr_user_id', get_data_user('web'))->where('tr_status', Transaction::STATUS_DONE)->sum('tr_total');
 
 
         $viewData = [
             'totalTrans' => $totalTrans,
             'totalTransDone' => $totalTransDone,
             'totalMoney' => $totalMoney,
-            'listTransactions' => $listTransactions
+            'transactions' => $transactions
         ];
         return view('user.transaction', $viewData);
+    }
+    //Load dữ liệu ra html rồi bỏ vào ajax
+    public function viewOrder(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $orders = Order::with('product')->where('or_transaction_id', $id)->get();
+            $transnote = Transaction::find($id);
+            $viewData = [
+                'orders'=>$orders,
+                'transnote'=>$transnote
+            ];
+            $html = view('user.components.order', $viewData)->render();
+            return response()->json($html);
+        }
     }
 }

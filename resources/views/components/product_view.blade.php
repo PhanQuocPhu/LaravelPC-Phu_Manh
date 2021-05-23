@@ -27,8 +27,9 @@
                                 <a href="{{ route('get.detail.product', [$product->pro_slug, $product->id]) }}">
                                     <div class="product-row-note pull-left">Click để xem chi tiết</div>
                                 </a>
-                                <a href="{{ route('add.shopping.cart', $product->id) }}"
-                                    class="product-row-btnbuy pull-right"><i class="fas fa-cart-plus"></i></a>
+                                <a href="{{-- {{ route('add.shopping.cart', $product->id) }} --}} {{ route('add.shopping.cart.ajax', $product->id) }}"
+                                    class="product-row-btnbuy pull-right add-to-cart"><i
+                                        class=" fas fa-cart-plus "></i></a>
                             </div>
                         </div>
                         {{-- Hình ảnh sản phẩm end --}}
@@ -61,3 +62,19 @@
 
     </div>
 </div>
+<script>
+    $('.add-to-cart').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let id = $this.attr('data-id');
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Thêm sản phẩm thành công")
+                    $("#cart-count").html(response);
+                }
+            });
+        });
+</script>

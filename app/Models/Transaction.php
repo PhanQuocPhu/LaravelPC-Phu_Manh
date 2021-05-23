@@ -9,8 +9,11 @@ class Transaction extends Model
     protected $table = 'transactions';
     protected $guarded = ['*'];
 
-    const STATUS_DONE = 1;
     const STATUS_DEFAULT = 0;
+    const STATUS_DONE = 1;
+    const STATUS_PAY = 2;
+    const STATUS_ONGOING = 3;
+    
     
     public function user()
     {

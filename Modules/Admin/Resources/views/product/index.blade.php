@@ -118,3 +118,25 @@
         </table>
     </div>
 @endsection
+
+@section('script')
+   {{--  <script>
+        $(function() {
+            $(".nav-link").click(function(event) {
+                let $this = $(this);
+                let url = $this.attr('href');
+                $("#HomeContent").html('');
+                $.ajax({
+                    url: url,
+                }).done(function(result) {
+                    /* console.log(result); */
+                    if (result) {
+                        console.log(result);
+                        /* $("#HomeContent").append(result); */
+                    }
+                });
+            });
+        })
+
+    </script> --}}
+@endsection

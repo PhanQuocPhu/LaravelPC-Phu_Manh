@@ -31,7 +31,7 @@
                     @if (Auth::check())
                         <div class="col-md-6" style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
-                                <a href="{{ route('user.index') }}" style="color:black!important;"
+                                <a href="{{ route('user.info') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-user-circle"></i>
                                     {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}
                                 </a>
@@ -67,7 +67,7 @@
                         <li class="expand" style="padding: 1px; width:100%; list-style-type: none">
                             <div>
                                 @if (\Cart::count() != 0)
-                                    <a href=""><span class="cart-quantity">{{ \Cart::count() }}</span></a>
+                                    <span class="cart-quantity" id="cart-count">{{ \Cart::count() }}</span>
                                 @endif
                                 <a href="{{ route('get.list.shopping.cart') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-shopping-cart"></i>

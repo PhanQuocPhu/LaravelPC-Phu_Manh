@@ -49,6 +49,37 @@ class ShoppingCartController extends FrontendController
         return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng thành công');
 
     }
+    public function addProductAjax(Request $request, $id)
+    {
+        $product = Product::select('pro_name', 'id', 'pro_price', 'pro_sale', 'pro_avatar', 'pro_number')->find($id);
+
+        if (!$product) {
+            return redirect('/');
+        }
+
+        $price = $product->pro_price;
+        if($product->pro_sale)
+        {
+            $price = $price * (100 - $product->pro_sale)/100;
+        }
+
+        if($product->pro_number == 0)
+        {
+            return redirect()->back()->with('warning', 'Sản phẩm đang tạm hết hàng');
+        }
+        \Cart::add([
+            'id' => $id,
+            'name' => $product->pro_name,
+            'qty' => 1,
+            'price' => $price,
+            'weight' => 550,
+            'options' => ['avatar' => $product->pro_avatar, 
+                            'sale' => $product->pro_sale, 
+                            'price_old' => $product->pro_price],
+        ]);
+        return response(\Cart::count());
+
+    }
     public function deleteProductItem($key)
     {
         \Cart::remove($key);

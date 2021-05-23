@@ -41,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (isset($products))
+                        @if ($products)
                             <?php $i = 1; ?>
                             @foreach ($products as $key => $product)
                                 <tr>
@@ -57,9 +57,6 @@
                                     <td>{{ $product->qty }}</td>
                                     <td>{{ number_format($product->qty * $product->price, 0, '.', '.') }}</td>
                                     <td>
-                                        <a style="padding: 5px 10px" class="border-right"
-                                            href="{{ route('admin.get.edit.product', $product->id) }}"><i
-                                                class="far fa-edit"></i></a>
                                         <a style="padding: 5px 10px" class="border-left"
                                             href="{{ route('delete.shopping.cart', $key) }}"><i
                                                 class="far fa-trash-alt"></i></a>
@@ -76,6 +73,10 @@
                                     <h5>{{ Cart::subtotal() }}</h5>
                                 </td>
                             </tr>
+                        @else
+                            <div class="alert alert-warning" role="alert">
+                                This is a warning alert—check it out!
+                            </div>
                         @endif
                     </tbody>
                 </table>
