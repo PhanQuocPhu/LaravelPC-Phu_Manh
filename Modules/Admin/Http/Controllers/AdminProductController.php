@@ -111,4 +111,46 @@ class AdminProductController extends Controller
         }
         return redirect()->back();
     }
+    //Action Ajax
+    public function actionAjax($action, $id)
+    {
+        if($action)
+        {
+            $product = Product::find($id);
+            switch($action)
+            {
+                case 'delete':
+                    $product->delete();
+                break;
+                case 'active':
+                    $product->pro_active = $product->pro_active ? 0 : 1 ;
+                    $product->save();
+                break;
+                case 'hot':
+                    $product->pro_hot = $product->pro_hot ? 0 : 1;
+                    $product->save();
+                break;
+            }
+            $products = Product::orderBy('id', 'desc')->paginate(10);
+            $viewData = [
+                'products'=>$products,
+            ];
+            $html = view('admin::components.product_data', $viewData)->render();
+            return response()->json($html);
+        }
+    }
+     //Load dữ liệu ra html rồi bỏ vào ajax
+     public function viewOrder(Request $request, $id)
+     {
+         if ($request->ajax()) {
+             $orders = Order::with('product')->where('or_transaction_id', $id)->get();
+             $transnote = Transaction::find($id);
+             $viewData = [
+                 'orders'=>$orders,
+                 'transnote'=>$transnote
+             ];
+             $html = view('admin::components.order', $viewData)->render();
+             return response()->json($html);
+         }
+     }
 }

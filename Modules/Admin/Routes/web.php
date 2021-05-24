@@ -27,6 +27,9 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
         Route::get('/update/{id}', 'AdminProductController@edit')->name('admin.get.edit.product');
         Route::post('/update/{id}', 'AdminProductController@update');
         Route::get('/{action}/{id}', 'AdminProductController@action')->name('admin.get.action.product');
+
+        //ajax
+        Route::post('/ajax/{action}/{id}', 'AdminProductController@actionAjax')->name('admin.get.action.product.ajax');
     });
 
     //Quản lý tin tức

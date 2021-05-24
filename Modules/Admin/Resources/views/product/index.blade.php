@@ -61,7 +61,7 @@
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tb_content">
                 @if (isset($products))
                     @foreach ($products as $product)
                         <?php
@@ -95,20 +95,20 @@
                                     style="height: 80px; width:80px">
                             </td>
                             <td>
-                                <a class="badge {{ $product->getStatus($product->pro_active)['class'] }}"
-                                    href="{{ route('admin.get.action.product', ['active', $product->id]) }}">{{ $product->getStatus($product->pro_active)['name'] }}</a>
+                                <a class="badge {{ $product->getStatus($product->pro_active)['class'] }} status_product"
+                                    href="{{ route('admin.get.action.product.ajax', ['active', $product->id]) }}">{{ $product->getStatus($product->pro_active)['name'] }}</a>
                             </td>
                             <td>
-                                <a class="badge {{ $product->getHot($product->pro_hot)['class'] }}"
-                                    href="{{ route('admin.get.action.product', ['hot', $product->id]) }}">{{ $product->getHot($product->pro_hot)['name'] }}
+                                <a class="badge {{ $product->getHot($product->pro_hot)['class'] }} status_product"
+                                    href="{{ route('admin.get.action.product.ajax', ['hot', $product->id]) }}">{{ $product->getHot($product->pro_hot)['name'] }}
                                 </a>
                             </td>
                             <td>
                                 <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
                                     href="{{ route('admin.get.edit.product', $product->id) }}"><i
                                         class="far fa-edit text-primary"></i> Edit</a>
-                                <a style="padding: 5px 10px" class="btn btn-outline-danger" id="delete"
-                                    href="{{ route('admin.get.action.product', ['delete', $product->id]) }}"><i
+                                <a style="padding: 5px 10px" class="btn btn-outline-danger del_product" id="delete"
+                                    href="{{-- {{ route('admin.get.action.product', ['delete', $product->id]) }} --}} {{ route('admin.get.action.product.ajax', ['delete', $product->id]) }}"><i
                                         class="far fa-trash-alt text-danger"></i> Delete</a>
                             </td>
                         </tr>
@@ -119,24 +119,40 @@
     </div>
 @endsection
 
-@section('script')
-   {{--  <script>
-        $(function() {
-            $(".nav-link").click(function(event) {
-                let $this = $(this);
-                let url = $this.attr('href');
-                $("#HomeContent").html('');
-                $.ajax({
-                    url: url,
-                }).done(function(result) {
-                    /* console.log(result); */
-                    if (result) {
-                        console.log(result);
-                        /* $("#HomeContent").append(result); */
-                    }
-                });
-            });
-        })
 
-    </script> --}}
-@endsection
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.del_product').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Đã xóa sản phẩm");
+                    $('#tb_content').html(response);
+                }
+            });
+        });
+        $('.status_product').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Thay đổi trạng thái sản phẩm thành công");
+                    $('#tb_content').html(response);
+                }
+            });
+        });
+
+    </script>
+@stop

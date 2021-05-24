@@ -92,6 +92,7 @@
                     <span>Đơn Hàng</span>
                 </a>
             </li>
+
             <!-- Nav Item - Tin Tức -->
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.article' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.get.list.article') }}">
@@ -99,6 +100,7 @@
                     <span>Tin Tức</span>
                 </a>
             </li>
+
             <!-- Nav Item - Liên hệ -->
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.contact' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.get.list.contact') }}">
@@ -106,11 +108,28 @@
                     <span>Liên hệ</span>
                 </a>
             </li>
+
             <!-- Nav Item - Thành viên -->
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.get.list.user') }}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Thành viên</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Chỉnh sửa các bài viết cố định -->
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.user') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Static Post</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Chỉnh sửa banner trên trang chủ -->
+            <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.get.list.user') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Banner quảng cáo</span>
                 </a>
             </li>
 
@@ -308,7 +327,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{get_data_user('admins', 'name')}}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ get_data_user('admins', 'name') }}</span>
                                 <img class="img-profile rounded-circle" src="">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -395,7 +415,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{route('admin.logout')}}" title="Logout">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('admin.logout') }}" title="Logout">Logout</a>
                 </div>
             </div>
         </div>

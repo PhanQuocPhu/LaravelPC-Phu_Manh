@@ -79,9 +79,11 @@
     <link rel="stylesheet" href="{{ asset('theme_admin/css/responsive.css') }}">
 
     <script src="{{ asset('theme_admin/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-
-
 </head>
+
+<style>
+  
+</style>
 
 <body class="home-four" {{-- style="background-color: #f1f0f1 !important" --}}>
     <!--[if lt IE 8]>

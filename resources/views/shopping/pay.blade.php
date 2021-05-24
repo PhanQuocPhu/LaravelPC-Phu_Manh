@@ -91,7 +91,7 @@
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Email:</strong></div>
                                 <div class="col-md-12"><input type="text" name="email" class="form-control"
-                                        value="{{ get_data_user('web', 'email') }}" /></div>
+                                        value="{{ get_data_user('web', 'email') }}" readonly /></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Số điện thoại:</strong></div>

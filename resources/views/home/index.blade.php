@@ -14,7 +14,6 @@
             font-size: 14px;
             padding-top: 14px;
         }
-
     </style>
 
     <div class="main-area">
