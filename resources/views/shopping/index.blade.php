@@ -40,7 +40,7 @@
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="cart-content">
                         @if ($products)
                             <?php $i = 1; ?>
                             @foreach ($products as $key => $product)
@@ -57,9 +57,9 @@
                                     <td>{{ $product->qty }}</td>
                                     <td>{{ number_format($product->qty * $product->price, 0, '.', '.') }}</td>
                                     <td>
-                                        <a style="padding: 5px 10px" class="border-left"
-                                            href="{{ route('delete.shopping.cart', $key) }}"><i
-                                                class="far fa-trash-alt"></i></a>
+                                        <a style="padding: 5px 10px" class="border-left delete-cart"
+                                            href="{{-- {{ route('delete.shopping.cart', $key) }} --}} {{ route('delete.shopping.cart.ajax', $key) }}"><i
+                                                class="far fa-trash-alt"></i>@csrf</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -88,4 +88,28 @@
     </div>
     <!-- New product section end -->
     <br>
+@stop
+
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.delete-cart').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Đã xóa sản phẩm khỏi giỏ hàng");
+                    $('#cart-content').html(response);
+                }
+            });
+        });
+
+    </script>
 @stop

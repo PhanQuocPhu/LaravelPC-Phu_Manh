@@ -67,7 +67,11 @@
                         <li class="expand" style="padding: 1px; width:100%; list-style-type: none">
                             <div>
                                 @if (\Cart::count() != 0)
-                                    <span class="cart-quantity" id="cart-count">{{ \Cart::count() }}</span>
+                                    <a href="{{ route('get.list.shopping.cart') }}"><span class="cart-quantity"
+                                            id="cart-count">{{ \Cart::count() }}</span></a>
+                                @else
+                                    <a href="{{ route('get.list.shopping.cart') }}"><span class="cart-quantity"
+                                            id="cart-count"></span></a>
                                 @endif
                                 <a href="{{ route('get.list.shopping.cart') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-shopping-cart"></i>

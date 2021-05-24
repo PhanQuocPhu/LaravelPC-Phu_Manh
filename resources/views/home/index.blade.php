@@ -257,7 +257,7 @@
                 url: url,
                 method: 'POST',
                 success: function(response) {
-                    alert("Thêm sản phẩm thành công")
+                    alert("Thêm sản phẩm thành công");
                     $("#cart-count").html(response);
                 }
             });
@@ -279,7 +279,6 @@
                                 id: products
                             },
                             success: function(result) {
-                                console.log(result);
                                 $("#storage-products").html('').append(result.data);
                             }
                         });

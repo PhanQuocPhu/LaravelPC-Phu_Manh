@@ -27,13 +27,11 @@ class ShoppingCartController extends FrontendController
         }
 
         $price = $product->pro_price;
-        if($product->pro_sale)
-        {
-            $price = $price * (100 - $product->pro_sale)/100;
+        if ($product->pro_sale) {
+            $price = $price * (100 - $product->pro_sale) / 100;
         }
 
-        if($product->pro_number == 0)
-        {
+        if ($product->pro_number == 0) {
             return redirect()->back()->with('warning', 'Sản phẩm đang tạm hết hàng');
         }
         \Cart::add([
@@ -42,13 +40,15 @@ class ShoppingCartController extends FrontendController
             'qty' => 1,
             'price' => $price,
             'weight' => 550,
-            'options' => ['avatar' => $product->pro_avatar, 
-                            'sale' => $product->pro_sale, 
-                            'price_old' => $product->pro_price],
+            'options' => [
+                'avatar' => $product->pro_avatar,
+                'sale' => $product->pro_sale,
+                'price_old' => $product->pro_price
+            ],
         ]);
         return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng thành công');
-
     }
+    //Thêm bằng ajax
     public function addProductAjax(Request $request, $id)
     {
         $product = Product::select('pro_name', 'id', 'pro_price', 'pro_sale', 'pro_avatar', 'pro_number')->find($id);
@@ -58,13 +58,11 @@ class ShoppingCartController extends FrontendController
         }
 
         $price = $product->pro_price;
-        if($product->pro_sale)
-        {
-            $price = $price * (100 - $product->pro_sale)/100;
+        if ($product->pro_sale) {
+            $price = $price * (100 - $product->pro_sale) / 100;
         }
 
-        if($product->pro_number == 0)
-        {
+        if ($product->pro_number == 0) {
             return redirect()->back()->with('warning', 'Sản phẩm đang tạm hết hàng');
         }
         \Cart::add([
@@ -73,17 +71,42 @@ class ShoppingCartController extends FrontendController
             'qty' => 1,
             'price' => $price,
             'weight' => 550,
-            'options' => ['avatar' => $product->pro_avatar, 
-                            'sale' => $product->pro_sale, 
-                            'price_old' => $product->pro_price],
+            'options' => [
+                'avatar' => $product->pro_avatar,
+                'sale' => $product->pro_sale,
+                'price_old' => $product->pro_price
+            ],
         ]);
         return response(\Cart::count());
-
     }
+    //Xóa
     public function deleteProductItem($key)
     {
         \Cart::remove($key);
         return redirect()->back();
+    }
+    //Xóa bằng ajax
+    public function deleteProductItemAjax($key)
+    {
+        \Cart::remove($key);
+        $products = \Cart::content();
+        $html = view('shopping.content', compact('products'))->render();
+        return response()->json($html);
+    }
+
+    //Load dữ liệu ra html rồi bỏ vào ajax
+    public function viewOrder(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $orders = Order::with('product')->where('or_transaction_id', $id)->get();
+            $transnote = Transaction::find($id);
+            $viewData = [
+                'orders' => $orders,
+                'transnote' => $transnote
+            ];
+            $html = view('admin::components.order', $viewData)->render();
+            return response()->json($html);
+        }
     }
 
     //Danh sách giỏ hàng
@@ -105,8 +128,8 @@ class ShoppingCartController extends FrontendController
     public function saveInfoShoppingCart(Request $request)
     {
         /* dd($request->phone); */
-        $totalMoney = str_replace(',', '', \Cart::subtotal(0,3));
-        $totalMoney = (int)$totalMoney;
+        $totalMoney = str_replace(',', '', \Cart::subtotal(0, 3));
+        $totalMoney = (int) $totalMoney;
         $transactionId = DB::table('transactions')->insertGetID([
             'tr_user_id' => get_data_user('web'),
             'tr_total' => $totalMoney,
@@ -116,12 +139,10 @@ class ShoppingCartController extends FrontendController
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        
-        if($transactionId)
-        {
+
+        if ($transactionId) {
             $products = \Cart::content();
-            foreach ($products as $product) 
-            {
+            foreach ($products as $product) {
                 Order::insert([
                     'or_transaction_id' => $transactionId,
                     'or_product_id' => $product->id,

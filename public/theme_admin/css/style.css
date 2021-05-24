@@ -558,6 +558,11 @@ span.cart-quantity {
     font-size: 10px;
 }
 
+span.cart-quantity:empty {
+    display: none;
+    /* or visibility: hidden */
+}
+
 .small-cart-content {
     width: 270px;
     position: absolute;
