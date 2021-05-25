@@ -21,8 +21,13 @@
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    {{-- Jquery confirm --}}
+    <link href=" {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css') }}" rel="stylesheet" type="text/css">
+
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{-- Sweet Alert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -462,6 +467,11 @@
 
     {{-- Ck-editor --}}
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
+    {{-- Jquery confirm --}}
+    <script src="  {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js') }}"></script>
+
+
     {{-- Chart --}}
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>

@@ -42,44 +42,10 @@
                 <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
                     href="{{ route('admin.get.edit.product', $product->id) }}"><i
                         class="far fa-edit text-primary"></i> Edit</a>
-                <a style="padding: 5px 10px" class="btn btn-outline-danger del_product" id="delete"
+                <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
                     href="{{-- {{ route('admin.get.action.product', ['delete', $product->id]) }} --}} {{ route('admin.get.action.product.ajax', ['delete', $product->id]) }}"><i
                         class="far fa-trash-alt text-danger"></i> Delete</a>
             </td>
         </tr>
     @endforeach
 @endif
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $('.del_product').click(function(event) {
-        event.preventDefault()
-        let $this = $(this);
-        let url = $this.attr('href');
-        $.ajax({
-            url: url,
-            method: 'POST',
-            success: function(response) {
-                alert("Đã xóa sản phẩm");
-                $('#tb_content').html(response);
-            }
-        });
-    });
-    $('.status_product').click(function(event) {
-        event.preventDefault()
-        let $this = $(this);
-        let url = $this.attr('href');
-        $.ajax({
-            url: url,
-            method: 'POST',
-            success: function(response) {
-                alert("Thay đổi trạng thái sản phẩm thành công");
-                $('#tb_content').html(response);
-            }
-        });
-    });
-
-</script>

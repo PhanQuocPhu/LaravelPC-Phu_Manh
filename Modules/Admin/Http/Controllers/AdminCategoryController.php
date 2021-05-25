@@ -14,9 +14,9 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->get();
-        
 
-        $viewData = [ 'categories' => $categories ];
+
+        $viewData = ['categories' => $categories];
 
         return view('admin::category.index', $viewData);
     }
@@ -42,13 +42,12 @@ class AdminCategoryController extends Controller
         return redirect()->back();
     }
 
-    public function insertOrUpdate($requestCategory, $id='')
+    public function insertOrUpdate($requestCategory, $id = '')
     {
         $code = 1;
-        try{
+        try {
             $category                       = new Category();
-            if($id)
-            {
+            if ($id) {
                 $category                   = Category::find($id);
             }
             $category->c_name               = $requestCategory->name;
@@ -57,39 +56,61 @@ class AdminCategoryController extends Controller
             $category->c_title_seo          = $requestCategory->c_title_seo ? $requestCategory->c_title_seo : $requestCategory->name;
             $category->c_description_seo    = $requestCategory->c_description_seo;
             $category->save();
-
-        } catch(\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             $code = 0;
-            Log::error("[Error] insertOrUpdate Category".$exception->getMessage());
+            Log::error("[Error] insertOrUpdate Category" . $exception->getMessage());
         }
         return $code;
-
     }
     public function action($action, $id)
     {
         $message = '';
-        if($action)
-        {
+        if ($action) {
             $category = Category::find($id);
-            switch($action)
-            {
+            switch ($action) {
                 case 'delete':
                     $category->delete();
                     $message = 'Xóa dữ liệu thành công';
-                break;
+                    break;
                 case 'active':
-                    $category->c_active = $category->c_active ? 0 : 1 ;
+                    $category->c_active = $category->c_active ? 0 : 1;
                     $category->save();
                     $message = 'Sửa trạng thái thành công';
-                break;
+                    break;
                 case 'home':
-                    $category->c_home = $category->c_home ? 0 : 1 ;
+                    $category->c_home = $category->c_home ? 0 : 1;
                     $category->save();
                     $message = 'Sửa trạng thái thành công';
-                break;
+                    break;
             }
         }
         return redirect()->back()->with('success', $message);
     }
+    //Action Ajax
+    public function actionAjax($action, $id)
+    {
+        if ($action) {
+            $category = Category::find($id);
+            switch ($action) {
+                case 'delete':
+                    $category->delete();
+                    break;
+                case 'active':
+                    $category->c_active = $category->c_active ? 0 : 1;
+                    $category->save();
+                    break;
+                case 'home':
+                    $category->c_home = $category->c_home ? 0 : 1;
+                    $category->save();
+                    break;
+            }
+            $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->get();
+            $viewData = [
+                'categories' => $categories,
+            ];
+            $html = view('admin::components.cate_data', $viewData)->render();
+            return response()->json($html);
+        }
+    }
+    
 }

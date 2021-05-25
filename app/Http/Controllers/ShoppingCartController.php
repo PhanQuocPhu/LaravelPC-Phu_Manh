@@ -100,11 +100,13 @@ class ShoppingCartController extends FrontendController
         if ($request->ajax()) {
             $orders = Order::with('product')->where('or_transaction_id', $id)->get();
             $transnote = Transaction::find($id);
+            $cart_count = \Cart::count();
             $viewData = [
                 'orders' => $orders,
-                'transnote' => $transnote
+                'transnote' => $transnote,
+                'cart_count' => $cart_count
             ];
-            $html = view('admin::components.order', $viewData)->render();
+            $html = view('component.cart_index', $viewData)->render();
             return response()->json($html);
         }
     }

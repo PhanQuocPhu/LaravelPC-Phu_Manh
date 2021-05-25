@@ -97,7 +97,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('.delete-cart').click(function(event) {
+        $('body').on('click', '.delete-cart', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
@@ -110,6 +110,7 @@
                 }
             });
         });
+       
 
     </script>
 @stop

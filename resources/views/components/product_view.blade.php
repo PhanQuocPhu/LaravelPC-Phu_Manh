@@ -62,19 +62,3 @@
 
     </div>
 </div>
-<script>
-    $('.add-to-cart').click(function(event) {
-            event.preventDefault()
-            let $this = $(this);
-            let id = $this.attr('data-id');
-            let url = $this.attr('href');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function(response) {
-                    alert("Thêm sản phẩm thành công")
-                    $("#cart-count").html(response);
-                }
-            });
-        });
-</script>

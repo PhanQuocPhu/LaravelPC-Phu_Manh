@@ -14,6 +14,7 @@
             font-size: 14px;
             padding-top: 14px;
         }
+
     </style>
 
     <div class="main-area">
@@ -247,10 +248,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('.add-to-cart').click(function(event) {
-            event.preventDefault()
+        $('body').on('click', '.add-to-cart', function(event) {
+            event.preventDefault();
             let $this = $(this);
-            let id = $this.attr('data-id');
             let url = $this.attr('href');
             $.ajax({
                 url: url,
@@ -261,6 +261,7 @@
                 }
             });
         });
+
         $(function() {
             let routeRenderProduct = '{{ route('post.view.product') }}';
             checkRender = false;

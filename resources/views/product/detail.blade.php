@@ -91,7 +91,7 @@
     </div>
     <!-- breadcrumbs area end -->
     <!-- product-details Area Start -->
-    <div class="product-details-area" id="content_product" data-id="{{ $productDetail->id}}">
+    <div class="product-details-area" id="content_product" data-id="{{ $productDetail->id }}">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-sm-5 col-xs-12">
@@ -208,7 +208,7 @@
                                 <div class="actions-e">
                                     <div class="action-buttons-single" style="border-radius:8px">
                                         <div class="add-to-cart">
-                                            <a href="{{ route('add.shopping.cart', $productDetail->id) }}">Đặt hàng</a>
+                                            <a  class="add-cart" href="{{ route('add.shopping.cart.ajax', $productDetail->id) }}">Đặt hàng</a>
                                         </div>
                                     </div>
                                 </div>
@@ -340,6 +340,22 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $('body').on('click', '.add-cart', function(event) {
+            event.preventDefault();
+            let $this = $(this);
+            let url = $this.attr('href');
+           /*  console.log(url); */
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Thêm sản phẩm thành công");
+                    $("#cart-count").html(response);
+                }
+            });
+        });
+
         $(function() {
             let listStart = $(".list_start .fa");
             $listRatingText = {
@@ -388,7 +404,7 @@
                         if (result.code == 1) {
                             alert("Cảm ơn bạn đã đánh giá sản phẩm");
                             location.reload();
-                        } else{
+                        } else {
                             alert("Vui lòng đăng nhập để đánh giá sản phẩm");
                             location.href = "/dang-nhap";
                         }
@@ -402,17 +418,15 @@
             //Lấy giá trị trong storage
             let products = localStorage.getItem('products');
 
-            if(products == null)
-            {
+            if (products == null) {
                 arrayProduct = new Array();
                 arrayProduct.push(idProduct);
                 localStorage.setItem('products', JSON.stringify(arrayProduct));
-                
-            } else{
+
+            } else {
                 //Chuyển về mảng
                 products = $.parseJSON(products);
-                if(products.indexOf(idProduct) == -1)
-                {
+                if (products.indexOf(idProduct) == -1) {
                     products.push(idProduct);
                     localStorage.setItem('products', JSON.stringify(products));
                 }
@@ -422,3 +436,4 @@
 
     </script>
 @endsection
+

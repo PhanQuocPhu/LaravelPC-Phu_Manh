@@ -43,7 +43,6 @@
                     name="pro_description_seo">
             </div>
             <div class="form-group">
-
                 <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
                     Nổi bật</label>
             </div>
@@ -94,11 +93,6 @@
 
             <div class="form-group">
                 <input type="file" name="avatar" class="form-control" id="input_img">
-            </div>
-
-            <div class="form-group">
-                <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
-                    Nổi bật</label>
             </div>
         </div>
     </div>

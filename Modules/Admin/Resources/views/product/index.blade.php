@@ -94,10 +94,12 @@
                                 <img src="{{ pare_url_file($product->pro_avatar) }}" alt="" class="img img-responsive"
                                     style="height: 80px; width:80px">
                             </td>
+                            {{-- Active --}}
                             <td>
                                 <a class="badge {{ $product->getStatus($product->pro_active)['class'] }} status_product"
                                     href="{{ route('admin.get.action.product.ajax', ['active', $product->id]) }}">{{ $product->getStatus($product->pro_active)['name'] }}</a>
                             </td>
+                            {{-- Hot --}}
                             <td>
                                 <a class="badge {{ $product->getHot($product->pro_hot)['class'] }} status_product"
                                     href="{{ route('admin.get.action.product.ajax', ['hot', $product->id]) }}">{{ $product->getHot($product->pro_hot)['name'] }}
@@ -107,7 +109,7 @@
                                 <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
                                     href="{{ route('admin.get.edit.product', $product->id) }}"><i
                                         class="far fa-edit text-primary"></i> Edit</a>
-                                <a style="padding: 5px 10px" class="btn btn-outline-danger del_product" id="delete"
+                                <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
                                     href="{{-- {{ route('admin.get.action.product', ['delete', $product->id]) }} --}} {{ route('admin.get.action.product.ajax', ['delete', $product->id]) }}"><i
                                         class="far fa-trash-alt text-danger"></i> Delete</a>
                             </td>
@@ -127,20 +129,54 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('.del_product').click(function(event) {
+        //Xóa
+        $('body').on('click', '.del_item', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function(response) {
-                    alert("Đã xóa sản phẩm");
-                    $('#tb_content').html(response);
+            $.confirm({
+                title: 'Xóa danh mục này ?',
+                content: 'Chắc chắn ?',
+                buttons: {
+                    confirm: {
+                        text: 'Xóa',
+                        btnClass: 'btn-danger',
+                        action: function() {
+                            /* console.log(url); */
+                            $.ajax({
+                                url: url,
+                                method: 'POST',
+                                success: function(response) {
+                                    $.alert('Đã xóa sản phẩm');
+                                    $('#tb_content').html(response);
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: 'Hủy',
+                        btnClass: 'btn-secondary'
+                    }
                 }
             });
+            /* Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            }); */
         });
-        $('.status_product').click(function(event) {
+        
+
+        //Edit status
+        $('body').on('click', '.status_product', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
@@ -148,7 +184,6 @@
                 url: url,
                 method: 'POST',
                 success: function(response) {
-                    alert("Thay đổi trạng thái sản phẩm thành công");
                     $('#tb_content').html(response);
                 }
             });

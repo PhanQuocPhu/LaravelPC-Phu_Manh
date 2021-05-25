@@ -32,39 +32,106 @@
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    @if (isset($categories))
-                        @foreach ($categories as $category)
-                <tr>
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->c_name }}</td>
-                    <td>{{ $category->c_title_seo }}</td>
-                    <td>
-                        <a class="badge {{ $category->getHome($category->c_home)['class'] }}"
-                            href="{{ route('admin.get.action.category', ['home', $category->id]) }}">{{ $category->getHome($category->c_home)['name'] }}
-                        </a>
-                    </td>
-                    <td>
-                        <a class="badge {{ $category->getStatus($category->c_active)['class'] }}"
-                            href="{{ route('admin.get.action.category', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}
-                        </a>
-                    </td>
-                    <td>
-                        <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
-                            href="{{ route('admin.get.edit.category', $category->id) }}}}"><i
-                                class="far fa-edit text-primary"></i> Edit</a>
-                        <a style="padding: 5px 10px" class="btn btn-outline-danger" id="delete"
-                            href="{{ route('admin.get.action.category', ['delete', $category->id]) }}"><i
-                                class="far fa-trash-alt text-danger"></i> Delete</a>
-                    </td>
-                </tr>
-                @endforeach
+            <tbody id="tb_content">
+                @if (isset($categories))
+                    @foreach ($categories as $category)
+                        <tr>
+                            <td>{{ $category->id }}</td>
+                            <td id="c_name">{{ $category->c_name }}</td>
+                            <td>{{ $category->c_title_seo }}</td>
+                            <td>
+                                <a class="badge {{ $category->getHome($category->c_home)['class'] }} status_cate "
+                                    href="{{ route('admin.get.action.category.ajax', ['home', $category->id]) }}">{{ $category->getHome($category->c_home)['name'] }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="badge {{ $category->getStatus($category->c_active)['class'] }} status_cate"
+                                    href="{{ route('admin.get.action.category.ajax', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}
+                                </a>
+                            </td>
+                            <td>
+                                {{-- Edit --}}
+                                <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
+                                    href="{{ route('admin.get.edit.category', $category->id) }}}}"><i
+                                        class="far fa-edit text-primary"></i> Edit</a>
+                                {{-- Xóa --}}
+                                <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
+                                    href="{{ route('admin.get.action.category.ajax', ['delete', $category->id]) }}"><i
+                                        class="far fa-trash-alt text-danger"></i> Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
-
-                </tr>
             </tbody>
         </table>
     </div>
 @endsection
+
 @section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        //Xóa
+        $('body').on('click', '.del_item', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.confirm({
+                title: 'Xóa danh mục này ?',
+                content: 'Chắc chắn ?',
+                buttons: {
+                    confirm: {
+                        text: 'Xóa',
+                        btnClass: 'btn-danger',
+                        action: function() {
+                            /* console.log(url); */
+                            $.ajax({
+                                url: url,
+                                method: 'POST',
+                                success: function(response) {
+                                    $.alert('Đã xóa danh mục');
+                                    $('#tb_content').html(response);
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: 'Hủy',
+                        btnClass: 'btn-secondary'
+                    }
+                }
+            });
+            /* Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            }); */
+        });
+
+        //Sửa status
+        $('body').on('click', '.status_cate', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    $('#tb_content').html(response);
+                }
+            });
+        });
+
+    </script>
+@stop

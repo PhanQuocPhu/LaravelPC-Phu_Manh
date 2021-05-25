@@ -16,13 +16,13 @@ class AdminProductController extends Controller
     {
         $products = Product::with('category:id,c_name');
 
-        if($request->name) $products->where('pro_name', 'like', '%'.$request->name.'%');
-        if($request->cate) $products->where('pro_category_id', $request->cate);
+        if ($request->name) $products->where('pro_name', 'like', '%' . $request->name . '%');
+        if ($request->cate) $products->where('pro_category_id', $request->cate);
 
         $products = $products->orderBy('id', 'desc')->paginate(10);
 
         $categories = $this->getCategories();
-        $viewData = [ 'products' => $products, 'categories'=>$categories];
+        $viewData = ['products' => $products, 'categories' => $categories];
         return view('admin::product.index', $viewData);
     }
     public function getCategories()
@@ -44,7 +44,7 @@ class AdminProductController extends Controller
     {
         $this->insertOrUpdate($requestProduct, $id);
 
-        return redirect()->back()->with('success', 'Cập nhật thành công'); 
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
     public function store(RequestProduct $requestProduct)
@@ -72,41 +72,36 @@ class AdminProductController extends Controller
         $product->pro_title_seo = $requestProduct->pro_title_seo ? $requestProduct->pro_title_seo : $requestProduct->pro_name;
         $product->pro_description_seo = $requestProduct->pro_description_seo ? $requestProduct->pro_description_seo : $requestProduct->pro_name;
 
-       
 
-        if ($requestProduct->hasFile('avatar')) 
-        {
+
+        if ($requestProduct->hasFile('avatar')) {
             $file = upload_image('avatar');
 
-            if(isset($file['name']))
-            {
+            if (isset($file['name'])) {
                 $product->pro_avatar = $file['name'];
             }
         }
         $product->save();
-
     }
 
     public function action($action, $id)
     {
         $message = '';
-        if($action)
-        {
+        if ($action) {
             $product = Product::find($id);
-            switch($action)
-            {
+            switch ($action) {
                 case 'delete':
                     $message = 'Xóa thành công';
                     $product->delete()->with('success', $message);
-                break;
+                    break;
                 case 'active':
-                    $product->pro_active = $product->pro_active ? 0 : 1 ;
+                    $product->pro_active = $product->pro_active ? 0 : 1;
                     $product->save();
-                break;
+                    break;
                 case 'hot':
                     $product->pro_hot = $product->pro_hot ? 0 : 1;
                     $product->save();
-                break;
+                    break;
             }
         }
         return redirect()->back();
@@ -114,43 +109,41 @@ class AdminProductController extends Controller
     //Action Ajax
     public function actionAjax($action, $id)
     {
-        if($action)
-        {
+        if ($action) {
             $product = Product::find($id);
-            switch($action)
-            {
+            switch ($action) {
                 case 'delete':
                     $product->delete();
-                break;
+                    break;
                 case 'active':
-                    $product->pro_active = $product->pro_active ? 0 : 1 ;
+                    $product->pro_active = $product->pro_active ? 0 : 1;
                     $product->save();
-                break;
+                    break;
                 case 'hot':
                     $product->pro_hot = $product->pro_hot ? 0 : 1;
                     $product->save();
-                break;
+                    break;
             }
             $products = Product::orderBy('id', 'desc')->paginate(10);
             $viewData = [
-                'products'=>$products,
+                'products' => $products,
             ];
             $html = view('admin::components.product_data', $viewData)->render();
             return response()->json($html);
         }
     }
-     //Load dữ liệu ra html rồi bỏ vào ajax
-     public function viewOrder(Request $request, $id)
-     {
-         if ($request->ajax()) {
-             $orders = Order::with('product')->where('or_transaction_id', $id)->get();
-             $transnote = Transaction::find($id);
-             $viewData = [
-                 'orders'=>$orders,
-                 'transnote'=>$transnote
-             ];
-             $html = view('admin::components.order', $viewData)->render();
-             return response()->json($html);
-         }
-     }
+    //Load dữ liệu ra html rồi bỏ vào ajax
+    public function viewOrder(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $orders = Order::with('product')->where('or_transaction_id', $id)->get();
+            $transnote = Transaction::find($id);
+            $viewData = [
+                'orders' => $orders,
+                'transnote' => $transnote
+            ];
+            $html = view('admin::components.order', $viewData)->render();
+            return response()->json($html);
+        }
+    }
 }

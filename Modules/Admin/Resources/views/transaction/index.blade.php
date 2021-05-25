@@ -44,7 +44,7 @@
 
     <h3> <strong> Quản lý đơn hàng <a class="btn btn-success" href="{{ route('admin.get.create.product') }}"
                 style="float: right;"><i class="far fa-plus-square"></i> Thêm mới</a> </strong></h3>
-    <div id="Tr_Data">
+    <div>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -59,7 +59,7 @@
                         <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tb_content">
                     @if (isset($transactions))
                         @foreach ($transactions as $transaction)
                             <tr>
@@ -80,13 +80,25 @@
                                     {{ $transaction->created_at->format('d-m-y') }}
                                 </td>
                                 <td>
-                                    @if ($transaction->tr_status == 1)
+                                    <div class="btn-group">
+                                        <a href="#"
+                                            class="badge {{ $transaction->getStatus($transaction->tr_status)['class'] }} "
+                                            data-toggle="{{ $transaction->getStatus($transaction->tr_status)['toggle'] }}"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            {{ $transaction->getStatus($transaction->tr_status)['name'] }}
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item status_transaction" href="{{ route('admin.get.action.transaction', ['done', $transaction->id]) }}">Đã xử lý</a>
+                                            <a class="dropdown-item status_transaction" href="{{ route('admin.get.action.transaction', ['shipping', $transaction->id]) }}">Đang giao hàng</a>
+                                        </div>
+                                    </div>
+                                    {{-- @if ($transaction->tr_status == 1)
                                         <a class="badge badge-success" href="#" id="tr_status"> Đã xử lý</a>
                                     @else
                                         <a class="badge badge-secondary "
                                             href="{{ route('admin.get.active.transaction', $transaction->id) }}"
                                             id="tr_status"> Đang chờ</a>
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td>
                                     <a style="padding: 5px 10px" class="btn btn-outline-danger" id="delete"
@@ -109,30 +121,45 @@
 
     <!-- Modal -->
     @include('admin::components.modalOrder')
-    {{-- <div class="modal fade" id="ModalOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Chi tiết đơn hàng - Mã đơn <b>#</b><b id="trid"></b></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="md_content">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+
 @endsection
 
 @section('script')
     <script>
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        /* $('.del_product').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    alert("Đã xóa sản phẩm");
+                    $('#tb_content').html(response);
+                }
+            });
+        }); */
+
+        $('.status_transaction').click(function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    $('#tb_content').html(response);
+                }
+            });
+        });
+
+
         $(function() {
             console.log("ready!");
             $(".js_order_item").click(function(event) {
@@ -154,3 +181,4 @@
 
     </script>
 @endsection
+
