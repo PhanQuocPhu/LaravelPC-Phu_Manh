@@ -17,21 +17,13 @@
             <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
         </ol>
     </nav>
+
+    {{-- Start Search --}}
     <hr class="sidebar-divider my-0"> <br>
     <div class="col-sm-12">
         <form class="form-inline">
-            <input type="text" class="form-control my-1 mr-sm-2" name="name" placeholder="Tên sản phẩm...."
+            <input type="text" class="form-control my-1 mr-sm-2" name="name" placeholder="Số điện thoại"
                 value="{{ \Request::get('name') }}">
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="cate">
-                @if (@isset($categories))
-                    <option class="selected" value="">All</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}"
-                            {{ \Request::get('cate') == $category->id ? "selected='selected'" : '' }}>
-                            {{ $category->c_name }}</option>
-                    @endforeach
-                @endif
-            </select>
             <div class="form-group">
 
             </div>
@@ -41,7 +33,7 @@
     <br>
     <hr class="sidebar-divider my-0"> <br>
 
-
+    {{-- Start Table --}}
     <h3> <strong> Quản lý đơn hàng <a class="btn btn-success" href="{{ route('admin.get.create.product') }}"
                 style="float: right;"><i class="far fa-plus-square"></i> Thêm mới</a> </strong></h3>
     <div>
@@ -88,8 +80,12 @@
                                             {{ $transaction->getStatus($transaction->tr_status)['name'] }}
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item status_transaction" href="{{ route('admin.get.action.transaction', ['done', $transaction->id]) }}">Đã xử lý</a>
-                                            <a class="dropdown-item status_transaction" href="{{ route('admin.get.action.transaction', ['shipping', $transaction->id]) }}">Đang giao hàng</a>
+                                            <a class="dropdown-item status_transaction"
+                                                href="{{ route('admin.get.action.transaction', ['done', $transaction->id]) }}">Đã
+                                                xử lý</a>
+                                            <a class="dropdown-item status_transaction"
+                                                href="{{ route('admin.get.action.transaction', ['shipping', $transaction->id]) }}">Đang
+                                                giao hàng</a>
                                         </div>
                                     </div>
                                     {{-- @if ($transaction->tr_status == 1)
@@ -101,14 +97,18 @@
                                     @endif --}}
                                 </td>
                                 <td>
-                                    <a style="padding: 5px 10px" class="btn btn-outline-danger" id="delete"
-                                        href="{{ route('admin.get.action.product', ['delete', $transaction->id]) }}"><i
-                                            class="far fa-trash-alt text-danger"></i> Delete</a>
+                                    <div>
+                                        <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
+                                            href="{{ route('admin.get.action.transaction', ['delete', $transaction->id]) }}"><i
+                                                class="far fa-trash-alt text-danger"></i> </a>
 
-                                    <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
-                                        data-toggle="modal" data-target="#ModalOrder" data-id="{{ $transaction->id }}"
-                                        href="{{ route('admin.get.view.order', $transaction->id) }}"><i
-                                            class="far fa-eye text-primary"></i></a>
+                                        <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
+                                            data-toggle="modal" data-target="#ModalOrder"
+                                            data-id="{{ $transaction->id }}"
+                                            href="{{ route('admin.get.view.order', $transaction->id) }}"><i
+                                                class="far fa-eye text-primary"></i></a>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -126,27 +126,14 @@
 
 @section('script')
     <script>
-         $.ajaxSetup({
+        $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-        /* $('.del_product').click(function(event) {
-            event.preventDefault()
-            let $this = $(this);
-            let url = $this.attr('href');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function(response) {
-                    alert("Đã xóa sản phẩm");
-                    $('#tb_content').html(response);
-                }
-            });
-        }); */
-
-        $('.status_transaction').click(function(event) {
+        //Edit status
+        $('body').on('click', '.status_transaction', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
@@ -158,11 +145,106 @@
                 }
             });
         });
+        //Xóa
+        $('body').on('click', '.del_item', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.confirm({
+                title: 'Xóa đơn hàng này ?',
+                content: 'Chắc chắn ?',
+                buttons: {
+                    confirm: {
+                        text: 'Xóa',
+                        btnClass: 'btn-danger',
+                        action: function() {
+                            /* console.log(url); */
+                            $.ajax({
+                                url: url,
+                                method: 'POST',
+                                success: function(response) {
+                                    $.alert('Đã xóa đơn hàng');
+                                    $('#tb_content').html(response);
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: 'Hủy',
+                        btnClass: 'btn-secondary'
+                    }
+                }
+            });
+        });
+        //Update
+        $('body').on('click', '.update_item', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.confirm({
+                title: 'Save change ?',
+                content: 'Chắc chắn ?',
+                buttons: {
+                    confirm: {
+                        text: 'Save',
+                        btnClass: 'btn-success',
+                        action: function() {
+                            /* console.log(url); */
+                            $.ajax({
+                                url: url,
+                                method: 'POST',
+                                success: function(response) {
+                                    $.alert('Đã lưu');
+                                    $('#md_content').html(response);
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: 'Hủy',
+                        btnClass: 'btn-secondary'
+                    }
+                }
+            });
+        });
 
+        //Xóa sản phẩm khỏi đơn hàng
+        $('body').on('click', '.del_order_item', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.confirm({
+                title: 'Xóa sản phẩm này khỏi đơn hàng ?',
+                content: 'Chắc chắn ?',
+                buttons: {
+                    confirm: {
+                        text: 'Xóa',
+                        btnClass: 'btn-danger',
+                        action: function() {
+                            /* console.log(url); */
+                            $.ajax({
+                                url: url,
+                                method: 'POST',
+                                success: function(response) {
+                                    $.alert('Đã xóa sản phẩm');
+                                    /* console.log(response); */
+                                    $('#md_content').html(response);
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: 'Hủy',
+                        btnClass: 'btn-secondary'
+                    }
+                }
+            });
+        });
 
+        //View product in transaction
         $(function() {
             console.log("ready!");
-            $(".js_order_item").click(function(event) {
+            $('body').on('click', '.js_order_item', function(event) {
                 let $this = $(this);
                 let url = $this.attr('href');
                 let md = $this.attr('data-id');
@@ -177,8 +259,7 @@
                     }
                 });
             });
-        })
+        });
 
     </script>
 @endsection
-

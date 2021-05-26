@@ -135,7 +135,7 @@
             let $this = $(this);
             let url = $this.attr('href');
             $.confirm({
-                title: 'Xóa danh mục này ?',
+                title: 'Xóa sản phẩm này ?',
                 content: 'Chắc chắn ?',
                 buttons: {
                     confirm: {

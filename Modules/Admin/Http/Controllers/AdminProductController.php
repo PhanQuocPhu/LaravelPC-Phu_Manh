@@ -22,7 +22,10 @@ class AdminProductController extends Controller
         $products = $products->orderBy('id', 'desc')->paginate(10);
 
         $categories = $this->getCategories();
-        $viewData = ['products' => $products, 'categories' => $categories];
+        $viewData = [
+            'products' => $products,
+            'categories' => $categories
+        ];
         return view('admin::product.index', $viewData);
     }
     public function getCategories()
@@ -84,6 +87,7 @@ class AdminProductController extends Controller
         $product->save();
     }
 
+    //Action
     public function action($action, $id)
     {
         $message = '';
@@ -106,7 +110,8 @@ class AdminProductController extends Controller
         }
         return redirect()->back();
     }
-    //Action Ajax
+
+    //Action Ajax //Load dữ liệu ra html rồi bỏ vào ajax
     public function actionAjax($action, $id)
     {
         if ($action) {
@@ -129,20 +134,6 @@ class AdminProductController extends Controller
                 'products' => $products,
             ];
             $html = view('admin::components.product_data', $viewData)->render();
-            return response()->json($html);
-        }
-    }
-    //Load dữ liệu ra html rồi bỏ vào ajax
-    public function viewOrder(Request $request, $id)
-    {
-        if ($request->ajax()) {
-            $orders = Order::with('product')->where('or_transaction_id', $id)->get();
-            $transnote = Transaction::find($id);
-            $viewData = [
-                'orders' => $orders,
-                'transnote' => $transnote
-            ];
-            $html = view('admin::components.order', $viewData)->render();
             return response()->json($html);
         }
     }

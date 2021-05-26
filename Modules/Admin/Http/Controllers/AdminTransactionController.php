@@ -25,7 +25,7 @@ class AdminTransactionController extends Controller
         return view('admin::transaction.index', $viewData);
     }
 
-    //Load dữ liệu ra html rồi bỏ vào ajax
+    //Xem chi tiết đơn hàng - Load dữ liệu ra html rồi bỏ vào ajax
     public function viewOrder(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -39,6 +39,7 @@ class AdminTransactionController extends Controller
             return response()->json($html);
         }
     }
+
 
     /* Xử lý trạng thái đơn hàng */
     public function actionTransaction($id)
@@ -109,5 +110,58 @@ class AdminTransactionController extends Controller
             $html = view('admin::components.transaction_data', $viewData)->render();
             return response()->json($html);
         }
+    }
+
+    //Xử lý CRUD chi tiết đơn hàng Ajax
+    public function actionOrderAjax($trid, $action, $id)
+    {
+        if ($action) {
+            $order = Order::with('product')->where('or_transaction_id', $trid)->where('or_product_id', $id);
+
+
+            switch ($action) {
+                case 'delete': {
+                        $order->delete();
+                        break;
+                    }
+            }
+
+            $orders = Order::with('product')->where('or_transaction_id', $trid)->get();
+            $transnote = Transaction::find($trid);
+            $viewData = [
+                'orders' => $orders,
+                'transnote' => $transnote
+            ];
+            $html = view('admin::components.order', $viewData)->render();
+            return response()->json($html);
+        }
+    }
+
+    //Xử lý cập nhật thông tin đơn hàng
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $categories = $this->getCategories();
+        return view('admin::product.update', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        dd($request->all());
+        $transaction = Transaction::find($id);
+
+        $transaction->tr_address = $request->tr_address;
+        $transaction->tr_note = $request->tr_note;
+        $transaction->tr_phone = $request->tr_phone;
+        $transaction->save();
+
+        $orders = Order::with('product')->where('or_transaction_id', $id)->get();
+        $transnote = Transaction::find($id);
+        $viewData = [
+            'orders' => $orders,
+            'transnote' => $transnote
+        ];
+        $html = view('admin::components.order', $viewData)->render();
+        return response()->json($html);
     }
 }

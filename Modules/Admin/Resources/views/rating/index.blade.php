@@ -44,8 +44,7 @@
     <hr class="sidebar-divider my-0"> <br>
     {{-- End Search --}}
 
-    <h3> <strong> Quản lý đánh giá <a class="btn btn-success" href="{{ route('admin.get.create.product') }}"
-                style="float: right;"><i class="far fa-plus-square"></i> Thêm mới</a> </strong></h3>
+    <h3> <strong> Quản lý đánh giá </strong></h3>
     <div class="table-responsive">
         <table class="table">
             <thead>

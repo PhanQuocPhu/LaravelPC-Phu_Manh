@@ -26,9 +26,9 @@
         <label for="c_description_seo" class="form-label">Meta Description</label>
         <input type="text" class="form-control" placeholder="Meta description" value="{{ old('c_description_seo',isset($category->c_description_seo) ? $category->c_description_seo: '') }}" name="c_description_seo">
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         
         <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot"> Nổi bật</label>
-    </div>
+    </div> --}}
     <button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
 </form>

@@ -51,11 +51,18 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     //Quản lý đơn hàng
     Route::group(['prefix' => 'transaction'], function () {
         Route::get('/', 'AdminTransactionController@index')->name('admin.get.list.transaction');
-        Route::get('/view/{id}', 'AdminTransactionController@viewOrder')->name('admin.get.view.order');
         Route::get('/active/{id}', 'AdminTransactionController@actionTransaction')->name('admin.get.active.transaction');
 
-        //thay đổi trạng thái ajax
+        //thay đổi trạng thái đơn hàng ajax
         Route::post('/{action}/{id}', 'AdminTransactionController@actionTransactionAjax')->name('admin.get.action.transaction');
+        Route::get('/view/{id}', 'AdminTransactionController@viewOrder')->name('admin.get.view.order');
+
+        //CRUD chi tiết sản phẩm trong đơn hàng
+        Route::post('/view/{trid}/{action}/{id}', 'AdminTransactionController@actionOrderAjax')->name('admin.get.action.order.ajax');
+        
+
+        //Update thông tin đơn hàng
+        Route::post('/view/{id}', 'AdminTransactionController@update')->name('admin.update.transaction.ajax');
     });
 
     //Quản lý thành viên

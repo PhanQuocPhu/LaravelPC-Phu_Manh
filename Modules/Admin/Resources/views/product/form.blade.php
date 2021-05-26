@@ -43,11 +43,10 @@
                     value="{{ old('pro_description_seo', isset($product->pro_description_seo) ? $product->pro_description_seo : '') }}"
                     name="pro_description_seo">
             </div>
-            <div class="form-group">
-
+            {{-- <div class="form-group">
                 <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
                     Nổi bật</label>
-            </div>
+            </div> --}}
         </div>
         <div class="col-sm-4">
             <div class="form-group">
@@ -91,6 +90,7 @@
                 <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id=""  min="0" value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
             </div>
 
+            {{-- Hình ảnh --}}
             <div class="form-group">
                 @if (isset($product))
                     <img id="output_img" src=" {{ pare_url_file($product->pro_avatar) }}" class="img-fluid" alt="">
@@ -98,18 +98,20 @@
                     <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="img-fluid" alt="">
                 @endif
             </div>
-
             <div class="form-group">
                 <input type="file" name="avatar" class="form-control" id="input_img">
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
                     Nổi bật</label>
-            </div>
+            </div> --}}
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+    <div class="button">
+        <button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+    </div>
+    
 </form>
 @section('script')
     <script type="text/javascript">
