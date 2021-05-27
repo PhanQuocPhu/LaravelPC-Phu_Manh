@@ -34,8 +34,7 @@
     <hr class="sidebar-divider my-0"> <br>
 
     {{-- Start Table --}}
-    <h3> <strong> Quản lý đơn hàng <a class="btn btn-success" href="{{ route('admin.get.create.product') }}"
-                style="float: right;"><i class="far fa-plus-square"></i> Thêm mới</a> </strong></h3>
+    <h3> <strong> Quản lý đơn hàng </strong></h3>
     <div>
         <div class="table-responsive">
             <table class="table">
@@ -105,7 +104,7 @@
                                         <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
                                             data-toggle="modal" data-target="#ModalOrder"
                                             data-id="{{ $transaction->id }}"
-                                            href="{{ route('admin.get.view.order', $transaction->id) }}"><i
+                                            href="{{ route('admin.get.view.order', $transaction->id) }}" submit="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}"><i
                                                 class="far fa-eye text-primary"></i></a>
                                     </div>
 
@@ -181,6 +180,10 @@
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
+
+            var t_address = $('#tr_address').val();
+            var t_phone = $('#tr_phone').val();
+            var t_note = $('#tr_note').val();
             $.confirm({
                 title: 'Save change ?',
                 content: 'Chắc chắn ?',
@@ -193,6 +196,11 @@
                             $.ajax({
                                 url: url,
                                 method: 'POST',
+                                data: {
+                                    tr_address: t_address,
+                                    tr_phone: t_phone,
+                                    tr_note: t_note
+                                },
                                 success: function(response) {
                                     $.alert('Đã lưu');
                                     $('#md_content').html(response);
@@ -248,8 +256,11 @@
                 let $this = $(this);
                 let url = $this.attr('href');
                 let md = $this.attr('data-id');
+                let urlSubmit = $this.attr('submit');;
                 $("#md_content").html('');
                 $("#trid").text(md);
+                /* console.log(urlSubmit); */
+                $('.update_item').attr('href', urlSubmit);
                 $.ajax({
                     url: url,
                 }).done(function(result) {

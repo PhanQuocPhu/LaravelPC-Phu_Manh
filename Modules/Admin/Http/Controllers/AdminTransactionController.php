@@ -147,7 +147,7 @@ class AdminTransactionController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+       /*  dd($request->all()); */
         $transaction = Transaction::find($id);
 
         $transaction->tr_address = $request->tr_address;
@@ -156,10 +156,9 @@ class AdminTransactionController extends Controller
         $transaction->save();
 
         $orders = Order::with('product')->where('or_transaction_id', $id)->get();
-        $transnote = Transaction::find($id);
         $viewData = [
             'orders' => $orders,
-            'transnote' => $transnote
+            'transnote' => $transaction
         ];
         $html = view('admin::components.order', $viewData)->render();
         return response()->json($html);

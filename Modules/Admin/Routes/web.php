@@ -62,7 +62,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         
 
         //Update thông tin đơn hàng
-        Route::post('/view/{id}', 'AdminTransactionController@update')->name('admin.update.transaction.ajax');
+        Route::post('/view/update/{id}', 'AdminTransactionController@update')->name('admin.update.transaction.ajax');
     });
 
     //Quản lý thành viên

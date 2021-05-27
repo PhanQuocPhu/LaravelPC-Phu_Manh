@@ -1,3 +1,4 @@
+
 @if ($orders)
     <div class="table-responsive">
         <table class="table">
@@ -64,5 +65,5 @@
 </div>
 <div class="form-group note">
     <h5>Ghi chú:</h5>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $transnote->tr_note }}</textarea>
+    <textarea class="form-control" id="tr_note" rows="3">{{ $transnote->tr_note }}</textarea>
 </div>
