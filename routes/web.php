@@ -11,7 +11,11 @@ Route::post('dang-ky', [App\Http\Controllers\Auth\RegisterController::class, 'po
 //Đăng nhập
 Route::get('dang-nhap', [App\Http\Controllers\Auth\LoginController::class, 'getLogin'])->name('get.login');
 Route::post('dang-nhap', [App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('post.login');
+//Đăng nhập google
+Route::get('/auth/{provider}', [App\Http\Controllers\Auth\SocialAuthController::class, 'redirectToProvider'])->name('get.auth.login');
+Route::get('/auth/{provide}/callback', [App\Http\Controllers\Auth\SocialAuthController::class, 'handleProviderCallback']);
 
+//Đăng xuất
 Route::get('dang-xuat', [App\Http\Controllers\Auth\LoginController::class, 'getLogout'])->name('get.logout.user');
 
 

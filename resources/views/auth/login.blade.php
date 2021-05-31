@@ -125,6 +125,7 @@
                 </div>
             </div>
             <!-- breadcrumbs area end -->
+
             <!-- account-details Area Start -->
             <div class="customer-login-area">
                 <div class="container">
@@ -151,6 +152,13 @@
                                     <label for="rememberme" class="inline">
                                         <input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember
                                         me </label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <a class="btn btn-link" href="{{ route('get.auth.login', ['google']) }}">
+                                            <i class="fa fa-google-plus-square" aria-hidden="true"></i> Đăng nhập bằng Google
+                                        </a>
+                                    </div>
                                 </div>
                             </form>
                         </div>

@@ -104,7 +104,8 @@
                                         <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
                                             data-toggle="modal" data-target="#ModalOrder"
                                             data-id="{{ $transaction->id }}"
-                                            href="{{ route('admin.get.view.order', $transaction->id) }}" submit="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}"><i
+                                            href="{{ route('admin.get.view.order', $transaction->id) }}"
+                                            submit="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}"><i
                                                 class="far fa-eye text-primary"></i></a>
                                     </div>
 
@@ -204,6 +205,14 @@
                                 success: function(response) {
                                     $.alert('Đã lưu');
                                     $('#md_content').html(response);
+                                    //Reload data trang đơn hàng
+                                    $.ajax({
+                                        url: ,
+                                        method: 'POST',
+                                        success: function(response) {
+                                            $('#md_content').html(response);
+                                        }
+                                    });
                                 }
                             });
                         }

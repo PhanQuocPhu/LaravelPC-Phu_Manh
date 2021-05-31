@@ -137,14 +137,14 @@ class AdminTransactionController extends Controller
         }
     }
 
-    //Xử lý cập nhật thông tin đơn hàng
-    public function edit($id)
+     
+    //Lấy thông tin render ra html
+    public function renderHTML($id)
     {
-        $product = Product::find($id);
-        $categories = $this->getCategories();
-        return view('admin::product.update', compact('product', 'categories'));
+
     }
 
+    //Xử lý cập nhật thông tin đơn hàng
     public function update(Request $request, $id)
     {
        /*  dd($request->all()); */

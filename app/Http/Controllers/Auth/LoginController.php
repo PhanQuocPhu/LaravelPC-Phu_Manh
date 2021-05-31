@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Socialite, Redirect, Session, URL;
 
 class LoginController extends Controller
 {
@@ -14,10 +15,16 @@ class LoginController extends Controller
 
     public function getLogin(Request $request)
     {
+        if (!Session::has('pre_url')) {
+            Session::put('pre_url', URL::previous());
+            
+        } else {
+            if (URL::previous() != URL::to('dang-nhap')) Session::put('pre_url', URL::previous());
+        }
         session(['link' => url()->previous()]);
         if(Auth::check())
         {
-            return redirect(session('link'));
+            return redirect(session('link'))->with('success', "Bạn đã đăng nhập");
         }
         return view('auth.login');
     }

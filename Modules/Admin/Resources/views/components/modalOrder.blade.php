@@ -13,7 +13,7 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary close_modal" href="{{ route('admin.get.list.transaction') }}" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary update_item" href="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}">Save changes</button>
             </div>
         </form>
