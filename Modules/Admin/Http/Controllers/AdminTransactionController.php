@@ -137,13 +137,7 @@ class AdminTransactionController extends Controller
         }
     }
 
-     
-    //Lấy thông tin render ra html
-    public function renderHTML($id)
-    {
-
-    }
-
+    
     //Xử lý cập nhật thông tin đơn hàng
     public function update(Request $request, $id)
     {

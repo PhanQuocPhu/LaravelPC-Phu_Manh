@@ -126,35 +126,52 @@ class ShoppingCartController extends FrontendController
         return view('shopping.pay', compact('products'));
     }
 
-    //Lưu thông tin giỏ hàng
+    //Lưu thông tin giỏ hàng - Post từ view
     public function saveInfoShoppingCart(Request $request)
     {
-        /* dd($request->phone); */
+        /* dd($request->all()); */
+        $data = $request->except("_token", "payment");
+        
+        $data['tr_user_id'] = \Auth::user()->id;
+        $data['tr_total'] = str_replace(',', '', \Cart::subtotal(0));
+        $data['created_at'] = Carbon::now();
+
         $totalMoney = str_replace(',', '', \Cart::subtotal(0, 3));
         $totalMoney = (int) $totalMoney;
-        $transactionId = DB::table('transactions')->insertGetID([
-            'tr_user_id' => get_data_user('web'),
-            'tr_total' => $totalMoney,
-            'tr_note' => $request->note,
-            'tr_address' => $request->address,
-            'tr_phone' => $request->phone,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
-        if ($transactionId) {
-            $products = \Cart::content();
-            foreach ($products as $product) {
-                Order::insert([
-                    'or_transaction_id' => $transactionId,
-                    'or_product_id' => $product->id,
-                    'or_qty' => $product->qty,
-                    'or_price' => $product->options->price_old,
-                    'or_sale' => $product->options->sale
-                ]);
+        if($request->payment == 2)
+        {
+            session(['info_customer' => $data]);
+            return view('vnpay.index',compact('totalMoney'));
+        }else
+        {
+            $transactionId = DB::table('transactions')->insertGetID([
+                'tr_user_id' => get_data_user('web'),
+                'tr_total' => $totalMoney,
+                'tr_note' => $request->note,
+                'tr_address' => $request->address,
+                'tr_phone' => $request->phone,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+            if ($transactionId) {
+                $products = \Cart::content();
+                foreach ($products as $product) {
+                    Order::insert([
+                        'or_transaction_id' => $transactionId,
+                        'or_product_id' => $product->id,
+                        'or_qty' => $product->qty,
+                        'or_price' => $product->options->price_old,
+                        'or_sale' => $product->options->sale
+                    ]);
+                }
             }
         }
         \Cart::destroy();
         return redirect('/');
+    }
+
+    public function createPayment(Request $request)
+    {
+        
     }
 }

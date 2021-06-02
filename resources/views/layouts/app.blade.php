@@ -22,19 +22,19 @@
 
     <!-- Bootstrap CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/bootstrap/bootstrap.min.css') }}">
 
     <!-- owl.carousel CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.carousel.css') }}">
 
     <!-- owl.theme CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/owl.theme.css') }} ">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.theme.css') }} ">
 
     <!-- owl.transitions CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/owl.transitions.css') }} ">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.transitions.css') }} ">
 
     <!-- font-awesome.min CSS
   ============================================ -->
@@ -69,7 +69,11 @@
 
     <!-- style CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/themestyle/loginstyle.css') }}">
+
+    <!-- login style CSS
+  ============================================ -->
+  <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
 
     <!-- header CSS
   ============================================ -->

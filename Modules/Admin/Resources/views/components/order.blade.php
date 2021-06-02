@@ -1,4 +1,3 @@
-
 @if ($orders)
     <div class="table-responsive">
         <table class="table">
@@ -59,7 +58,8 @@
             <label for="tr_phone"> Số điện thoại:</label>
         </div>
         <div class="col-md-10">
-            <input type="number" min="0" class="form-control" id="tr_phone" name="tr_phone" value="{{ $transnote->tr_phone }}">
+            <input type="number" min="0" class="form-control" id="tr_phone" name="tr_phone"
+                value="{{ $transnote->tr_phone }}">
         </div>
     </div>
 </div>

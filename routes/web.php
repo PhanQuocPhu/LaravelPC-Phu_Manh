@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use Faker\Provider\Payment;
 
 Auth::routes();
 
@@ -57,6 +58,8 @@ Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], functio
 {
     Route::get('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'getFormPay'])->name('get.form.pay');
     Route::post('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'saveInfoShoppingCart']);
+
+    Route::post('/thanh-toan/online',[App\Http\Controllers\ShoppingCartController::class, 'createPayment'])->name('payment.online');
 });
 
 /* Đánh giá sản phẩm */

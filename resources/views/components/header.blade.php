@@ -26,10 +26,10 @@
                 </div>
                 <!-- search end -->
                 <!-- Đăng ký - Đặng nhập - Giỏ hàng -->
-                <div class="col-md-4 text-left" style="margin-top: 15px; padding:0">
+                <div class="col-md-4 col-sm-12" style="margin-top: 15px; padding:0">
                     {{-- Đăng ký đăng nhập --}}
                     @if (Auth::check())
-                        <div class="col-md-6" style="padding: 0">
+                        <div class="col-sm-6" style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
                                 <a href="{{ route('user.info') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-user-circle"></i>
@@ -37,7 +37,7 @@
                                 </a>
                             </li>
                         </div>
-                        <div class="col-md-3" style="padding: 0">
+                        <div class="col-sm-3" style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
                                 <a href="{{ route('get.logout.user') }}" style="color:black!important;"
                                     id="header-top-button"> <i class="fas fa-sign-out-alt"></i>
@@ -46,15 +46,16 @@
                             </li>
                         </div>
                     @else
-                        <div class="col-md-3" style="padding: 0">
+                        <div class="col-md-3 col-sm-4 " style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
                                 <a href="{{ route('get.register') }}" style="color:black!important;"
-                                    id="header-top-button"> <i class="fas fa-clipboard"></i>
+                                    id="header-top-button">
+                                    <i class="fas fa-clipboard"></i>
                                     Đăng ký
                                 </a>
                             </li>
                         </div>
-                        <div class="col-md-3" style="padding: 0">
+                        <div class="col-md-3 col-sm-4" style="padding: 0">
                             <li class="" style="padding: 1px; width:100%; list-style-type: none">
                                 <a href="{{ route('get.login') }}" style="color:black!important;"
                                     id="header-top-button" class=" log_in"> <i class="fas fa-user-circle"></i>
@@ -63,7 +64,7 @@
                             </li>
                         </div>
                     @endif
-                    <div class="col-md-3" style="padding: 0">
+                    <div class="col-md-3 col-sm-4" style="padding: 0">
                         <li class="expand" style="padding: 1px; width:100%; list-style-type: none">
                             <div>
                                 @if (\Cart::count() != 0)
@@ -113,7 +114,7 @@
                     </div>
 
                 </div>
-                <!-- Đăng ký - Đặng nhập - Giỏ hàng -->
+                <!-- Đăng ký - Đăng nhập - Giỏ hàng -->
             </div>
         </div>
         <hr style="margin-top: 8px; margin-bottom:0px; backgrounf:#d4d4d4">
@@ -129,8 +130,8 @@
                                         <li class="expand"
                                             style="padding: 1px;border: 1px solid #505050; border-radius: 5px; background-color:#505050; width:100%">
                                             <a href="#" style="color:white !important"> <i class="fa fa-bars"></i>
-                                                Danh mục sản
-                                                phẩm</a>
+                                                Danh mục sản phẩm
+                                            </a>
                                             <ul
                                                 class="sub-menu  {{ \Request::route()->getName() == 'home' ? 'show-home-cate' : 'restrain' }}">
                                                 @if (isset($categories))

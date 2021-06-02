@@ -41,12 +41,10 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Tên khách hàng</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Thông tin đơn hàng</th>
                         <th scope="col">Tổng giá trị</th>
-                        <th scope="col">Ngày đặt hàng</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Thanh toán</th>
                         <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
@@ -56,19 +54,25 @@
                             <tr>
                                 <td>{{ $transaction->id }}</td>
                                 <td>
-                                    {{ isset($transaction->user->name) ? $transaction->user->name : '[N/A]' }}
-                                </td>
-                                <td>
-                                    {{ $transaction->tr_address }}
-                                </td>
-                                <td>
-                                    {{ $transaction->tr_phone }}
+                                    <ul>
+                                        <li>
+                                            <Strong>Tên khách hàng: </Strong>
+                                            {{ isset($transaction->user->name) ? $transaction->user->name : '[N/A]' }}
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li><Strong>Địa chỉ: </Strong>{{ $transaction->tr_address }}</li>
+                                    </ul>
+                                    <ul>
+                                        <li><Strong>Số điện thoại: </Strong>{{ $transaction->tr_phone }}</li>
+                                    </ul>
+                                    <ul>
+                                        <li><Strong>Ngày đặt hàng: </Strong>
+                                            {{ $transaction->created_at->format('d-m-y') }}</li>
+                                    </ul>
                                 </td>
                                 <td>
                                     {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
-                                </td>
-                                <td>
-                                    {{ $transaction->created_at->format('d-m-y') }}
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -87,13 +91,15 @@
                                                 giao hàng</a>
                                         </div>
                                     </div>
-                                    {{-- @if ($transaction->tr_status == 1)
+                                </td>
+                                <td>
+                                    @if ($transaction->tr_status == 1)
                                         <a class="badge badge-success" href="#" id="tr_status"> Đã xử lý</a>
                                     @else
                                         <a class="badge badge-secondary "
                                             href="{{ route('admin.get.active.transaction', $transaction->id) }}"
                                             id="tr_status"> Đang chờ</a>
-                                    @endif --}}
+                                    @endif
                                 </td>
                                 <td>
                                     <div>
@@ -121,6 +127,7 @@
 
     <!-- Modal -->
     @include('admin::components.modalOrder')
+
 
 @endsection
 

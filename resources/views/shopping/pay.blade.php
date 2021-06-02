@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Địa chỉ:</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="" />
+                                    <input type="text" name="address" class="form-control" value="{{ get_data_user('web', 'address') }}" required/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -106,7 +106,10 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
+                                    <button type="submit" class="btn btn-primary btn-submit-fix">Đặt hàng</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <button type="submit" name="payment" value="2" class="btn btn-primary btn-submit-fix">Thanh toán online</button>
                                 </div>
                             </div>
                         </div>
