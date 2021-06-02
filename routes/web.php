@@ -56,10 +56,13 @@ Route::prefix('shopping')->group(function ()
 /* Thanh toán */
 Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], function ()
 {
+    //Đặt hàng COD
     Route::get('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'getFormPay'])->name('get.form.pay');
     Route::post('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'saveInfoShoppingCart']);
 
+    //Thanh toán Online
     Route::post('/thanh-toan/online',[App\Http\Controllers\ShoppingCartController::class, 'createPayment'])->name('payment.online');
+    Route::get('/vnpay/return',[App\Http\Controllers\ShoppingCartController::class, 'vnpayReturn'])->name('vnpay.return');
 });
 
 /* Đánh giá sản phẩm */

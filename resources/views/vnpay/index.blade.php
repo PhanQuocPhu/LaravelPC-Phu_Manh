@@ -24,8 +24,8 @@
         </div>
         <h3>Tạo mới đơn hàng</h3>
         <div class="table-responsive">
-            <form action="/vnpay_php/vnpay_create_payment.php" id="create_form" method="post">
-
+            <form action="{{route('payment.online')}}" id="create_form" method="post">
+                @csrf
                 <div class="form-group">
                     <label for="language">Loại hàng hóa </label>
                     <select name="order_type" id="order_type" class="form-control">
@@ -35,11 +35,7 @@
                         <option value="other">Khác - Xem thêm tại VNPAY</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="order_id">Mã hóa đơn</label>
-                    <input class="form-control" id="order_id" name="order_id" type="text"
-                        value="<?php echo date('YmdHis'); ?>" />
-                </div>
+               
                 <div class="form-group">
                     <label for="amount">Số tiền</label>
                     <input class="form-control" id="amount" name="amount" type="number" value="{{$totalMoney}}" readonly />
@@ -104,7 +100,7 @@
     <script src="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.js"></script>
     <script src="{{ asset('vnpay_php/assets/jquery-1.11.3.min.js') }}"></script>
     <script type="text/javascript">
-        $("#btnPopup").click(function() {
+        /* $("#btnPopup").click(function() {
             var postData = $("#create_form").serialize();
             var submitUrl = $("#create_form").attr("action");
             $.ajax({
@@ -130,7 +126,7 @@
                 }
             });
             return false;
-        });
+        }); */
 
     </script>
 </footer>
