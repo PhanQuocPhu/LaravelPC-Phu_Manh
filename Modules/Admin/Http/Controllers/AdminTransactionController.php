@@ -17,11 +17,12 @@ class AdminTransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('user:id,name')->paginate(10);
+        $transactions = Transaction::with('user:id,name', 'payment')->paginate(10);
         $viewData = [
             'transactions' => $transactions,
         ];
         /* return response()->json($html); */
+        /* dd($transactions->toArray()); */
         return view('admin::transaction.index', $viewData);
     }
 

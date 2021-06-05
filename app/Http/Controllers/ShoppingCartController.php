@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\Payment;
+use Illuminate\Support\Facades\View;
+
 use function GuzzleHttp\Promise\all;
 
 class ShoppingCartController extends FrontendController
@@ -116,6 +119,8 @@ class ShoppingCartController extends FrontendController
     {
         $products = \Cart::content();
         /* return View::make('shopping.index', compact('products'))->nest('home', compact('products')); */
+       /*  $vnp_TxnRef = randString(15);
+        dd($vnp_TxnRef); */
         return view('shopping.index', compact('products'));
     }
 
@@ -130,14 +135,19 @@ class ShoppingCartController extends FrontendController
     public function saveInfoShoppingCart(Request $request)
     {
         /* dd($request->all()); */
-        $data = $request->except("_token", "payment");
-
-        $data['tr_user_id'] = \Auth::user()->id;
-        $data['tr_total'] = str_replace(',', '', \Cart::subtotal(0));
-        $data['created_at'] = Carbon::now();
-
         $totalMoney = str_replace(',', '', \Cart::subtotal(0, 3));
         $totalMoney = (int) $totalMoney;
+        /*  $data = $request->except("_token", "payment"); */
+        $data['tr_user_id'] = \Auth::user()->id;
+        $data['tr_total'] = $totalMoney;
+        $data['tr_note'] =  $request->note;
+        $data['tr_address'] = $request->address;
+        $data['tr_phone'] = $request->phone;
+        $data['tr_status'] = 2;
+        $data['tr_payment'] = 1;
+        $data['created_at'] = Carbon::now();
+        $data['updated_at'] = Carbon::now();
+        
         if ($request->payment == 2) {
             session(['info_customer' => $data]);
             return view('vnpay.index', compact('totalMoney'));
@@ -221,8 +231,72 @@ class ShoppingCartController extends FrontendController
         }
         return redirect($vnp_Url);
     }
+
     public function vnpayReturn(Request $request)
     {
-        dd($request->all());
+        /* dd($request->all()); */
+        //Kiểm tra data trong session và tình trạng xử lý giao dịch -> '00' là success
+        if (session()->has('info_customer') && $request->vnp_ResponseCode == '00') {
+
+            \DB::beginTransaction();
+           
+
+            /////////
+           
+            ////////
+            try {
+                $vnpayData = $request->all();
+                $data = session()->get('info_customer');
+                /* dd($data); */
+                $transactionID = DB::table('transactions')->insertGetID($data);
+                /* dd($transactionID); */
+                if ($transactionID) {
+                    $shopping = \Cart::content();
+
+                    foreach ($shopping as $key => $item) {
+                        //lưu chi tiết đơn hàng
+                        Order::insert([
+                            'or_transaction_id' => $transactionID,
+                            'or_product_id' => $item->id,
+                            'or_qty' => $item->qty,
+                            'or_price' => $item->options->price_old,
+                            'or_sale' => $item->options->sale
+                        ]);
+
+                        //Tăng pay
+                        \DB::table('products')->where('id', $item->id)->increment("pro_pay");
+                    }
+                    /* dd('done'); */
+                    /* dd( $data['tr_total_money']); */
+                    $dataPayment = [
+                        'p_transaction_id' => $transactionID,
+                        'p_transaction_code' => $vnpayData['vnp_TxnRef'],
+                        'p_user_id' => $data['tr_user_id'],
+                        'p_money' => $data['tr_total'],
+                        'p_note' => $vnpayData['vnp_OrderInfo'],
+                        'p_vnp_response_code' => $vnpayData['vnp_ResponseCode'],
+                        'p_code_vnp' => $vnpayData['vnp_TransactionNo'],
+                        'p_code_bank' => $vnpayData['vnp_BankCode'],
+                        'p_time' => date('Y-m-d H:i', strtotime($vnpayData['vnp_PayDate']))
+                    ];
+                    /* dd('done'); */
+                    /* dd($dataPayment); */
+                    DB::table('payments')->insert($dataPayment);
+                    /* dd('done'); */
+                }
+                \Cart::destroy();
+                \DB::commit();
+                return view('vnpay.vnpay_return', compact('vnpayData'))->with('success', 'Đơn hàng của bạn đã được lưu');
+            } catch (\Exception $exception) {
+                /* dd('Exception'); */
+                \DB::rollBack();
+                return redirect('/')->with('error', 'Đã xảy ra lỗi, không thể thanh toán đơn hàng');
+            }
+        } else {
+            /* dd('nodata'); */
+            return redirect('/')->with('error', 'Đã xảy ra lỗi, không thể thanh toán đơn hàng');
+        }
+        //
+
     }
 }

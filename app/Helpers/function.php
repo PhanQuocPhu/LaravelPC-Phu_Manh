@@ -33,7 +33,7 @@ if (!function_exists('upload_image')) {
         $filename = date('Y-m-d__') . Str::slug($nameFile) . '.' . $ext;
 
         // thu muc goc de upload
-        $path = public_path () . '/uploads/' . date('Y/m/d/');
+        $path = public_path() . '/uploads/' . date('Y/m/d/');
         if ($folder) {
             $path = public_path() . '/uploads/' . $folder . '/' . date('Y/m/d/');
         }
@@ -79,15 +79,13 @@ if (!function_exists('get_data_user')) {
 }
 
 
-if (!function_exists('randString')) {
-    function randString($length)
-    {
-        $chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $randstr = '';
-        $size = strlen($chars);
-        for ($i = 0; $i < $length; $i++) {
-            $randstr = $chars[rand(0, $size - 1)];
-        }
-        return $randstr;
+function randString($length)
+{
+    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randstr = '';
+    $size = strlen($chars);
+    for ($i = 0; $i < $length; $i++) {
+        $randstr .= $chars[rand(0, $size - 1)];
     }
+    return $randstr;
 }

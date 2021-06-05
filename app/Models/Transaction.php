@@ -10,6 +10,7 @@ class Transaction extends Model
 {
     protected $table = 'transactions';
     protected $guarded = ['*'];
+    /* protected $fillable = ['tr_user_id', 'tr_total', 'tr_note', 'tr_address', 'tr_phone', 'tr_status', 'created_at', 'updated_at']; */
 
     const STATUS_DEFAULT = 0;
     const STATUS_DONE = 1;
@@ -42,5 +43,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class, 'tr_user_id');
 
+    }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'id', 'p_transaction_id');
     }
 }
