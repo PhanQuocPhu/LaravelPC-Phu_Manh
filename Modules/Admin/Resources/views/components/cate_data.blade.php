@@ -3,6 +3,7 @@
         <tr>
             <td>{{ $category->id }}</td>
             <td>{{ $category->c_name }}</td>
+            <td> <img src="{{ pare_url_file($category->c_icon) }}" alt="" class="img img-responsive" style="height: 20px; width:20px"></td>
             <td>{{ $category->c_title_seo }}</td>
             <td>
                 <a class="badge {{ $category->getHome($category->c_home)['class'] }} status_cate"

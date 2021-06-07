@@ -73,21 +73,27 @@
 
     <!-- login style CSS
   ============================================ -->
-  <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('theme_admin/css/gearvn.css') }}">
-  <link rel="stylesheet" href="{{ asset('theme_admin/css/header_new.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
+
     <!-- header CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/gearvn.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/header_new.css') }}">
     <!-- responsive CSS
   ============================================ -->
     <link rel="stylesheet" href="{{ asset('theme_admin/css/responsive.css') }}">
 
-    <script src="{{ asset('theme_admin/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+    {{-- Jquery confirm --}}
+    <link href=" {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css') }}" rel="stylesheet"
+        type="text/css">
+    {{-- Sweet Alert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <style>
-  
+
 </style>
 
 <body class="home-four" {{-- style="background-color: #f1f0f1 !important" --}}>
@@ -97,7 +103,10 @@
 
     <!-- Add your site or application content here -->
     <!-- Header start -->
-    @include('components.header')
+    <header>
+        @include('components.header')
+    </header>
+
     <!-- Header end -->
 
     <!-- Begin alert -->

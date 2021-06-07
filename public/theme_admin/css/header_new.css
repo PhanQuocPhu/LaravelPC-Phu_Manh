@@ -1288,7 +1288,7 @@ a.gearvn-header-navigation-item.recently-product-item.header-navigation-recently
     position: relative;
     z-index: 10;
     background: #fff;
-    height: 552px;
+    height: 550px;
     -webkit-border-radius: 7px 0 0 7px !important;
     -moz-border-radius: 7px 0 0 7px !important;
     border-radius: 7px 0 0 7px !important;
@@ -3249,7 +3249,7 @@ a.right.carousel-control {
 
 @media screen and (min-width: 992px) {
     .gearvn-header-navigation {
-        margin-top: 170px;
+        margin-top: 102px;
     }
 }
 

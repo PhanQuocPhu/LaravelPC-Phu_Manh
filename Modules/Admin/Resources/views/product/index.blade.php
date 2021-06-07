@@ -173,7 +173,7 @@
                 }
             }); */
         });
-        
+
 
         //Edit status
         $('body').on('click', '.status_product', function(event) {

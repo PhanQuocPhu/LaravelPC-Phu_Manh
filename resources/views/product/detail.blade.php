@@ -64,273 +64,280 @@
         }
 
     </style>
-    <!-- breadcrumbs area start -->
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="container-inner">
-                        <ul>
-                            <li class="home">
-                                <a href="{{ route('home') }}">Home</a>
-                                <span><i class="fa fa-angle-right"></i></span>
-                            </li>
-                            <li class="home">
-                                <a
-                                    href="{{ route('get.list.product', [$cateProduct->c_slug, $cateProduct->id]) }}">{{ $cateProduct->c_name }}</a>
-                                <span><i class="fa fa-angle-right"></i></span>
-                            </li>
-                            <li class="home">
-                                <span>{{ $productDetail->pro_name }}</span>
-                            </li>
-                        </ul>
+
+    <div class="main" style="margin-top:120px">
+        <!-- breadcrumbs area start -->
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-inner">
+                            <ul>
+                                <li class="home">
+                                    <a href="{{ route('home') }}">Home</a>
+                                    <span><i class="fa fa-angle-right"></i></span>
+                                </li>
+                                <li class="home">
+                                    <a
+                                        href="{{ route('get.list.product', [$cateProduct->c_slug, $cateProduct->id]) }}">{{ $cateProduct->c_name }}</a>
+                                    <span><i class="fa fa-angle-right"></i></span>
+                                </li>
+                                <li class="home">
+                                    <span>{{ $productDetail->pro_name }}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- breadcrumbs area end -->
-    <!-- product-details Area Start -->
-    <div class="product-details-area" id="content_product" data-id="{{ $productDetail->id }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-sm-5 col-xs-12">
-                    <div class="zoomWrapper">
-                        <div id="img-1" class="zoomWrapper single-zoom">
-                            <a href="#">
-                                <img id="zoom1" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
-                                    data-zoom-image="" alt="big-1">
-                            </a>
+        <!-- breadcrumbs area end -->
+        <!-- product-details Area Start -->
+        <div class="product-details-area" id="content_product" data-id="{{ $productDetail->id }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="zoomWrapper">
+                            <div id="img-1" class="zoomWrapper single-zoom">
+                                <a href="#">
+                                    <img id="zoom1" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
+                                        data-zoom-image="" alt="big-1">
+                                </a>
+                            </div>
+                            {{-- <div class="single-zoom-thumb">
+                        <ul class="bxslider" id="gallery_01">
+                            <li>
+                                <a href="#" class="elevatezoom-gallery active" data-update=""
+                                    data-image="img/product-details/big-1-1.jpg"
+                                    data-zoom-image="img/product-details/ex-big-1-1.jpg"><img
+                                        src="img/product-details/th-1-1.jpg" alt="zo-th-1" /></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-2.jpg"
+                                    data-zoom-image="img/product-details/ex-big-1-2.jpg"><img
+                                        src="img/product-details/th-1-2.jpg" alt="zo-th-2"></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-3.jpg"
+                                    data-zoom-image="img/product-details/ex-big-1-3.jpg"><img
+                                        src="img/product-details/th-1-3.jpg" alt="ex-big-3" /></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-4.jpg"
+                                    data-zoom-image="img/product-details/ex-big-4.jpg"><img
+                                        src="img/product-details/th-4.jpg" alt="zo-th-4"></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-5.jpg"
+                                    data-zoom-image="img/product-details/ex-big-5.jpg"><img
+                                        src="img/product-details/th-5.jpg" alt="zo-th-5" /></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-6.jpg"
+                                    data-zoom-image="img/product-details/ex-big-6.jpg"><img
+                                        src="img/product-details/th-6.jpg" alt="ex-big-3" /></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-7.jpg"
+                                    data-zoom-image="img/product-details/ex-big-7.jpg"><img
+                                        src="img/product-details/th-7.jpg" alt="ex-big-3" /></a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-8.jpg"
+                                    data-zoom-image="img/product-details/ex-big-8.jpg"><img
+                                        src="img/product-details/th-8.jpg" alt="ex-big-3" /></a>
+                            </li>
+                        </ul>
+                    </div> --}}
                         </div>
-                        {{-- <div class="single-zoom-thumb">
-                            <ul class="bxslider" id="gallery_01">
-                                <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update=""
-                                        data-image="img/product-details/big-1-1.jpg"
-                                        data-zoom-image="img/product-details/ex-big-1-1.jpg"><img
-                                            src="img/product-details/th-1-1.jpg" alt="zo-th-1" /></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-2.jpg"
-                                        data-zoom-image="img/product-details/ex-big-1-2.jpg"><img
-                                            src="img/product-details/th-1-2.jpg" alt="zo-th-2"></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-3.jpg"
-                                        data-zoom-image="img/product-details/ex-big-1-3.jpg"><img
-                                            src="img/product-details/th-1-3.jpg" alt="ex-big-3" /></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-4.jpg"
-                                        data-zoom-image="img/product-details/ex-big-4.jpg"><img
-                                            src="img/product-details/th-4.jpg" alt="zo-th-4"></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-5.jpg"
-                                        data-zoom-image="img/product-details/ex-big-5.jpg"><img
-                                            src="img/product-details/th-5.jpg" alt="zo-th-5" /></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-6.jpg"
-                                        data-zoom-image="img/product-details/ex-big-6.jpg"><img
-                                            src="img/product-details/th-6.jpg" alt="ex-big-3" /></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-7.jpg"
-                                        data-zoom-image="img/product-details/ex-big-7.jpg"><img
-                                            src="img/product-details/th-7.jpg" alt="ex-big-3" /></a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-8.jpg"
-                                        data-zoom-image="img/product-details/ex-big-8.jpg"><img
-                                            src="img/product-details/th-8.jpg" alt="ex-big-3" /></a>
-                                </li>
-                            </ul>
-                        </div> --}}
                     </div>
-                </div>
-                <div class="col-md-7 col-sm-7 col-xs-12">
-                    <div class="product-list-wrapper">
-                        <div class="single-product">
-                            <div class="product-content">
-                                <h2 class="product-name"><a href="#">{{ $productDetail->pro_name }}</a></h2>
-                                <div class="rating-price row">
-                                    <div class="col-md-3">
-                                        <strong>Đánh giá:</strong>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                        <div class="product-list-wrapper">
+                            <div class="single-product">
+                                <div class="product-content">
+                                    <h2 class="product-name"><a href="#">{{ $productDetail->pro_name }}</a></h2>
+                                    <div class="rating-price row">
+                                        <div class="col-md-3">
+                                            <strong>Đánh giá:</strong>
+                                        </div>
+                                        <?php
+                                        $ageDetail = 0;
+                                        if ($productDetail->pro_total_rating) {
+                                        $ageDetail = round($productDetail->pro_total_number /
+                                        $productDetail->pro_total_rating, 2);
+                                        }
+                                        ?>
+                                        <div class="pro-rating">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <a href="#"><i
+                                                        class="fa fa-star {{ $i <= $ageDetail ? 'active' : '' }}"></i></a>
+                                            @endfor
+                                        </div>
                                     </div>
-                                    <?php
-                                    $ageDetail = 0;
-                                    if ($productDetail->pro_total_rating) {
-                                    $ageDetail = round($productDetail->pro_total_number / $productDetail->pro_total_rating,
-                                    2);
-                                    }
-                                    ?>
-                                    <div class="pro-rating">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <a href="#"><i
-                                                    class="fa fa-star {{ $i <= $ageDetail ? 'active' : '' }}"></i></a>
-                                        @endfor
+                                    <div class="product-desc">
+                                        <strong>Thông tin chung: </strong>
+                                        <p>
+                                            {{ $productDetail->pro_description }}
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="product-desc">
-                                    <strong>Thông tin chung: </strong>
-                                    <p>
-                                        {{ $productDetail->pro_description }}
-                                    </p>
-                                </div>
-                                <div class="price-boxes row">
-                                    <span class="col-md-2" style="display: inline-block; font-size:16px;">
-                                        Giá:
-                                    </span>
-                                    <div class="product-row-price pull-left">
-                                        @if ($productDetail->pro_sale)
-                                            <del
-                                                style="font-size: 12px">{{ number_format($productDetail->pro_price, 0, '.', '.') }}₫</del>
-                                        @else
-                                            <del> </del>
-                                        @endif
-                                        <br>
-                                        <span class="product-row-sale"
-                                            style="font-size: 30px">{{ number_format(($productDetail->pro_price * (100 - $productDetail->pro_sale)) / 100, 0, '.', '.') }}₫
+                                    <div class="price-boxes row">
+                                        <span class="col-md-2" style="display: inline-block; font-size:16px;">
+                                            Giá:
                                         </span>
-                                    </div>
-                                    {{-- <span class="new-price" style="font-size: 22px;color: #e61010; font-weight: 700;">
-                                        {{ number_format($productDetail->pro_price, 0, '.', '.') }}vnđ
-                                    </span> --}}
-                                </div>
-                                <p class="availability in-stock">Availability:
-                                    @if ($productDetail->pro_number >> 0)
-                                        <span> Còn hàng</span>
-                                    @else
-                                        <span style="color: #e61010"> Hết hàng</span>
-                                    @endif
-                                </p>
-                                <div class="actions-e">
-                                    <div class="action-buttons-single" style="border-radius:8px">
-                                        <div class="add-to-cart">
-                                            <a  class="add-cart" href="{{ route('add.shopping.cart.ajax', $productDetail->id) }}">Đặt hàng</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="single-product-tab">
-                    <!-- Nav tabs -->
-                    <ul class="details-tab">
-                        <li class="active"><a href="" data-toggle="tab">Chi tiết sản phẩm</a></li>
-                    </ul>
-                    <!-- Chi tiết sản phẩm -->
-                    <div class="product-tab-content" style="border: 1px solid #ddd; border-top: none; padding: 10px;">
-                        <p>{!! $productDetail->pro_content !!}</p>
-                    </div>
-                    <br>
-                    <!-- Đánh giá sản phẩm -->
-                    <div class="component_rating col"
-                        style="margin-bottom: 20px;  border: 1px solid #dedede; border-radius:5px">
-                        <h3 style="margin: 5px"> Đánh giá sản phẩm</h3>
-                        <div class="component_rating_content" style="display:flex; align-items:center;">
-                            <div class="rating_item" style="width: 20%; position: relative;">
-                                <span class="fa fa-star"
-                                    style="font-size: 100px; display:block;color:#ff9785;margin: 0 auto; text-align: center"></span>
-                                <b
-                                    style="position: absolute; top:50%; left:50%; transform: translateX(-50%) translateY(-50%); color:white; font-size: 20px">{{ $ageDetail }}</b>
-                            </div>
-                            <div class="list_rating" style="width: 60%; padding:20px">
-                                @foreach ($arrayRatings as $key => $arrayRating)
-                                    <?php $itemAge = round(($arrayRating['total'] /
-                                    $productDetail->pro_total_rating) * 100, 0); ?>
-                                    <div class="item_rating" style="display: flex; align_items:center">
-                                        {{-- {{dd($arrayRating)}} --}}
-                                        <div style="width: 10%; font-size:14px">
-                                            {{ $key }} <span class="fa fa-star"> </span>
-                                        </div>
-                                        <div style="width: 70%; margin: 6px 20px">
-                                            <span
-                                                style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
-                                                    style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                        <div class="product-row-price pull-left">
+                                            @if ($productDetail->pro_sale)
+                                                <del
+                                                    style="font-size: 12px">{{ number_format($productDetail->pro_price, 0, '.', '.') }}₫</del>
+                                            @else
+                                                <del> </del>
+                                            @endif
+                                            <br>
+                                            <span class="product-row-sale"
+                                                style="font-size: 30px">{{ number_format(($productDetail->pro_price * (100 - $productDetail->pro_sale)) / 100, 0, '.', '.') }}₫
                                             </span>
                                         </div>
-                                        <div style="width: 20%">
-                                            <a href="">{{ $arrayRating['total'] }} đánh giá ({{ $itemAge }}%)</a>
+                                        {{-- <span class="new-price" style="font-size: 22px;color: #e61010; font-weight: 700;">
+                                    {{ number_format($productDetail->pro_price, 0, '.', '.') }}vnđ
+                                </span> --}}
+                                    </div>
+                                    <p class="availability in-stock">Availability:
+                                        @if ($productDetail->pro_number >> 0)
+                                            <span> Còn hàng</span>
+                                        @else
+                                            <span style="color: #e61010"> Hết hàng</span>
+                                        @endif
+                                    </p>
+                                    <div class="actions-e">
+                                        <div class="action-buttons-single" style="border-radius:8px">
+                                            <div class="add-to-cart">
+                                                <a class="add-cart"
+                                                    href="{{ route('add.shopping.cart.ajax', $productDetail->id) }}">Đặt
+                                                    hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="single-product-tab">
+                        <!-- Nav tabs -->
+                        <ul class="details-tab">
+                            <li class="active"><a href="" data-toggle="tab">Chi tiết sản phẩm</a></li>
+                        </ul>
+                        <!-- Chi tiết sản phẩm -->
+                        <div class="product-tab-content" style="border: 1px solid #ddd; border-top: none; padding: 10px;">
+                            <p>{!! $productDetail->pro_content !!}</p>
+                        </div>
+                        <br>
+                        <!-- Đánh giá sản phẩm -->
+                        <div class="component_rating col"
+                            style="margin-bottom: 20px;  border: 1px solid #dedede; border-radius:5px">
+                            <h3 style="margin: 5px"> Đánh giá sản phẩm</h3>
+                            <div class="component_rating_content" style="display:flex; align-items:center;">
+                                <div class="rating_item" style="width: 20%; position: relative;">
+                                    <span class="fa fa-star"
+                                        style="font-size: 100px; display:block;color:#ff9785;margin: 0 auto; text-align: center"></span>
+                                    <b
+                                        style="position: absolute; top:50%; left:50%; transform: translateX(-50%) translateY(-50%); color:white; font-size: 20px">{{ $ageDetail }}</b>
+                                </div>
+                                <div class="list_rating" style="width: 60%; padding:20px">
+                                    @foreach ($arrayRatings as $key => $arrayRating)
+                                        <?php $itemAge = round(($arrayRating['total'] /
+                                        $productDetail->pro_total_rating) * 100, 0); ?>
+                                        <div class="item_rating" style="display: flex; align_items:center">
+                                            {{-- {{dd($arrayRating)}} --}}
+                                            <div style="width: 10%; font-size:14px">
+                                                {{ $key }} <span class="fa fa-star"> </span>
+                                            </div>
+                                            <div style="width: 70%; margin: 6px 20px">
+                                                <span
+                                                    style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
+                                                        style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                                </span>
+                                            </div>
+                                            <div style="width: 20%">
+                                                <a href="">{{ $arrayRating['total'] }} đánh giá
+                                                    ({{ $itemAge }}%)</a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                                <div style="width: 20%">
+                                    <button class="btn btn-primary js_rating_action"
+                                        style="width: 80%; padding:10px; color:white;">
+                                        Gửi đánh giá
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- Khung đánh giá --}}
+                            <div class="form_rating col-12 hide">
+                                <div
+                                    style="display: flex; margin-top:15px; margin-left:10px; margin-bottom:5px; font-size:15px">
+                                    <p style="margin-bottom:0">Chọn đánh giá:</p>
+                                    <span style="margin: 0 15px" class="list_start">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa fa-star" data-key="{{ $i }}"></i>
+                                        @endfor
+                                    </span>
+                                    <span class="list_text"> </span>
+                                    <input type="hidden" value="" class="number_rating">
+                                </div>
+                                <div class="row">
+                                    {{-- Khung nội dung --}}
+                                    <div class="col-md-6" style="margin-left:10px; margin-bottom:5px; margin-right:10px;">
+                                        <textarea name="" class="form-control" rows="5" id="ra_content"></textarea>
+                                    </div>
+                                    {{-- Khung thông tin cá nhân --}}
+                                    <div class="col-md-2">
+                                        <a class="btn btn-primary js_rating_product" style="margin-left:10px;"
+                                            href="{{ route('post.rating.product', $productDetail->id) }}"> Gửi đánh
+                                            giá</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Bình luận đánh giá sản phẩm --}}
+                        <div class="component_list_rating">
+                            <h2>Bình luận</h2>
+                            @if (isset($ratings))
+                                @foreach ($ratings as $rating)
+                                    <div class="rating_item" style="margin: 10px 0">
+                                        <div>
+                                            <span style="color: #333; font-weight: bold; text-transform:capitalize;">
+                                                {{ $rating->user->name }} &nbsp;
+                                            </span>
+                                            <a href="" class="fa fa-check-circle-o" style="color: #52b858"> Đã mua hàng tại
+                                                website </a>
+                                        </div>
+                                        <div class="pro-rating">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star {{ $i <= $rating->ra_number ? 'active' : '' }}"></i>
+                                            @endfor
+                                        </div>
+                                        <span>
+                                            {{ $rating->ra_content }}
+                                        </span>
+                                        <div>
+                                            <span><i class="fa fa-clock-o"></i> {{ $rating->created_at }}</span>
                                         </div>
                                     </div>
                                 @endforeach
 
-                            </div>
-                            <div style="width: 20%">
-                                <button class="btn btn-primary js_rating_action"
-                                    style="width: 80%; padding:10px; color:white;">
-                                    Gửi đánh giá
-                                </button>
-                            </div>
+                            @endif
                         </div>
-
-                        {{-- Khung đánh giá --}}
-                        <div class="form_rating col-12 hide">
-                            <div
-                                style="display: flex; margin-top:15px; margin-left:10px; margin-bottom:5px; font-size:15px">
-                                <p style="margin-bottom:0">Chọn đánh giá:</p>
-                                <span style="margin: 0 15px" class="list_start">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <i class="fa fa-star" data-key="{{ $i }}"></i>
-                                    @endfor
-                                </span>
-                                <span class="list_text"> </span>
-                                <input type="hidden" value="" class="number_rating">
-                            </div>
-                            <div class="row">
-                                {{-- Khung nội dung --}}
-                                <div class="col-md-6" style="margin-left:10px; margin-bottom:5px; margin-right:10px;">
-                                    <textarea name="" class="form-control" rows="5" id="ra_content"></textarea>
-                                </div>
-                                {{-- Khung thông tin cá nhân --}}
-                                <div class="col-md-2">
-                                    <a class="btn btn-primary js_rating_product" style="margin-left:10px;"
-                                        href="{{ route('post.rating.product', $productDetail->id) }}"> Gửi đánh
-                                        giá</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Bình luận đánh giá sản phẩm --}}
-                    <div class="component_list_rating">
-                        <h2>Bình luận</h2>
-                        @if (isset($ratings))
-                            @foreach ($ratings as $rating)
-                                <div class="rating_item" style="margin: 10px 0">
-                                    <div>
-                                        <span style="color: #333; font-weight: bold; text-transform:capitalize;">
-                                            {{ $rating->user->name }} &nbsp;
-                                        </span>
-                                        <a href="" class="fa fa-check-circle-o" style="color: #52b858"> Đã mua hàng tại
-                                            website </a>
-                                    </div>
-                                    <div class="pro-rating">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="fa fa-star {{ $i <= $rating->ra_number ? 'active' : '' }}"></i>
-                                        @endfor
-                                    </div>
-                                    <span>
-                                        {{ $rating->ra_content }}
-                                    </span>
-                                    <div>
-                                        <span><i class="fa fa-clock-o"></i> {{ $rating->created_at }}</span>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
+        <!-- product-details Area end -->
     </div>
-    <!-- product-details Area end -->
+
     <br>
 @stop
 @section('script')
@@ -345,7 +352,7 @@
             event.preventDefault();
             let $this = $(this);
             let url = $this.attr('href');
-           /*  console.log(url); */
+            /*  console.log(url); */
             $.ajax({
                 url: url,
                 method: 'POST',
@@ -436,4 +443,3 @@
 
     </script>
 @endsection
-

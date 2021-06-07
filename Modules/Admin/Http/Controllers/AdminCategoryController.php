@@ -13,7 +13,7 @@ class AdminCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->get();
+        $categories = Category::select('id', 'c_name', 'c_icon', 'c_title_seo', 'c_active', 'c_home')->get();
 
 
         $viewData = ['categories' => $categories];
@@ -39,7 +39,7 @@ class AdminCategoryController extends Controller
     {
         $this->insertOrUpdate($requestCategory, $id);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Chỉnh sửa thành công');
     }
 
     public function insertOrUpdate($requestCategory, $id = '')
@@ -52,9 +52,17 @@ class AdminCategoryController extends Controller
             }
             $category->c_name               = $requestCategory->name;
             $category->c_slug               = Str::slug($requestCategory->name);
-            $category->c_icon               = Str::slug($requestCategory->icon);
+            /* $category->c_icon               = Str::slug($requestCategory->icon); */
             $category->c_title_seo          = $requestCategory->c_title_seo ? $requestCategory->c_title_seo : $requestCategory->name;
             $category->c_description_seo    = $requestCategory->c_description_seo;
+
+            if ($requestCategory->hasFile('icon')) {
+                $file = upload_image('icon');
+    
+                if (isset($file['name'])) {
+                    $category->c_icon = $file['name'];
+                }
+            }
             $category->save();
         } catch (\Exception $exception) {
             $code = 0;
@@ -104,7 +112,7 @@ class AdminCategoryController extends Controller
                     $category->save();
                     break;
             }
-            $categories = Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->get();
+            $categories = Category::select('id', 'c_name', 'c_icon', 'c_title_seo', 'c_active', 'c_home')->get();
             $viewData = [
                 'categories' => $categories,
             ];

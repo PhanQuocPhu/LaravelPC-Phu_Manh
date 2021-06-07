@@ -19,56 +19,7 @@
 
     <div class="main-area">
         <div class="container">
-            {{-- khung mở đầu start --}}
-            <div class="start-home-modules row">
-                {{-- Banner carousel start --}}
-                <div class="col-md-10" style="float: right; margin-top:5px">
-                    <div class="slider-area hm-1">
-                        <!-- slider -->
-                        @if (isset($articleNews))
-                            <div class="bend niceties preview-2">
-                                <div id="ensign-nivoslider-2" class="slides" style="height:530px">
-                                    @foreach ($articleNews as $articleNew)
-                                        <img src="{{ asset(pare_url_file($articleNew->a_avatar)) }}" alt=""
-                                            title="#slider-direction-2" style="display: inline; height:530px" />
-                                    @endforeach
-                                </div>
-                                <!-- direction 1 -->
-                                <div id="slider-direction-1" class="t-cn slider-direction">
-                                    <div class="slider-progress"></div>
-                                </div>
-                                <!-- direction 2 -->
-                                <div id="slider-direction-2" class="slider-direction">
-                                    <div class="slider-progress"></div>
-                                </div>
-                            </div>
-                        @endif
-                        <!-- slider end-->
-                    </div>
-                    <!-- Article area start -->
-                    <div class="unit-banner-area" style="margin-top: 15px">
-                        <div class="row">
-                            @if (isset($articleNews))
-                                @foreach ($articleNews as $articleNew)
-                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                        <!-- single banner start -->
-                                        <div class="single-banner">
-                                            <a href="#"><img src="{{ asset(pare_url_file($articleNew->a_avatar)) }}"
-                                                    alt="" class="img-fluid"
-                                                    style="display: inline; width:100% ;height:140px" />
-                                            </a>
-                                        </div>
-                                        <!-- single banner end -->
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Article area end -->
-                </div>
-                {{-- Banner carousel end --}}
-            </div>
-            {{-- khung mở đầu end --}}
+            <br>
 
 
             {{-- Sản phẩm vừa xem --}}
@@ -252,14 +203,26 @@
             event.preventDefault();
             let $this = $(this);
             let url = $this.attr('href');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function(response) {
-                    alert("Thêm sản phẩm thành công");
-                    $("#cart-count").html(response);
+            Swal.fire({
+                title: 'Thêm sản phẩm vào giỏ hàng ?',
+                /* showDenyButton: true, */
+                showCancelButton: true,
+                confirmButtonText: `Yes`,
+                /* denyButtonText: `No`, */
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        success: function(response) {
+                            Swal.fire('Saved!', '', 'success')
+                            $("#cart-count").html(response);
+                        }
+                    });
+
                 }
             });
+
         });
 
         $(function() {

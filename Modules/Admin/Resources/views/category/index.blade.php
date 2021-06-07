@@ -26,6 +26,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Tên danh mục</th>
+                    <th scope="col">Icon</th>
                     <th scope="col">Title SEO</th>
                     <th scope="col">HomePage</th>
                     <th scope="col">Status</th>
@@ -38,6 +39,7 @@
                         <tr>
                             <td>{{ $category->id }}</td>
                             <td id="c_name">{{ $category->c_name }}</td>
+                            <td> <img src="{{ pare_url_file($category->c_icon) }}" alt="" class="img img-responsive" style="height: 20px; width:20px"></td>
                             <td>{{ $category->c_title_seo }}</td>
                             <td>
                                 <a class="badge {{ $category->getHome($category->c_home)['class'] }} status_cate "
