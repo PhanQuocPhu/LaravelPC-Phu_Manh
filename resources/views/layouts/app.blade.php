@@ -74,7 +74,8 @@
     <!-- login style CSS
   ============================================ -->
   <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
-
+  <link rel="stylesheet" href="{{ asset('theme_admin/css/gearvn.css') }}">
+  <link rel="stylesheet" href="{{ asset('theme_admin/css/header_new.css') }}">
     <!-- header CSS
   ============================================ -->
     <link rel="stylesheet" href="{{ asset('theme_admin/css/header.css') }}">
