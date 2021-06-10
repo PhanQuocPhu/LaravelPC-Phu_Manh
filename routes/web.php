@@ -29,10 +29,15 @@ Route::get('dang-xuat', [App\Http\Controllers\Auth\LoginController::class, 'getL
     Route::post('dang-nhap', 'LoginController@postLogin')->name('post.login');
 }); */
 
+//Liên quan tới trang chủ
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
 Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
+//Static page
+Route::get('pages/chinh-sach-bao-hanh', [App\Http\Controllers\StaticPageController::class, 'getGuarantee'])->name('get.guarantee');
+Route::get('pages/huong-dan-tra-gop', [App\Http\Controllers\StaticPageController::class, 'getInstallment'])->name('get.buy.installment');
+Route::get('pages/chinh-sach-giao-hang', [App\Http\Controllers\StaticPageController::class, 'getShipping'])->name('get.shipping');
 
 
 /* Bài viết */

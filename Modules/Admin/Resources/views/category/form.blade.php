@@ -30,7 +30,7 @@
         <div class="col-sm-3">
             {{-- Hình ảnh --}}
             <div class="form-group text-center">
-                @if (isset($category))
+                @if (isset($category->c_icon))
                     <img id="output_img" src=" {{ pare_url_file($category->c_icon) }}" class="" alt="" style="height: 100px; width:100px">
                 @else
                     <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="" alt="" style="height: 100px; width:100px">

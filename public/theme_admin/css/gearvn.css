@@ -502,3 +502,8 @@ svg {
     user-select: none;
     height: 34px;
 }
+
+#footer {
+    background: #f6f6f6;
+    padding: 20px 0;
+}

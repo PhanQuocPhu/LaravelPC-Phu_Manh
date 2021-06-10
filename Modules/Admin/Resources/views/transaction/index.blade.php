@@ -214,7 +214,7 @@
                                     $('#md_content').html(response);
                                     //Reload data trang đơn hàng
                                     $.ajax({
-                                        url: ,
+                                        url: url,
                                         method: 'POST',
                                         success: function(response) {
                                             $('#md_content').html(response);

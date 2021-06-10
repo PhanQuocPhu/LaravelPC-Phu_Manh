@@ -91,10 +91,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-
-<style>
-
-</style>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0" nonce="cDYxzErr"></script>
 
 <body class="home-four" {{-- style="background-color: #f1f0f1 !important" --}}>
     <!--[if lt IE 8]>
@@ -144,7 +142,10 @@
     <!-- End alert -->
 
     <!-- main area start -->
-    @yield('content')
+    <div style="margin-top:120px">
+        @yield('content')
+    </div>
+
     <!-- main area end -->
 
 

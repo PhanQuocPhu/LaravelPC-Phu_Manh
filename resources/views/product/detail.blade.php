@@ -65,7 +65,7 @@
 
     </style>
 
-    <div class="main" style="margin-top:120px">
+    <div class="main" >
         <!-- breadcrumbs area start -->
         <div class="breadcrumbs">
             <div class="container">
@@ -104,51 +104,7 @@
                                         data-zoom-image="" alt="big-1">
                                 </a>
                             </div>
-                            {{-- <div class="single-zoom-thumb">
-                        <ul class="bxslider" id="gallery_01">
-                            <li>
-                                <a href="#" class="elevatezoom-gallery active" data-update=""
-                                    data-image="img/product-details/big-1-1.jpg"
-                                    data-zoom-image="img/product-details/ex-big-1-1.jpg"><img
-                                        src="img/product-details/th-1-1.jpg" alt="zo-th-1" /></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-2.jpg"
-                                    data-zoom-image="img/product-details/ex-big-1-2.jpg"><img
-                                        src="img/product-details/th-1-2.jpg" alt="zo-th-2"></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-1-3.jpg"
-                                    data-zoom-image="img/product-details/ex-big-1-3.jpg"><img
-                                        src="img/product-details/th-1-3.jpg" alt="ex-big-3" /></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-4.jpg"
-                                    data-zoom-image="img/product-details/ex-big-4.jpg"><img
-                                        src="img/product-details/th-4.jpg" alt="zo-th-4"></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-5.jpg"
-                                    data-zoom-image="img/product-details/ex-big-5.jpg"><img
-                                        src="img/product-details/th-5.jpg" alt="zo-th-5" /></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-6.jpg"
-                                    data-zoom-image="img/product-details/ex-big-6.jpg"><img
-                                        src="img/product-details/th-6.jpg" alt="ex-big-3" /></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-7.jpg"
-                                    data-zoom-image="img/product-details/ex-big-7.jpg"><img
-                                        src="img/product-details/th-7.jpg" alt="ex-big-3" /></a>
-                            </li>
-                            <li class="">
-                                <a href="#" class="elevatezoom-gallery" data-image="img/product-details/big-8.jpg"
-                                    data-zoom-image="img/product-details/ex-big-8.jpg"><img
-                                        src="img/product-details/th-8.jpg" alt="ex-big-3" /></a>
-                            </li>
-                        </ul>
-                    </div> --}}
+
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7 col-xs-12">
@@ -245,26 +201,29 @@
                                         style="position: absolute; top:50%; left:50%; transform: translateX(-50%) translateY(-50%); color:white; font-size: 20px">{{ $ageDetail }}</b>
                                 </div>
                                 <div class="list_rating" style="width: 60%; padding:20px">
-                                    @foreach ($arrayRatings as $key => $arrayRating)
-                                        <?php $itemAge = round(($arrayRating['total'] /
-                                        $productDetail->pro_total_rating) * 100, 0); ?>
-                                        <div class="item_rating" style="display: flex; align_items:center">
-                                            {{-- {{dd($arrayRating)}} --}}
-                                            <div style="width: 10%; font-size:14px">
-                                                {{ $key }} <span class="fa fa-star"> </span>
+                                    @if (isset($arrayRatings))
+                                        @foreach ($arrayRatings as $key => $arrayRating)
+                                            <?php $itemAge = round(($arrayRating['total'] /
+                                            $productDetail->pro_total_rating) * 100, 0); ?>
+                                            <div class="item_rating" style="display: flex; align_items:center">
+                                                {{-- {{dd($arrayRating)}} --}}
+                                                <div style="width: 10%; font-size:14px">
+                                                    {{ $key }} <span class="fa fa-star"> </span>
+                                                </div>
+                                                <div style="width: 70%; margin: 6px 20px">
+                                                    <span
+                                                        style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
+                                                            style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                                    </span>
+                                                </div>
+                                                <div style="width: 20%">
+                                                    <a href="">{{ $arrayRating['total'] }} đánh giá
+                                                        ({{ $itemAge }}%)</a>
+                                                </div>
                                             </div>
-                                            <div style="width: 70%; margin: 6px 20px">
-                                                <span
-                                                    style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
-                                                        style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
-                                                </span>
-                                            </div>
-                                            <div style="width: 20%">
-                                                <a href="">{{ $arrayRating['total'] }} đánh giá
-                                                    ({{ $itemAge }}%)</a>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
+
 
                                 </div>
                                 <div style="width: 20%">

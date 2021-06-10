@@ -9,6 +9,7 @@ Route::prefix('authenticate')->group(function () {
 Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin.home');
 
+
     //quản lý danh mục
     Route::group(['prefix' => 'category'], function () {
         Route::get('/', 'AdminCategoryController@index')->name('admin.get.list.category');
@@ -68,6 +69,33 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
     //Quản lý thành viên
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'AdminUserController@index')->name('admin.get.list.user');
+
+        Route::get('/create', 'AdminUserController@create')->name('admin.get.create.user');
+        Route::post('/create', 'AdminUserController@store');
+
+        Route::get('/update/{id}', 'AdminUserController@edit')->name('admin.get.edit.user');
+        Route::post('/update/{id}', 'AdminUserController@update');
+
+        //thay đổi trạng thái ajax
+        Route::post('/ajax/{action}/{id}', 'AdminUserController@actionAjax')->name('admin.get.action.user');
+
+        
+    });
+
+    //Quản lý tài khoản Admin
+    Route::group(['prefix' => 'AdminUser'], function () {
+        Route::get('/', 'AdminUserController@indexAdmin')->name('admin.get.list.admin');
+
+        Route::get('/create', 'AdminUserController@createAdmin')->name('admin.get.create.admin');
+        Route::post('/create', 'AdminUserController@storeAdmin');
+
+        Route::get('/update/{id}', 'AdminUserController@editAdmin')->name('admin.get.edit.admin');
+        Route::post('/update/{id}', 'AdminUserController@updateAdmin');
+
+        //thay đổi trạng thái ajax
+        Route::post('/ajax/{action}/{id}', 'AdminUserController@actionAjax')->name('admin.get.action.admin');
+
+        
     });
 
     //Quản lý đánh giá

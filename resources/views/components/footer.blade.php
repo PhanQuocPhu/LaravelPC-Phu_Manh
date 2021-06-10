@@ -1,154 +1,101 @@
-<!-- FOOTER START -->
-<footer>
-    <!-- top footer area start -->
-    <div class="top-footer-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-4">
-                    <div class="single-snap-footer">
-                        <div class="snap-footer-title">
-                            <h4>Company info</h4>
-                        </div>
-                        <div class="cakewalk-footer-content">
-                            <p class="footer-des">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim adm.</p>
-                            <a href="#" class="read-more">Read more</a>
-                        </div>
-                    </div>
+<div id="footer" style="  background: #f6f6f6; padding: 20px 0;">
+    <div class="container">
+        <div id="user1" class="col-sm-4 col-xs-12">
+            <div class="moduletable">
+                <!--<h3>PCPM.COM - HI-END PC & GAMING GEAR</h3> -->
+                <h5>Công ty TNHH Thương Mại PCPM </h5>
+                <div class="custom">
+                    <h5 class="title-footer-2"> Email cskh: 16110180@student.hcmute.edu.vn<br></h5>
+                    <h5 class="title-footer-2"> Email tư vấn: 16110151@student.hcmute.edu.vn<br></h5>
+                    <p style="font-size: 14px">
+                        <b>HỆ THỐNG TỔNG ĐÀI MIỄN PHÍ:</b> (Làm việc từ 8h00 - 22h00)<br>
+                    <table style="width: 296px;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 211px;">Gọi mua hàng</td>
+                                <td style="width: 105px;"><strong>0981183122</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 211px;">Hỗ trợ khách hàng</td>
+                                <td style="width: 105px;"><strong>1800 6173</strong></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <br>
+                    <a href="{{ route('get.guarantee') }}"
+                        style="font-size: 16px; color: #0655a6; font-weight: bold;">Chính sách bảo hành</a><br>
+                    <a href="https://gearvn.com/pages/huong-dan-thanh-toan-gearvn"
+                        style="font-size: 16px; color: #0655a6; font-weight: bold;">Chính sách thanh toán</a><br>
+                    <a href="https://gearvn.com/pages/chinh-sach-giao-hang"
+                        style="font-size: 16px; color: #0655a6; font-weight: bold;">Chính sách giao hàng</a><br>
+                    <a href="https://gearvn.com/pages/chinh-sach-bao-mat"
+                        style="font-size: 16px; color: #0655a6; font-weight: bold;">Chính sách bảo mật</a>
+                    </p>
                 </div>
-                <div class="col-md-3 col-sm-4">
-                    <div class="single-snap-footer">
-                        <div class="snap-footer-title">
-                            <h4>Information</h4>
-                        </div>
-                        <div class="cakewalk-footer-content">
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Condition</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                    <div class="single-snap-footer">
-                        <div class="snap-footer-title">
-                            <h4>Fashion Tags</h4>
-                        </div>
-                        <div class="cakewalk-footer-content">
-                            <ul>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">My Cart</a></li>
-                                <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Checkout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 hidden-sm">
-                    <div class="single-snap-footer">
-                        <div class="snap-footer-title">
-                            <h4>Fashion Tags</h4>
-                        </div>
-                        <div class="cakewalk-footer-content">
-                            <ul>
-                                <li><a href="#">Sitemap</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Advanced Search</a></li>
-                                <li><a href="#">Affiliates</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 hidden-sm">
-                    <div class="single-snap-footer">
-                        <div class="snap-footer-title">
-                            <h4>Follow Us</h4>
-                        </div>
-                        <div class="cakewalk-footer-content social-footer">
-                            <ul>
-                                <li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a><span> Facebook</span></li>
-                                <li><a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a><span> Google Plus</span></li>
-                                <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a><span> Twitter</span></li>
-                                <li><a href="https://youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a><span> Youtube</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="title-footer-2"></h3>
+                <ul class="menu-footer">
+
+                </ul>
+
+                {{-- Logo bộ công thương --}}
+                <a href="" rel="nofollow">
+                    <img src="https://theme.hstatic.net/1000026716/1000440777/14/20150827110756-dathongbao.png"
+                        style="max-width: 300px;">
+                </a>
+
             </div>
         </div>
-    </div>	
-    <!-- top footer area end -->
-    <!-- info footer start -->
-    <div class="info-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-4">
-                    <div class="info-fcontainer">
-                        <div class="infof-icon">
-                            <i class="fa fa-map-marker"></i>
-                        </div>
-                        <div class="infof-content">
-                            <h3>Our Address</h3>
-                            <p>Main Street, Banasree, Dhaka</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                    <div class="info-fcontainer">
-                        <div class="infof-icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="infof-content">
-                            <h3>Phone Support</h3>
-                            <p>+88 0173 7803547</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                    <div class="info-fcontainer">
-                        <div class="infof-icon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <div class="infof-content">
-                            <h3>Email Support</h3>
-                            <p>admin@bootexperts.com</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 hidden-sm">
-                    <div class="info-fcontainer">
-                        <div class="infof-icon">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <div class="infof-content">
-                            <h3>Openning Hour</h3>
-                            <p>Sat - Thu : 9:00 am - 22:00 pm</p>
-                        </div>
-                    </div>
-                </div>
+        <div id="user2" class="col-sm-5 col-xs-12">
+            <div class="moduletable">
+
+                <a href="https://gearvn.com/pages/he-thong-showroom-gvn">
+                    <p style="font-size: 16px; display: inline">
+                        <b>HỆ THỐNG CỬA HÀNG:</b>
+                    </p>
+                </a>
+                <p style="display: inline">
+                </p>
+                <br>
+
+                <p style="font-size: 14px; padding-top: 4px">
+                    <b>SHOWROOM HCM</b> (Làm việc từ 8h00 - 22h00) <br>
+                    - Địa chỉ: 1 Võ Văn Ngân, quận Thủ Đức<br>
+                </p>
+
+                <!-- Pháp nhân -->
+
+                <p style="font-size: 14px; padding-top: 4px">
+                    - Công ty TNHH Thương Mại PCPM <br>
+                    - GPKD số 0316517394 do Sở KH và ĐT TP Hồ Chí Minh cấp ngày 01/10/2020 <br>
+                </p>
+                <!-- Code veryfi DMCA Quocvu -->
+                <a href="https://www.dmca.com/Protection/Status.aspx?ID=65147526-7602-46be-9047-e8c33f9fcbd3&amp;refurl=https://gearvn.com/"
+                    title="DMCA.com Protection Status" class="dmca-badge" rel="nofollow noopener noreferrer"> <img
+                        src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=65147526-7602-46be-9047-e8c33f9fcbd3"
+                        alt="DMCA.com Protection Status"></a>
+                <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+
             </div>
         </div>
+        <div id="user3" class="col-sm-3 col-xs-12">
+            <div class="moduletable">
+                <h3>Fanpage</h3>
+                <div class="face-content">
+                    <div class="fb-page" data-href="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555"
+                        data-tabs="timeline" data-width="300px" data-height="375px" data-small-header="false"
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555"
+                            class="fb-xfbml-parse-ignore"><a
+                                href="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555">Pc Phú -
+                                Mạnh</a></blockquote>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clr"></div>
+
     </div>
-    <!-- info footer end -->
-    <!-- footer address area start -->
-    <div class="address-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <address>Copyright © <a href="http://bootexperts.com/">BootExperts.</a> All Rights Reserved</address>
-                </div>
-                <div class="col-md-6 col-xs-12">
-                    <div class="footer-payment pull-right">
-                        <a href="#"><img src="{{asset('img/payment.png')}}" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- footer address area end -->
-</footer>
-<!-- FOOTER END -->
+</div>

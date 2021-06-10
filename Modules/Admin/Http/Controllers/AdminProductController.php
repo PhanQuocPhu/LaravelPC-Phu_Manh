@@ -32,17 +32,20 @@ class AdminProductController extends Controller
     {
         return Category::all();
     }
+
     public function create()
     {
         $categories = $this->getCategories();
         return view('admin::product.create', compact('categories'));
     }
+
     public function edit($id)
     {
         $product = Product::find($id);
         $categories = $this->getCategories();
         return view('admin::product.update', compact('product', 'categories'));
     }
+    
     public function update(RequestProduct $requestProduct, $id)
     {
         $this->insertOrUpdate($requestProduct, $id);

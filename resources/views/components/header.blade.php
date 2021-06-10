@@ -87,7 +87,7 @@
         <div class="headerxxx">
             <div class="container gearvn-content-section">
                 <div class="row">
-
+                    {{-- Logo với khung search --}}
                     <div class="left_header" style="z-index: 997;">
                         <a href="/" class="hidden-xsx logo-big">
                             <img src="{{ asset('img/logo.gif') }}" alt="" />
@@ -116,6 +116,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Mấy cái còn lại --}}
                     <div class="right_header">
                         <div class=" pd5 fl1 ">
                             <div id="search" class=" hidden-sm  hidden-xs">
@@ -227,21 +229,19 @@
                             <img src="//theme.hstatic.net/1000026716/1000440777/14/xk1.png?v=19892">
                             <img src="//theme.hstatic.net/1000026716/1000440777/14/xk1s.png?v=19892">
                         </div>
-
-
                         SẢN PHẨM VỪA XEM
                     </a>
-                    <a href="https://gearvn.com/pages/huong-dan-thanh-toan-gearvn"
+                    <a href="{{route('get.list.article')}}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
-                            <img src="//theme.hstatic.net/1000026716/1000440777/14/xk2.png?v=19892">
-                            <img src="//theme.hstatic.net/1000026716/1000440777/14/xk2s.png?v=19892">
+                            <img src="//theme.hstatic.net/1000026716/1000440777/14/ak1.png?v=19892">
+                            <img src="//theme.hstatic.net/1000026716/1000440777/14/ak1.png?v=19892">
                         </div>
 
-                        HƯỚNG DẪN THANH TOÁN
+                        THÔNG TIN CÔNG NGHỆ
                     </a>
-                    <a href="https://gearvn.com/pages/huong-dan-tra-gop"
+                    <a href="{{route('get.buy.installment')}}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
@@ -250,7 +250,7 @@
                         </div>
                         HƯỚNG DẪN TRẢ GÓP
                     </a>
-                    <a href="https://gearvn.com/pages/chinh-sach-bao-hanh"
+                    <a href="{{route('get.guarantee')}}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 

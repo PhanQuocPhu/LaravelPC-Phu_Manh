@@ -19,9 +19,7 @@
 
     <div class="main-area">
         <div class="container">
-            <br>
-
-
+            
             {{-- Sản phẩm vừa xem --}}
             <div id="storage-products" style="margin-top: 5px">
 
