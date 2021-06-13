@@ -2,6 +2,10 @@
 
 @section('content')
     <style>
+        .table .active {
+            color: #ff9705 !important;
+        }
+
         #edit {
             font-size: 12px;
         }
@@ -14,15 +18,16 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Danh Mục</li>
+            <li class="breadcrumb-item active" aria-current="page">Slide Banner</li>
         </ol>
     </nav>
+
     <!-- DataTales -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary" style="float: left;">Quản lý danh mục</h5>
-            <a class="btn btn-success" href="{{ route('admin.get.create.category') }}"
-                style="float: right;"><i class="far fa-plus-square"></i> Thêm mới</a> 
+            <h5 class="m-0 font-weight-bold text-primary" style="float: left;">Quản lý Slide Banner</h5>
+            <a class="btn btn-success" href="{{ route('admin.get.create.category') }}" style="float: right;"><i
+                    class="far fa-plus-square"></i> Thêm mới</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -77,6 +82,7 @@
     </div>
 @endsection
 
+
 @section('script')
     <script>
         $.ajaxSetup({
@@ -90,7 +96,7 @@
             let $this = $(this);
             let url = $this.attr('href');
             $.confirm({
-                title: 'Xóa danh mục này ?',
+                title: 'Xóa sản phẩm này ?',
                 content: 'Chắc chắn ?',
                 buttons: {
                     confirm: {
@@ -102,7 +108,7 @@
                                 url: url,
                                 method: 'POST',
                                 success: function(response) {
-                                    $.alert('Đã xóa danh mục');
+                                    $.alert('Đã xóa sản phẩm');
                                     $('#tb_content').html(response);
                                 }
                             });
@@ -129,8 +135,9 @@
             }); */
         });
 
-        //Sửa status
-        $('body').on('click', '.status_cate', function(event) {
+
+        //Edit status
+        $('body').on('click', '.status_product', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');

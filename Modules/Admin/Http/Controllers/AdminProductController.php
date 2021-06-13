@@ -19,7 +19,7 @@ class AdminProductController extends Controller
         if ($request->name) $products->where('pro_name', 'like', '%' . $request->name . '%');
         if ($request->cate) $products->where('pro_category_id', $request->cate);
 
-        $products = $products->orderBy('id', 'desc')->paginate(10);
+        $products = $products->orderBy('id', 'desc')->get();
 
         $categories = $this->getCategories();
         $viewData = [

@@ -21,6 +21,8 @@
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('theme_admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     {{-- Jquery confirm --}}
     <link href=" {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css') }}" rel="stylesheet"
         type="text/css">
@@ -32,7 +34,7 @@
 </head>
 
 <style>
-    
+
 
 </style>
 
@@ -49,7 +51,7 @@
                 style="background-color: #008B8B;">
                 <div>ADMIN LTE</div>
             </a>
-            
+
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ \Request::route()->getName() == 'admin.home' ? 'active' : '' }} ">
                 <a class="nav-link" href="{{ route('admin.home') }}">
@@ -121,16 +123,27 @@
                     <span>Thành viên</span>
                 </a>
             </li>
-           
-            <!-- Nav Item - Chỉnh sửa banner trên trang chủ -->
-            <li class="nav-item {{-- {{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }} --}}">
-                <a class="nav-link" href="{{ route('admin.get.list.user') }}">
+
+            <!-- Nav Item - Banner Menu -->
+            <li
+                class="nav-item {{ \Request::route()->getName() == 'admin.get.list.outbanner' ? 'active' : '' }} {{ \Request::route()->getName() == 'admin.get.list.slidebanner' ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Banner quảng cáo</span>
+                    <span>Banner Quảng cáo</span>
                 </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Banner:</h6>
+                        <a class="collapse-item {{ \Request::route()->getName() == 'admin.get.list.outbanner' ? 'active' : '' }}"
+                            href="{{ route('admin.get.list.outbanner') }}">Banner ngoài</a>
+                        <a class="collapse-item {{ \Request::route()->getName() == 'admin.get.list.slidebanner' ? 'active' : '' }}"
+                            href="{{ route('admin.get.list.slidebanner') }}">Slide Banner</a>
+                    </div>
+                </div>
             </li>
 
-            <!-- Nav Item - Chỉnh sửa banner trên trang chủ -->
+            <!-- Nav Item - Admin user -->
             <li class="nav-item {{ \Request::route()->getName() == 'admin.get.list.admin' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.get.list.admin') }}">
                     <i class="fas fa-fw fa-cog"></i>
@@ -332,10 +345,16 @@
 
     <!-- Page level plugins -->
     <script src=" {{ asset('theme_admin/vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- Tabble --}}
+    <script src="{{ asset('theme_admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('theme_admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
 
     <!-- Page level custom scripts -->
     <script src=" {{ asset('theme_admin/js/demo/chart-area-demo.js') }}"></script>
     <script src=" {{ asset('theme_admin/js/demo/chart-pie-demo.js') }}"></script>
+    {{-- Table --}}
+    <script src=" {{ asset('theme_admin/js/demo/datatables-demo.js') }}"></script>
     @yield('script')
 
 

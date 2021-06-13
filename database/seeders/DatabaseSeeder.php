@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \DB::table('admins')->insert([
-            'name' => 'Đặng văn mạnh',
-            'email' => '16110151@student.hcmute.edu.vn',
+            'name' => 'Phan Quốc Phú',
+            'email' => 'phanquocphu1998@gmail.com',
             'password' => bcrypt('123')
         ]);
     }

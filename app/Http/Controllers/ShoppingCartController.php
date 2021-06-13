@@ -119,7 +119,7 @@ class ShoppingCartController extends FrontendController
     {
         $products = \Cart::content();
         /* return View::make('shopping.index', compact('products'))->nest('home', compact('products')); */
-       /*  $vnp_TxnRef = randString(15);
+        /*  $vnp_TxnRef = randString(15);
         dd($vnp_TxnRef); */
         return view('shopping.index', compact('products'));
     }
@@ -147,7 +147,7 @@ class ShoppingCartController extends FrontendController
         $data['tr_payment'] = 1;
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
-        
+
         if ($request->payment == 2) {
             session(['info_customer' => $data]);
             return view('vnpay.index', compact('totalMoney'));
@@ -229,6 +229,7 @@ class ShoppingCartController extends FrontendController
             $vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }
+        /* dd($vnp_HashSecret); */
         return redirect($vnp_Url);
     }
 
@@ -239,11 +240,7 @@ class ShoppingCartController extends FrontendController
         if (session()->has('info_customer') && $request->vnp_ResponseCode == '00') {
 
             \DB::beginTransaction();
-           
 
-            /////////
-           
-            ////////
             try {
                 $vnpayData = $request->all();
                 $data = session()->get('info_customer');

@@ -36,6 +36,28 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/ajax/{action}/{id}', 'AdminProductController@actionAjax')->name('admin.get.action.product.ajax');
     });
 
+    //Quản lý banner
+    Route::group(['prefix' => 'banner'], function () {
+        //Out banner
+        Route::get('/outside', 'AdminBannerController@indexOb')->name('admin.get.list.outbanner');
+        Route::get('/outside/create', 'AdminBannerController@createOb')->name('admin.get.create.outbanner');
+        Route::post('/outside/create', 'AdminBannerController@storeOb');
+        Route::get('/outside/update/{id}', 'AdminBannerController@editOb')->name('admin.get.edit.outbanner');
+        Route::post('/outside/update/{id}', 'AdminBannerController@updateOb');
+
+        //Slide banner
+        Route::get('/slide', 'AdminBannerController@indexSb')->name('admin.get.list.slidebanner');
+        Route::get('/slide/create', 'AdminBannerController@createSb')->name('admin.get.create.slidebanner');
+        Route::post('/slide/create', 'AdminBannerController@storeSb');
+        Route::get('/slide/update/{id}', 'AdminBannerController@editSb')->name('admin.get.edit.slidebanner');
+        Route::post('/slide/update/{id}', 'AdminBannerController@updateSb');
+
+        //ajax
+        Route::post('/outside/ajax/{action}/{id}', 'AdminBannerController@actionAjax')->name('admin.get.action.outbanner.ajax');
+
+        Route::post('/slide/ajax/{action}/{id}', 'AdminBannerController@actionAjax')->name('admin.get.action.slidebanner.ajax');
+    });
+
     //Quản lý tin tức
     Route::group(['prefix' => 'article'], function () {
         Route::get('/', 'AdminArticleController@index')->name('admin.get.list.article');

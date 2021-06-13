@@ -196,7 +196,7 @@
                 <div class="fixed-nav dropdown">
                     <span class="fixed-menu style-nav-fix "><i class="fa fa-bars"></i> Danh mục sản phẩm</span>
                     <!--MENU LEFT-->
-                    <div class="gearvn-header-menu dropdown-content freez">
+                    <div class="gearvn-header-menu dropdown-content freez" style="background-color: #f1f0f1">
                         <div class="cat-menu gearvn-cat-menu mainmenu" style="margin-top: 13px">
                             <nav id="megamenu-nav-freez" class="megamenu-nav">
                                 <ol class="megamenu-nav-primary responsive" id="megamenu-nav-main">

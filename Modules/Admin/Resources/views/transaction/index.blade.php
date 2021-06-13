@@ -18,113 +18,102 @@
         </ol>
     </nav>
 
-    {{-- Start Search --}}
-    <hr class="sidebar-divider my-0"> <br>
-    <div class="col-sm-12">
-        <form class="form-inline">
-            <input type="text" class="form-control my-1 mr-sm-2" name="name" placeholder="Số điện thoại"
-                value="{{ \Request::get('name') }}">
-            <div class="form-group">
-
-            </div>
-            <button type="submit" class="btn btn-primary my-1 mr-sm-2"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-    <br>
-    <hr class="sidebar-divider my-0"> <br>
-
-    {{-- Start Table --}}
-    <h3> <strong> Quản lý đơn hàng </strong></h3>
-    <div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Thông tin đơn hàng</th>
-                        <th scope="col">Tổng giá trị</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Thanh toán</th>
-                        <th scope="col">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody id="tb_content">
-                    @if (isset($transactions))
-                        @foreach ($transactions as $transaction)
-                            <tr>
-                                <td>{{ $transaction->id }}</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            <Strong>Tên khách hàng: </Strong>
-                                            {{ isset($transaction->user->name) ? $transaction->user->name : '[N/A]' }}
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><Strong>Địa chỉ: </Strong>{{ $transaction->tr_address }}</li>
-                                    </ul>
-                                    <ul>
-                                        <li><Strong>Số điện thoại: </Strong>{{ $transaction->tr_phone }}</li>
-                                    </ul>
-                                    <ul>
-                                        <li><Strong>Ngày đặt hàng: </Strong>
-                                            {{ $transaction->created_at->format('d-m-y') }}</li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#"
-                                            class="badge {{ $transaction->getStatus($transaction->tr_status)['class'] }} "
-                                            data-toggle="{{ $transaction->getStatus($transaction->tr_status)['toggle'] }}"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            {{ $transaction->getStatus($transaction->tr_status)['name'] }}
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item status_transaction"
-                                                href="{{ route('admin.get.action.transaction', ['done', $transaction->id]) }}">Đã
-                                                xử lý</a>
-                                            <a class="dropdown-item status_transaction"
-                                                href="{{ route('admin.get.action.transaction', ['shipping', $transaction->id]) }}">Đang
-                                                giao hàng</a>
+    <!-- DataTales -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary" style="float: left;"> Quản lý đơn hàng </h5>
+            {{-- <a class="btn btn-success" href="{{ route('admin.get.create.product') }}" style="float: right;"><i
+                    class="far fa-plus-square"></i> Thêm mới</a> --}}
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Thông tin đơn hàng</th>
+                            <th scope="col">Tổng giá trị</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Thanh toán</th>
+                            <th scope="col">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb_content">
+                        @if (isset($transactions))
+                            @foreach ($transactions as $transaction)
+                                <tr>
+                                    <td>{{ $transaction->id }}</td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <Strong>Tên khách hàng: </Strong>
+                                                {{ isset($transaction->user->name) ? $transaction->user->name : '[N/A]' }}
+                                            </li>
+                                        </ul>
+                                        <ul>
+                                            <li><Strong>Địa chỉ: </Strong>{{ $transaction->tr_address }}</li>
+                                        </ul>
+                                        <ul>
+                                            <li><Strong>Số điện thoại: </Strong>{{ $transaction->tr_phone }}</li>
+                                        </ul>
+                                        <ul>
+                                            <li><Strong>Ngày đặt hàng: </Strong>
+                                                {{ $transaction->created_at->format('d-m-y') }}</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="#"
+                                                class="badge {{ $transaction->getStatus($transaction->tr_status)['class'] }} "
+                                                data-toggle="{{ $transaction->getStatus($transaction->tr_status)['toggle'] }}"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                {{ $transaction->getStatus($transaction->tr_status)['name'] }}
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item status_transaction"
+                                                    href="{{ route('admin.get.action.transaction', ['done', $transaction->id]) }}">Đã
+                                                    xử lý</a>
+                                                <a class="dropdown-item status_transaction"
+                                                    href="{{ route('admin.get.action.transaction', ['shipping', $transaction->id]) }}">Đang
+                                                    giao hàng</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    @if ($transaction->tr_status == 1)
-                                        <a class="badge badge-success" href="#" id="tr_status"> Đã xử lý</a>
-                                    @else
-                                        <a class="badge badge-secondary "
-                                            href="{{ route('admin.get.active.transaction', $transaction->id) }}"
-                                            id="tr_status"> Đang chờ</a>
-                                    @endif
-                                </td>
-                                <td>
-                                    <div>
-                                        <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
-                                            href="{{ route('admin.get.action.transaction', ['delete', $transaction->id]) }}"><i
-                                                class="far fa-trash-alt text-danger"></i> </a>
+                                    </td>
+                                    <td>
+                                        @if ($transaction->tr_payment == 1)
+                                            <a class="badge badge-success" href="#" id="tr_status"> Đã thanh toán</a>
+                                        @else
+                                            <a class="badge badge-secondary "
+                                                href="{{ route('admin.get.active.transaction', $transaction->id) }}"
+                                                id="tr_status"> Thanh toán COD</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
+                                                href="{{ route('admin.get.action.transaction', ['delete', $transaction->id]) }}"><i
+                                                    class="far fa-trash-alt text-danger"></i> </a>
 
-                                        <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
-                                            data-toggle="modal" data-target="#ModalOrder"
-                                            data-id="{{ $transaction->id }}"
-                                            href="{{ route('admin.get.view.order', $transaction->id) }}"
-                                            submit="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}"><i
-                                                class="far fa-eye text-primary"></i></a>
-                                    </div>
+                                            <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item"
+                                                id="edit" data-toggle="modal" data-target="#ModalOrder"
+                                                data-id="{{ $transaction->id }}"
+                                                href="{{ route('admin.get.view.order', $transaction->id) }}"
+                                                submit="{{ route('admin.update.transaction.ajax', [$transaction->id]) }}"><i
+                                                    class="far fa-eye text-primary"></i></a>
+                                        </div>
 
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-
     <!-- Modal -->
     @include('admin::components.modalOrder')
 
@@ -213,13 +202,13 @@
                                     $.alert('Đã lưu');
                                     $('#md_content').html(response);
                                     //Reload data trang đơn hàng
-                                    $.ajax({
+                                    /* $.ajax({
                                         url: url,
                                         method: 'POST',
                                         success: function(response) {
                                             $('#md_content').html(response);
                                         }
-                                    });
+                                    }); */
                                 }
                             });
                         }
