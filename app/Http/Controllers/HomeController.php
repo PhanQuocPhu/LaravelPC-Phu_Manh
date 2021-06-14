@@ -22,8 +22,8 @@ class HomeController extends FrontendController
         $productHot = Product::where(['pro_hot' => Product::HOT_ON, 'pro_active' => Product::STATUS_PUBLIC])->limit(5)->get();
         $productActive = Product::where(['pro_active' => Product::STATUS_PUBLIC])->limit(5)->get();
         $productNews = Product::where(['pro_active' => Product::STATUS_PUBLIC])->limit(5)->orderBy('id', 'DESC')->get();
-        $outBanners = OutBanner::limit(5)->get();
-        $slideBanners = SlideBanner::limit(8)->get();
+        $outBanners = OutBanner::where(['ob_status' => OutBanner::STATUS_PUBLIC])->limit(5)->get();
+        $slideBanners = SlideBanner::where(['sb_status' => SlideBanner::STATUS_PUBLIC])->limit(8)->get();
        
         $firstSb = $slideBanners->first();
 

@@ -2,12 +2,12 @@
     @foreach ($slidebanners as $slidebanner)
         <tr>
             <td>{{ $slidebanner->id }}</td>
-            <td> <img src="{{ pare_url_file($slidebanner->ob_img) }}" alt="" class="img img-fluid"
+            <td> <img src="{{ pare_url_file($slidebanner->sb_img) }}" alt="" class="img img-fluid"
                     style="height: 184px; width:368px"></td>
 
             <td>
-                <a class="badge {{ $slidebanner->getStatus($slidebanner->ob_status)['class'] }} status_sb"
-                    href="{{ route('admin.get.action.slidebanner.ajax', ['active', $slidebanner->id]) }}">{{ $slidebanner->getStatus($slidebanner->ob_status)['name'] }}
+                <a class="badge {{ $slidebanner->getStatus($slidebanner->sb_status)['class'] }} status_sb"
+                    href="{{ route('admin.get.action.slidebanner.ajax', ['active', $slidebanner->id]) }}">{{ $slidebanner->getStatus($slidebanner->sb_status)['name'] }}
                 </a>
             </td>
 
