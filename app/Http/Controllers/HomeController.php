@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OutBanner;
 use App\Models\Product;
+use App\Models\SlideBanner;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -20,14 +22,19 @@ class HomeController extends FrontendController
         $productHot = Product::where(['pro_hot' => Product::HOT_ON, 'pro_active' => Product::STATUS_PUBLIC])->limit(5)->get();
         $productActive = Product::where(['pro_active' => Product::STATUS_PUBLIC])->limit(5)->get();
         $productNews = Product::where(['pro_active' => Product::STATUS_PUBLIC])->limit(5)->orderBy('id', 'DESC')->get();
+        $outBanners = OutBanner::limit(5)->get();
+        $slideBanners = SlideBanner::limit(8)->get();
+       
+        $firstSb = $slideBanners->first();
+
         $articleNews = Article::orderBy('id', 'DESC')->limit(6)->get();
 
         $categoriesHome = Category::with('products')->where('c_home', Category::HOME)->limit(5)->get();
 
 
 
-        $latestNews = $articleNews->last();
-
+        
+        /* dd($outBanners); */
         $productSugests = [];
         //Kiểm tra người dùng đăng nhập
         if (get_data_user('web')) {
@@ -50,8 +57,10 @@ class HomeController extends FrontendController
 
         $viewData = [
             'productHot' => $productHot,
-            'articleNews' => $articleNews,
-            'latestNews' => $latestNews,
+            'outBanners' => $outBanners,
+            'slideBanners' => $slideBanners,
+            
+            'firstSb' => $firstSb,
             'productNews' => $productNews,
             'categoriesHome' => $categoriesHome,
             'productSugests' => $productSugests

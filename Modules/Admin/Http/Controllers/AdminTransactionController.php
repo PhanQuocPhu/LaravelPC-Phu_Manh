@@ -103,6 +103,12 @@ class AdminTransactionController extends Controller
                 case 'delete':
                     $transaction->delete();
                     break;
+                case 'paid':
+                    {
+                        $transaction->tr_payment = Transaction::PAYMENT_DONE;
+                        $transaction->save();
+                    }
+                    break;
             }
             $transactions = Transaction::with('user:id,name')->paginate(10);
             $viewData = [
@@ -138,11 +144,11 @@ class AdminTransactionController extends Controller
         }
     }
 
-    
+
     //Xử lý cập nhật thông tin đơn hàng
     public function update(Request $request, $id)
     {
-       /*  dd($request->all()); */
+        /*  dd($request->all()); */
         $transaction = Transaction::find($id);
 
         $transaction->tr_address = $request->tr_address;

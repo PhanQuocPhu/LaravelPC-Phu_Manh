@@ -60,7 +60,7 @@
                                     <td>
                                         {{-- Edit --}}
                                         <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
-                                            href="{{ route('admin.get.edit.category', $category->id) }}}}"><i
+                                            href="{{ route('admin.get.edit.category', $category->id) }}"><i
                                                 class="far fa-edit text-primary"></i> Edit</a>
                                         {{-- Xóa --}}
                                         <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"

@@ -231,7 +231,7 @@
                         </div>
                         SẢN PHẨM VỪA XEM
                     </a>
-                    <a href="{{route('get.list.article')}}"
+                    <a href="{{ route('get.list.article') }}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
@@ -241,7 +241,7 @@
 
                         THÔNG TIN CÔNG NGHỆ
                     </a>
-                    <a href="{{route('get.buy.installment')}}"
+                    <a href="{{ route('get.buy.installment') }}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
@@ -250,7 +250,7 @@
                         </div>
                         HƯỚNG DẪN TRẢ GÓP
                     </a>
-                    <a href="{{route('get.guarantee')}}"
+                    <a href="{{ route('get.guarantee') }}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
@@ -309,246 +309,29 @@
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-
-
-
-
-
-
-
-
-
-
-
-
+                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
                                     <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="5" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="6" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="7" class=""></li>
-
-
-
-
-
-
-
                                     <li data-target="#carousel-example-generic" data-slide-to="8" class=""></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    <li data-target="#carousel-example-generic" data-slide-to="12" class=""></li>
-
-
-
-
-
-
-
-                                    <li data-target="#carousel-example-generic" data-slide-to="13" class=""></li>
-
-
-
-
-
-
-
-                                    <li data-target="#carousel-example-generic" data-slide-to="14" class=""></li>
-
-
-
-
-
-
                                 </ol>
 
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
+                                    @foreach ($slideBanners as $slideBanner)
+                                        <div class="item {{$slideBanner->sb_img == $firstSb->sb_img ? 'active' : ''}}">
+                                            <a href="{{$slideBanner->sb_link}}">
 
-
-
-
-
-
-                                    <div class="item active">
-                                        <a href="https://gearvn.com/pages/pc-gvn">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_1.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-
-
-
-
-
-
-
-
-
-
-
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/laptop">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_3.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="item">
-                                        <a href="http://bit.ly/Laptop-Asus-Intel">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_4.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/uu-dai-man-hinh-kem-pc-laptop">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_5.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/uu-dai-gear">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_6.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="https://gearvn.com/collections/loa-ultimate-ears">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_7.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/ban-phim-may-tinh">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_8.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/uu-dai-build-custom-pc">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_9.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="https://gearvn.com/pages/phan-mem">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_13.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_14.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="https://gearvn.com/collections/monitor-lg">
-
-                                            <img class="w-100"
-                                                src="//theme.hstatic.net/1000026716/1000440777/14/slideshow_15.jpg?v=19898"
-                                                alt="...">
-                                        </a>
-                                    </div>
+                                                <img class="w-100"
+                                                    src="{{ pare_url_file($slideBanner->sb_img) }}"
+                                                    alt="...">
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 </div>
 
                                 <!-- Controls -->
@@ -564,29 +347,24 @@
                             </div> <!-- Carousel -->
                         </div>
                         <div class="sub-banner-wrap i100">
-                            <a href="https://gearvn.com/pages/laptop-van-phong" class="sub-item">
-                                <img src="//theme.hstatic.net/1000026716/1000440777/14/solid4.jpg?v=19898">
-
+                            <a href="{{$outBanners[0]->ob_link}}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[0]->ob_img) }}"> 
                             </a>
-                            <a href="https://gearvn.com/pages/laptop-gaming" class="sub-item">
-                                <img src="//theme.hstatic.net/1000026716/1000440777/14/solid5.jpg?v=19898">
-
+                            <a href="{{$outBanners[1]->ob_link}}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[1]->ob_img) }}"> 
                             </a>
                         </div>
                     </div>
                     <div class="right i100">
                         <div class="sub-item-right">
-                            <a href="https://gearvn.com/pages/macbook" class="sub-item">
-                                <img src="//theme.hstatic.net/1000026716/1000440777/14/solid1.jpg?v=19898">
-
+                            <a href="{{$outBanners[2]->ob_link}}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[2]->ob_img) }}"> 
                             </a>
-                            <a href="https://gearvn.com/pages/logitech-official-store" class="sub-item">
-                                <img src="//theme.hstatic.net/1000026716/1000440777/14/solid2.jpg?v=19898">
-
+                            <a href="{{$outBanners[3]->ob_link}}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[3]->ob_img) }}"> 
                             </a>
-                            <a href="https://gearvn.com/pages/pc-gvn" class="sub-item">
-                                <img src="//theme.hstatic.net/1000026716/1000440777/14/solid3.jpg?v=19898">
-
+                            <a href="{{$outBanners[4]->ob_link}}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[4]->ob_img) }}"> 
                             </a>
                         </div>
                     </div>

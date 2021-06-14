@@ -17,6 +17,7 @@ class CreateSlideBannersTable extends Migration
             $table->id();
             $table->string('sb_img')->nullable();
             $table->string('sb_link')->nullable();
+            $table->timestamps();
         });
     }
 

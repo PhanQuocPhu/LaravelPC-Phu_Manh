@@ -53,9 +53,9 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/slide/update/{id}', 'AdminBannerController@updateSb');
 
         //ajax
-        Route::post('/outside/ajax/{action}/{id}', 'AdminBannerController@actionAjax')->name('admin.get.action.outbanner.ajax');
+        Route::post('/outside/ajax/{action}/{id}', 'AdminBannerController@actionObAjax')->name('admin.get.action.outbanner.ajax');
 
-        Route::post('/slide/ajax/{action}/{id}', 'AdminBannerController@actionAjax')->name('admin.get.action.slidebanner.ajax');
+        Route::post('/slide/ajax/{action}/{id}', 'AdminBannerController@actionSbAjax')->name('admin.get.action.slidebanner.ajax');
     });
 
     //Quản lý tin tức

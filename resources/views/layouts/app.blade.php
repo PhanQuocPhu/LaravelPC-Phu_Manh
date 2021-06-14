@@ -142,7 +142,7 @@
     <!-- End alert -->
 
     <!-- main area start -->
-    <div style="margin-top:120px">
+    <div style="{{ \Request::route()->getName() == 'home' ? '' : 'margin-top:120px' }}">
         @yield('content')
     </div>
 

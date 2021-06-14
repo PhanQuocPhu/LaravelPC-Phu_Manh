@@ -213,7 +213,7 @@
                                                 <div style="width: 70%; margin: 6px 20px">
                                                     <span
                                                         style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
-                                                            style="width: {{ $itemAge }}px; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                                            style="width: {{ $itemAge }}%; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
                                                     </span>
                                                 </div>
                                                 <div style="width: 20%">
@@ -271,8 +271,8 @@
                                             <span style="color: #333; font-weight: bold; text-transform:capitalize;">
                                                 {{ $rating->user->name }} &nbsp;
                                             </span>
-                                            <a href="" class="fa fa-check-circle-o" style="color: #52b858"> Đã mua hàng tại
-                                                website </a>
+                                            {{-- <a href="" class="fa fa-check-circle-o" style="color: #52b858"> Đã mua hàng tại
+                                                website </a> --}}
                                         </div>
                                         <div class="pro-rating">
                                             @for ($i = 1; $i <= 5; $i++)

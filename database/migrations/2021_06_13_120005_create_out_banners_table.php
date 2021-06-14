@@ -17,6 +17,7 @@ class CreateOutBannersTable extends Migration
             $table->id();
             $table->string('ob_img')->nullable();
             $table->string('ob_link')->nullable();
+            $table->timestamps();
         });
     }
 

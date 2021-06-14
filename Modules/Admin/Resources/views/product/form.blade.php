@@ -92,7 +92,7 @@
 
             {{-- Hình ảnh --}}
             <div class="form-group">
-                @if (isset($product))
+                @if (isset($product->pro_avatar))
                     <img id="output_img" src=" {{ pare_url_file($product->pro_avatar) }}" class="img-fluid" alt="">
                 @else
                     <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="img-fluid" alt="">

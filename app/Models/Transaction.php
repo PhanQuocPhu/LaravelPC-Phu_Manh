@@ -15,6 +15,7 @@ class Transaction extends Model
     const STATUS_DEFAULT = 0;
     const STATUS_DONE = 1;
     const STATUS_SHIPPING = 2;
+    const PAYMENT_DONE = 1;
     
     protected $status = [
         0 => [
@@ -34,9 +35,27 @@ class Transaction extends Model
         ],
     ];
 
+    protected $payment = [
+        0 => [
+            'name' => 'Đang chờ',
+            'class' => 'badge-secondary',
+            'toggle' => ''
+        ],
+        1 => [
+            'name' => 'Đã thanh toán',
+            'class' => 'badge-success',
+            'toggle' => ''
+        ]
+    ];
+
     public function getStatus()
     {
         return Arr::get($this->status, $this->tr_status, '[N\A]');
+    }
+
+    public function getPayment()
+    {
+        return Arr::get($this->payment, $this->tr_payment, '[N\A]');
     }
     
     public function user()

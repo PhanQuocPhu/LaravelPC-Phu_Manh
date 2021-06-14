@@ -18,6 +18,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#">Banner quảng cáo</a></li>
             <li class="breadcrumb-item active" aria-current="page">Banner Ngoài</li>
         </ol>
     </nav>
@@ -26,7 +27,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary" style="float: left;">Quản lý banner quảng cáo ngoài</h5>
-            <a class="btn btn-success" href="{{ route('admin.get.create.category') }}" style="float: right;"><i
+            <a class="btn btn-success" href="{{ route('admin.get.create.outbanner') }}" style="float: right;"><i
                     class="far fa-plus-square"></i> Thêm mới</a>
         </div>
         <div class="card-body">
@@ -35,41 +36,33 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Tên danh mục</th>
-                            <th scope="col">Icon</th>
-                            <th scope="col">Title SEO</th>
-                            <th scope="col">HomePage</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Hình ảnh</th>
+                            <th scope="col" style="width: !important">Status</th>
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="tb_content">
-                        @if (isset($categories))
-                            @foreach ($categories as $category)
+                        @if (isset($outbanners))
+                            @foreach ($outbanners as $outbanner)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td id="c_name">{{ $category->c_name }}</td>
-                                    <td> <img src="{{ pare_url_file($category->c_icon) }}" alt=""
-                                            class="img img-responsive" style="height: 20px; width:20px"></td>
-                                    <td>{{ $category->c_title_seo }}</td>
+                                    <td>{{ $outbanner->id }}</td>
+                                    <td> <img src="{{ pare_url_file($outbanner->ob_img) }}" alt=""
+                                            class="img img-fluid" style="height: 184px; width:368px"></td>
+                                    
                                     <td>
-                                        <a class="badge {{ $category->getHome($category->c_home)['class'] }} status_cate "
-                                            href="{{ route('admin.get.action.category.ajax', ['home', $category->id]) }}">{{ $category->getHome($category->c_home)['name'] }}
+                                        <a class="badge {{ $outbanner->getStatus($outbanner->ob_status)['class'] }} status_ob"
+                                            href="{{ route('admin.get.action.outbanner.ajax', ['active', $outbanner->id]) }}">{{ $outbanner->getStatus($outbanner->ob_status)['name'] }}
                                         </a>
                                     </td>
-                                    <td>
-                                        <a class="badge {{ $category->getStatus($category->c_active)['class'] }} status_cate"
-                                            href="{{ route('admin.get.action.category.ajax', ['active', $category->id]) }}">{{ $category->getStatus($category->c_active)['name'] }}
-                                        </a>
-                                    </td>
+                                   
                                     <td>
                                         {{-- Edit --}}
                                         <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
-                                            href="{{ route('admin.get.edit.category', $category->id) }}}}"><i
+                                            href="{{ route('admin.get.edit.outbanner', $outbanner->id) }}"><i
                                                 class="far fa-edit text-primary"></i> Edit</a>
                                         {{-- Xóa --}}
                                         <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
-                                            href="{{ route('admin.get.action.category.ajax', ['delete', $category->id]) }}"><i
+                                            href="{{ route('admin.get.action.outbanner.ajax', ['delete', $outbanner->id]) }}"><i
                                                 class="far fa-trash-alt text-danger"></i> Delete</a>
                                     </td>
                                 </tr>
@@ -137,7 +130,7 @@
 
 
         //Edit status
-        $('body').on('click', '.status_product', function(event) {
+        $('body').on('click', '.status_ob', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');

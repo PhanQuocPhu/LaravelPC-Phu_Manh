@@ -83,13 +83,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if ($transaction->tr_payment == 1)
-                                            <a class="badge badge-success" href="#" id="tr_status"> Đã thanh toán</a>
-                                        @else
-                                            <a class="badge badge-secondary "
-                                                href="{{ route('admin.get.active.transaction', $transaction->id) }}"
-                                                id="tr_status"> Thanh toán COD</a>
-                                        @endif
+                                        <a class="badge {{ $transaction->getPayment($transaction->tr_payment)['class'] }} status_paid"
+                                            href="{{ route('admin.get.action.transaction', ['paid', $transaction->id]) }}">{{ $transaction->getPayment($transaction->tr_payment)['name'] }}
+                                        </a>
                                     </td>
                                     <td>
                                         <div>
@@ -130,6 +126,19 @@
 
         //Edit status
         $('body').on('click', '.status_transaction', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
+                    $('#tb_content').html(response);
+                }
+            });
+        });
+        //Edit payment
+        $('body').on('click', '.status_paid', function(event) {
             event.preventDefault()
             let $this = $(this);
             let url = $this.attr('href');
