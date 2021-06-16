@@ -1,69 +1,101 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Đăng nhập</title>
+
+    <!-- Custom styles for this template-->
+    <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('theme_admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
     <div class="container">
+
+        <!-- Outer Row -->
         <div class="row justify-content-center">
-            <!-- breadcrumbs area start -->
-            <div class="breadcrumbs">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="container-inner">
-                                <ul>
-                                    <li class="home">
-                                        <a href="index.html">Home</a>
-                                        <span><i class="fa fa-angle-right"></i></span>
-                                    </li>
-                                    <li class="category3"><span>Login</span></li>
-                                </ul>
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    <form class="user"  method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="email" name="email" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="password" name="password" placeholder="Password">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+                                        <hr>
+                                        <a class="btn btn-google btn-user btn-block" href="{{ route('get.auth.login', ['google']) }}"> 
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+                                
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- breadcrumbs area end -->
-            <div id="logreg-forms">
-                <form class="form-signin" method="POST">
-                    @csrf
-                    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-                    {{-- Social Login --}}
-                    <div class="social-login">
-                        <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i>
-                                Sign in with Facebook</span> </button>
-                        <a class="btn google-btn social-btn" href="{{ route('get.auth.login', ['google']) }}"><span><i
-                                    class="fab fa-google-plus-g"></i> Sign in with Google+</span> </a>
-                    </div>
-
-                    <p style="text-align:center"> OR </p>
-
-                    {{-- Usual Login --}}
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required=""
-                        autofocus="">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password"
-                        required="">
-
-                    <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign
-                        in</button>
-                    <a href="#" id="forgot_pswd">Forgot password?</a>
-                    <hr>
-                    <!-- <p>Don't have an account!</p>  -->
-                    <a class="btn btn-primary btn-block" href="{{ route('get.register') }}" id="btn-signup"><i class="fas fa-user-plus"></i>
-                        Sign up New Account</a>
-                </form>
-
-                {{-- Reset password --}}
-                <form action="/reset/password/" class="form-reset">
-                    <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required=""
-                        autofocus="">
-                    <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
-                    <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
-                </form>
-
-
-                <br>
 
             </div>
 
         </div>
+
     </div>
-@endsection
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
+
