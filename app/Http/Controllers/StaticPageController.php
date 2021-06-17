@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StaticPageController extends Controller
+class StaticPageController extends FrontendController
 {
+    public function _construct()
+    {
+        parent::_contruct();
+    }
     public function getGuarantee()
     {
         return view('Static.guarantee');

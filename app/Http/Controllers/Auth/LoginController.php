@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Socialite, Redirect, Session, URL;
 
-class LoginController extends Controller
+class LoginController extends FrontendController
 {
-
+    public function _construct()
+    {
+        parent::_contruct();
+    }
     use AuthenticatesUsers;
 
     public function getLogin(Request $request)
