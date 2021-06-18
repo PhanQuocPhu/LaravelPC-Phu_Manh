@@ -11,22 +11,14 @@
 
     <title>SB Admin 2 - Register</title>
 
-    <!-- Custom styles for this template-->
-    <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
-    <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
-    <!-- Custom styles for this page -->
-    <link href="{{ asset('theme_admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+   <!-- Custom styles for this template-->
+   <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
+   <link href=" {{ asset('theme_admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+   <link
+       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+       rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
-
+   <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body class="bg-gradient-primary">
@@ -37,8 +29,8 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-3 d-none d-lg-block"></div>
+                    <div class="col-lg-6">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
@@ -81,9 +73,6 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
                                 <a class="small" href="{{ route('get.login') }}">Already have an account? Login!</a>
                             </div>
                         </div>
@@ -93,6 +82,7 @@
         </div>
 
     </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src=" {{ asset('theme_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 

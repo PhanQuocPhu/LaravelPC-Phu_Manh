@@ -43,12 +43,9 @@ class AdminController extends Controller
             'notdoneTrans'=>$notdoneTrans,
             'notdoneCont'=>$notdoneCont,
         ]; 
-        
-        
-        
+    
         return view('admin::index', $viewData);
     }
-
     public function ChartCreate()
     {
        //Ngày
