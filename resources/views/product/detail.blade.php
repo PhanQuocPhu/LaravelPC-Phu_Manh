@@ -65,7 +65,7 @@
 
     </style>
 
-    <div class="main" >
+    <div class="main">
         <!-- breadcrumbs area start -->
         <div class="breadcrumbs">
             <div class="container">
@@ -212,8 +212,10 @@
                                                 </div>
                                                 <div style="width: 70%; margin: 6px 20px">
                                                     <span
-                                                        style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px"><b
-                                                            style="width: {{ $itemAge }}%; background-color:#f25800; display:block; height:100%;border-radius:5px"></b>
+                                                        style="width: 100%; height:6px; display:block; border: 1px solid #dedede; border-radius:5px">
+                                                        <b
+                                                            style="width: {{ $itemAge }}%; background-color:#f25800; display:block; height:100%;border-radius:5px">
+                                                        </b>
                                                     </span>
                                                 </div>
                                                 <div style="width: 20%">

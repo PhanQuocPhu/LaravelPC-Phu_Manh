@@ -33,7 +33,8 @@
                     <!--REVIEW ORDER-->
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Giỏ hàng <div class="pull-right"><small><a class="afix-1" href="{{ route('get.list.shopping.cart') }}">Edit Cart</a></small>
+                            Giỏ hàng <div class="pull-right"><small><a class="afix-1"
+                                        href="{{ route('get.list.shopping.cart') }}">Edit Cart</a></small>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -62,8 +63,11 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <strong>Subtotal</strong>
-                                    <div class="pull-right"><span>{{ Cart::subtotal() }}</span> <span>vnđ</span></div>
+                                    <strong>Tổng giá trị</strong>
+                                    <div class="pull-right">
+                                        <span>{{ number_format(str_replace(',', '', Cart::subtotal(0)) * 100, 0, '.', '.') }}đ</span>
+                                        <span>vnđ</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +89,8 @@
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Địa chỉ:</strong></div>
                                 <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="{{ get_data_user('web', 'address') }}" required/>
+                                    <input type="text" name="address" class="form-control"
+                                        value="{{ get_data_user('web', 'address') }}" required />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -109,7 +114,8 @@
                                     <button type="submit" class="btn btn-primary btn-submit-fix">Đặt hàng</button>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <button type="submit" name="payment" value="2" class="btn btn-primary btn-submit-fix">Thanh toán online</button>
+                                    <button type="submit" name="payment" value="2"
+                                        class="btn btn-primary btn-submit-fix">Thanh toán online</button>
                                 </div>
                             </div>
                         </div>

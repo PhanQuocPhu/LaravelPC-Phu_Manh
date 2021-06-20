@@ -76,14 +76,6 @@
         line-height: 1.75em;
     }
 
-    h5 {
-        font-weight: bold;
-    }
-
-    .thanks {
-        font-weight: bolder;
-    }
-
 </style>
 
 <body>
@@ -103,8 +95,8 @@
                                 style="width: 72px; height: 72px;">
                         </div>
                         <div class="col-md-10" style="font-size: 14px;">
-                            <h5 class="thanks">Cảm ơn bạn đã mua hàng</h5>
-                            <p>Một email xác nhận đã được gửi tới phanquocphu1998@gmail.com. <br> Xin vui lòng kiểm tra
+                            <h5><strong>Cảm ơn bạn đã đặt hàng</strong></h5>
+                            <p>Một email xác nhận đã được gửi tới {{ $user->email }}. <br> Xin vui lòng kiểm tra
                                 email của bạn</p>
                         </div>
                     </div>
@@ -112,29 +104,19 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h5>Thông tin mua hàng</h5>
-                            <p>{{ get_data_user('web', 'name') }}</p>
-                            <p>{{ get_data_user('web', 'email') }}</p>
-                            <p>{{ get_data_user('web', 'phone') }}</p>
+                            <p>{{ $user->name }}</p>
+                            <p>{{ $user->email }}</p>
+                            <p>{{ $user->phone }}</p>
                         </div>
                         <div class="col-sm-6">
                             <h5>Địa chỉ thanh toán</h5>
-                            <p>{{ get_data_user('web', 'email') }}</p>
+                            <p>{{ $user->address }}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <h5>Thông tin hóa đơn</h5>
-                            <p>Mã đơn hàng: {{ $vnpayData['vnp_TxnRef'] }}<?php echo
-                                $_GET['vnp_TxnRef']; ?>
-                            </p>
-                            <p>Mã GD Tại VNPAY: {{ $vnpayData['vnp_TransactionNo'] }}</p>
-                            <p>Mã Ngân hàng: {{ $vnpayData['vnp_BankCode'] }}</p>
-                            <p>Thời gian thanh toán: {{ $vnpayData['vnp_PayDate'] }}</p>
-                        </div>
-                        <div class="col-sm-6">
                             <h5>Phương thức thanh toán</h5>
-                            <p>Thanh toán Online</p>
-                            <p>Kết quả giao dịch: Thành công</p>
+                            <p>Thanh toán COD</p>
                         </div>
                     </div>
 
@@ -143,32 +125,35 @@
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong>Đơn hàng #3333333</strong>
+                                <strong>Đơn hàng #{{ $transactionId }}</strong>
                             </li>
                             <li class="list-group-item">
                                 <table class="product-table">
                                     <tbody>
-                                        <tr class="product">
-                                            <td class="product__image">
-                                                <div class="product-thumbnail">
-                                                    <div class="product-thumbnail__wrapper">
-                                                        <img src="http://127.0.0.1:8000/img/Green-Check-Mark-PNG-Image.png"
-                                                            alt="SSD Samsung PM871b 128GB 2.5-Inch SATA III MZ-7LN128C Cáp SATA III PC chính hãng"
-                                                            class="product-thumbnail__image">
+                                        @foreach ($products as $product)
+                                            <tr class="product">
+                                                <td class="product__image">
+                                                    <div class="product-thumbnail">
+                                                        <div class="product-thumbnail__wrapper">
+                                                            <img src="{{ pare_url_file($product->options->avatar) }}"
+                                                                alt="" class="product-thumbnail__image">
 
+                                                        </div>
+                                                        <span
+                                                            class="product-thumbnail__quantity unprintable">{{ $product->qty }}
+                                                        </span>
                                                     </div>
-                                                    <span class="product-thumbnail__quantity unprintable">2</span>
-                                                </div>
-                                            </td>
-                                            <th class="product__description">
-                                                <span class="product__description__name">SSD Samsung PM871b 128GB
-                                                    2.5-Inch SATA III MZ-7LN128C</span>
-                                            </th>
-                                            <td class="product__price">
-                                                1.260.000₫
-                                            </td>
-                                        </tr>
-
+                                                </td>
+                                                <th class="product__description">
+                                                    <span class="product__description__name">
+                                                        {{ $product->name }}
+                                                    </span>
+                                                </th>
+                                                <td class="product__price">
+                                                    {{ number_format($product->qty * $product->price, 0, '.', '.') }}đ
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </li>
@@ -178,7 +163,8 @@
                                         <h6>Tổng cộng: </h6>
                                     </div>
                                     <div class="col-sm-6 text-right ">
-                                        <h4>1.260.000₫</h4>
+                                        <h4>{{ number_format(str_replace(',', '', $total) * 100, 0, '.', '.') }}đ
+                                        </h4>
                                     </div>
                                 </div>
                             </li>
@@ -189,9 +175,7 @@
         </div>
 
         <div class="text-center">
-            <button class="btn btn-success">
-                Tiếp tục mua hàng
-            </button>
+            <a href="{{ route('home') }}" class="btn btn-success">Tiếp tục mua hàng</a>
         </div>
 
     </div>

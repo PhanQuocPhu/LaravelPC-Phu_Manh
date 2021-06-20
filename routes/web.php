@@ -41,64 +41,58 @@ Route::get('pages/chinh-sach-giao-hang', [App\Http\Controllers\StaticPageControl
 
 
 /* Bài viết */
-Route::get('bai-viet',[App\Http\Controllers\ArticleController::class, 'getListArticle'])->name('get.list.article');
-Route::get('bai-viet/{slug}-{id}',[App\Http\Controllers\ArticleController::class, 'getDetailArticle'])->name('get.detail.article');
+Route::get('bai-viet', [App\Http\Controllers\ArticleController::class, 'getListArticle'])->name('get.list.article');
+Route::get('bai-viet/{slug}-{id}', [App\Http\Controllers\ArticleController::class, 'getDetailArticle'])->name('get.detail.article');
 
 
 /* Shopping cart - giỏ hàng */
-Route::prefix('shopping')->group(function ()
-{
+Route::prefix('shopping')->group(function () {
     //Basic
-    Route::get('/add/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
-    Route::get('/delete/{id}',[App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
-    Route::get('/danh-sach',[App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
+    Route::get('/add/{id}', [App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
+    Route::get('/delete/{id}', [App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
+    Route::get('/danh-sach', [App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
 
     //Chuyển thành ajax
-    Route::post('/add-ajax/{id}',[App\Http\Controllers\ShoppingCartController::class, 'addProductAjax'])->name('add.shopping.cart.ajax');
-    Route::post('/delete-ajax/{id}',[App\Http\Controllers\ShoppingCartController::class, 'deleteProductItemAjax'])->name('delete.shopping.cart.ajax');
+    Route::post('/add-ajax/{id}', [App\Http\Controllers\ShoppingCartController::class, 'addProductAjax'])->name('add.shopping.cart.ajax');
+    Route::post('/delete-ajax/{id}', [App\Http\Controllers\ShoppingCartController::class, 'deleteProductItemAjax'])->name('delete.shopping.cart.ajax');
 });
 
 /* Thanh toán */
-Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], function ()
-{
+Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], function () {
     //Đặt hàng COD
-    Route::get('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'getFormPay'])->name('get.form.pay');
-    Route::post('/thanh-toan',[App\Http\Controllers\ShoppingCartController::class, 'saveInfoShoppingCart']);
+    Route::get('/thanh-toan', [App\Http\Controllers\ShoppingCartController::class, 'getFormPay'])->name('get.form.pay');
+    Route::post('/thanh-toan', [App\Http\Controllers\ShoppingCartController::class, 'saveInfoShoppingCart']);
 
     //Thanh toán Online
-    Route::post('/thanh-toan/online',[App\Http\Controllers\ShoppingCartController::class, 'createPayment'])->name('payment.online');
-    Route::get('/vnpay/return',[App\Http\Controllers\ShoppingCartController::class, 'vnpayReturn'])->name('vnpay.return');
+    Route::post('/thanh-toan/online', [App\Http\Controllers\ShoppingCartController::class, 'createPayment'])->name('payment.online');
+    Route::get('/vnpay/return', [App\Http\Controllers\ShoppingCartController::class, 'vnpayReturn'])->name('vnpay.return');
 });
 
 /* Đánh giá sản phẩm */
-Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function ()
-{
-    Route::post('/danh-gia/{id}',[App\Http\Controllers\RatingController::class, 'saveRating'])->name('post.rating.product');
+Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function () {
+    Route::post('/danh-gia/{id}', [App\Http\Controllers\RatingController::class, 'saveRating'])->name('post.rating.product');
 });
 
 /* Sản phẩm vừa xem */
-Route::group(['prefix' => 'ajax'], function ()
-{
-    Route::post('/view-product',[App\Http\Controllers\HomeController::class, 'renderProductView'])->name('post.view.product');
+Route::group(['prefix' => 'ajax'], function () {
+    Route::post('/view-product', [App\Http\Controllers\HomeController::class, 'renderProductView'])->name('post.view.product');
 });
 
 /* Liên hệ */
-Route::get('/lien-he',[App\Http\Controllers\ContactController::class, 'getContact'])->name('get.contact');
-Route::post('/lien-he',[App\Http\Controllers\ContactController::class, 'saveContact']);
+Route::get('/lien-he', [App\Http\Controllers\ContactController::class, 'getContact'])->name('get.contact');
+Route::post('/lien-he', [App\Http\Controllers\ContactController::class, 'saveContact']);
 
 
 /* Thông tin user */
-Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function ()
-{
-    Route::get('/',[App\Http\Controllers\UserController::class, 'info'])->name('user.info');
+Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function () {
+    Route::get('/', [App\Http\Controllers\UserController::class, 'info'])->name('user.info');
 
-    Route::get('/info',[App\Http\Controllers\UserController::class, 'updateInfo'])->name('user.update.info');
-    Route::post('/info',[App\Http\Controllers\UserController::class, 'saveInfo']);
+    Route::get('/info', [App\Http\Controllers\UserController::class, 'updateInfo'])->name('user.update.info');
+    Route::post('/info', [App\Http\Controllers\UserController::class, 'saveInfo']);
 
-    Route::get('/password',[App\Http\Controllers\UserController::class, 'updatePassword'])->name('user.update.password');
-    Route::post('/password',[App\Http\Controllers\UserController::class, 'savePassword']);
+    Route::get('/password', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('user.update.password');
+    Route::post('/password', [App\Http\Controllers\UserController::class, 'savePassword']);
 
-    Route::get('/don-hang',[App\Http\Controllers\UserController::class, 'UserTransaction'])->name('user.transaction');
+    Route::get('/don-hang', [App\Http\Controllers\UserController::class, 'UserTransaction'])->name('user.transaction');
     Route::get('/don-hang/{id}', [App\Http\Controllers\UserController::class, 'viewOrder'])->name('user.get.view.order');
-
 });

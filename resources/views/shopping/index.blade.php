@@ -70,7 +70,7 @@
                                     <h5>Tổng giá trị đơn hàng:</h5>
                                 </td>
                                 <td colspan="2">
-                                    <h5>{{ Cart::subtotal() }}</h5>
+                                    <strong>{{ number_format(str_replace(',', '', Cart::subtotal()) * 100, 0, '.', '.') }}đ</strong>
                                 </td>
                             </tr>
                         @else
@@ -110,7 +110,5 @@
                 }
             });
         });
-       
-
     </script>
 @stop

@@ -323,11 +323,11 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     @foreach ($slideBanners as $slideBanner)
-                                        <div class="item {{$slideBanner->sb_img == $firstSb->sb_img ? 'active' : ''}}">
-                                            <a href="{{$slideBanner->sb_link}}">
+                                        <div
+                                            class="item {{ $slideBanner->sb_img == $firstSb->sb_img ? 'active' : '' }}">
+                                            <a href="{{ $slideBanner->sb_link }}">
 
-                                                <img class="w-100"
-                                                    src="{{ pare_url_file($slideBanner->sb_img) }}"
+                                                <img class="w-100" src="{{ pare_url_file($slideBanner->sb_img) }}"
                                                     alt="...">
                                             </a>
                                         </div>
@@ -347,24 +347,24 @@
                             </div> <!-- Carousel -->
                         </div>
                         <div class="sub-banner-wrap i100">
-                            <a href="{{$outBanners[0]->ob_link}}" class="sub-item">
-                                <img src="{{ pare_url_file($outBanners[0]->ob_img) }}"> 
+                            <a href="{{ $outBanners[0]->ob_link }}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[0]->ob_img) }}">
                             </a>
-                            <a href="{{$outBanners[1]->ob_link}}" class="sub-item">
-                                <img src="{{ pare_url_file($outBanners[1]->ob_img) }}"> 
+                            <a href="{{ $outBanners[1]->ob_link }}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[1]->ob_img) }}">
                             </a>
                         </div>
                     </div>
                     <div class="right i100">
                         <div class="sub-item-right">
-                            <a href="{{$outBanners[2]->ob_link}}" class="sub-item">
-                                <img src="{{ pare_url_file($outBanners[2]->ob_img) }}"> 
+                            <a href="{{ $outBanners[2]->ob_link }}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[2]->ob_img) }}">
                             </a>
-                            <a href="{{$outBanners[3]->ob_link}}" class="sub-item">
-                                <img src="{{ pare_url_file($outBanners[3]->ob_img) }}"> 
+                            <a href="{{ $outBanners[3]->ob_link }}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[3]->ob_img) }}">
                             </a>
-                            <a href="{{$outBanners[4]->ob_link}}" class="sub-item">
-                                <img src="{{ pare_url_file($outBanners[4]->ob_img) }}"> 
+                            <a href="{{ $outBanners[4]->ob_link }}" class="sub-item">
+                                <img src="{{ pare_url_file($outBanners[4]->ob_img) }}">
                             </a>
                         </div>
                     </div>
@@ -649,7 +649,6 @@
         wrapper: 'search-wrapper',
         collection: '.collection_id'
     });
-
 </script>
 <script>
     (function(jQuery) {
@@ -1090,5 +1089,4 @@
         var goToLink = obj.getAttribute("href");
         window.location.href = goToLink;
     }
-
 </script>

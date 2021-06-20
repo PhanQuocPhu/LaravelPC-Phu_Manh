@@ -10,6 +10,7 @@ use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 
 use function GuzzleHttp\Promise\all;
@@ -128,10 +129,11 @@ class ShoppingCartController extends FrontendController
     public function getFormPay()
     {
         $products = \Cart::content();
+
         return view('shopping.pay', compact('products'));
     }
 
-    //Lưu thông tin giỏ hàng - Post từ view
+    //Lưu thông tin giỏ hàng - Post từ view - Đặt hàng
     public function saveInfoShoppingCart(Request $request)
     {
         /* dd($request->all()); */
@@ -174,19 +176,30 @@ class ShoppingCartController extends FrontendController
                 }
             }
         }
+        $user = User::find(get_data_user('web'));
+        $products = \Cart::content();
+        $total = \Cart::subtotal();
+        $viewData = [
+            'user' => $user,
+            'products' => $products,
+            'total' => $total,
+            'transactionId' => $transactionId,
+        ];
         \Cart::destroy();
-        return redirect('/');
+        return view('shopping.pay_return', $viewData)/*  redirect('/') */;
     }
 
+
+    //Thanh toán online
     public function createPayment(Request $request)
     {
         /* dd($request->toArray()); */
         $vnp_TxnRef = randString(15); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_HashSecret = env('VNP_HASH_SECRET');
-        $vnp_OrderInfo = $request->order_desc;
-        $vnp_OrderType = $request->order_type;
+        $vnp_OrderInfo = 'Thanh toán đơn hàng';
+        $vnp_OrderType = 'billpayment';
         $vnp_Amount = str_replace(',', '', \Cart::subtotal(0)) * 100;
-        $vnp_Locale = $request->language;
+        $vnp_Locale = 'vn';
         $vnp_BankCode = $request->bank_code;
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 
@@ -204,7 +217,7 @@ class ShoppingCartController extends FrontendController
             "vnp_ReturnUrl" => route('vnpay.return'),
             "vnp_TxnRef" => $vnp_TxnRef,
         );
-
+        /* dd($inputData); */
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
         }
@@ -224,8 +237,10 @@ class ShoppingCartController extends FrontendController
         }
 
         $vnp_Url = env('VNP_URL') . "?" . $query;
+
         if (isset($vnp_HashSecret)) {
-            // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
+            /* dd($vnp_HashSecret); */
+            /* $vnpSecureHash = md5($vnp_HashSecret . $hashdata); */
             $vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }

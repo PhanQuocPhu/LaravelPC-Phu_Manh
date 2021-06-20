@@ -33,31 +33,30 @@ class AdminController extends Controller
         $notdoneTrans = Transaction::where('tr_status', Transaction::STATUS_DEFAULT)->get()->count();
         //Tin nhắn đang chờ
         $notdoneCont = Contact::where('c_status', Contact::STATUS_DEFAULT)->get()->count();
-        
-        
+
+
         $viewData = [
-            'ratings'=>$ratings, 
-            'contacts'=>$contacts,
-            'moneyDay'=>$moneyDay,
-            'moneyMonth'=>$moneyMonth,
-            'notdoneTrans'=>$notdoneTrans,
-            'notdoneCont'=>$notdoneCont,
-        ]; 
-    
+            'ratings' => $ratings,
+            'contacts' => $contacts,
+            'moneyDay' => $moneyDay,
+            'moneyMonth' => $moneyMonth,
+            'notdoneTrans' => $notdoneTrans,
+            'notdoneCont' => $notdoneCont,
+        ];
+
         return view('admin::index', $viewData);
     }
     public function ChartCreate()
     {
-       //Ngày
-       $transDates = Transaction::orderBy('updated_at', 'ASC')/* ->pluck('updated_at') */;
-       $days_array = array();
+        //Ngày
+        $transDates = Transaction::orderBy('updated_at', 'ASC')/* ->pluck('updated_at') */;
+        $days_array = array();
         foreach ($transDates as $transDate) {
             /* $day_array[$i] = $transDate->format('d'); */
-            array_push ( $days_array , $transDate->format('d'));
-        } 
-        
+            array_push($days_array, $transDate->format('d'));
+        }
     }
-    
+
     /**
      * Show the form for creating a new resource.
      * @return Renderable
