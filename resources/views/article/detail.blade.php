@@ -89,8 +89,7 @@
         <h1 style="color: black"> {{ $articleDetail->a_name }} </h1>
         <div class="row">
             <div class="col-md-8">
-
-                <p>{{ $articleDetail->a_description }}</p>
+                <strong>{{ $articleDetail->a_description }}</strong>
                 <div class="quick-link" style="font-family: Helvetica Neue,Helvetica,Roboto,Arial,sans-serif !important;">
                     <ul>
                         @foreach ($articles as $articleHot)
