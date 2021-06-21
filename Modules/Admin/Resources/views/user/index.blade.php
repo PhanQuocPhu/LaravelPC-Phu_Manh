@@ -40,14 +40,6 @@
                                     <td>{{ $user->email }}</td>
 
                                     <td>{{ $user->phone }}</td>
-                                    {{-- <td>
-                                <img src="{{ pare_url_file($user->avatar) }}" alt="" class="img img-responsive"
-                                    style="height: 80px; width:80px">
-                            </td>
-                            <td>
-                                <a class="badge {{ $user->getStatus($user->active)['class'] }}"
-                                    href="{{ route('admin.get.action.user', ['active', $user->id]) }}">{{ $user->getStatus($user->active)['name'] }}</a>
-                            </td> --}}
 
                                     <td>
                                         <a style="padding: 5px 10px" class="border-right"
@@ -59,6 +51,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            {{ $articles->links('components.paginate') }}
                         @endif
                     </tbody>
                 </table>

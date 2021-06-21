@@ -8,7 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Tạo mới đơn hàng</title>
+    <title>PcPM - Thanh toán Online</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vnpay_php/assets/bootstrap.min.css') }}" rel="stylesheet" />
     <!-- Custom styles for this template -->
@@ -38,14 +38,88 @@
                         </li>
                         <li>
                             <label for="VIETCOMBANK">
-                                <input type="submit" value="VIETCOMBANK" id="VIETCOMBANK" name="paymethod"><img
+                                <input type="submit" value="VIETCOMBANK" id="VIETCOMBANK" name="bank_code"><img
                                     src="https://sandbox.vnpayment.vn/paymentv2/images/bank/vietcombank_logo.png"
                                     width="200" height="40" alt="VIETCOMBANK">
                             </label>
                         </li>
+                        <li>
+                            <label for="VIETINBANK">
+                                <input type="submit" value="VIETINBANK" id="VIETINBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/vietinbank_logo.png"
+                                    width="200" height="40" alt="VIETINBANK">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="BIDV">
+                                <input type="submit" value="BIDV" id="BIDV" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/bidv_logo.png" width="200"
+                                    height="40" alt="BIDV">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="AGRIBANK">
+                                <input type="submit" value="AGRIBANK" id="AGRIBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/agribank_logo.png"
+                                    width="200" height="40" alt="AGRIBANK">
+                            </label>
+                        </li>
+
+                        <li>
+                            <label for="SACOMBANK">
+                                <input type="submit" value="SACOMBANK" id="SACOMBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/sacombank_logo.png"
+                                    width="200" height="40" alt="SACOMBANK">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="TECHCOMBANK">
+                                <input type="submit" value="TECHCOMBANK" id="TECHCOMBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/techcombank_logo.png"
+                                    width="200" height="40" alt="TECHCOMBANK">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="MBBANKHP">
+                                <input type="submit" value="MBBANKHP" id="MBBANKHP" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/mbb_logo.png" width="200"
+                                    height="40" alt="MBBANKHP">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="MBBANK">
+                                <input type="submit" value="MBBANK" id="MBBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/mbb_logo.png" width="200"
+                                    height="40" alt="MBBANK">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="ACB">
+                                <input type="submit" value="ACB" id="ACB" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/acb_logo.png" width="200"
+                                    height="40" alt="ACB">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="VPBANK">
+                                <input type="submit" value="VPBANK" id="VPBANK" name="bank_code"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/vpbank_logo.png" width="200"
+                                    height="40" alt="VPBANK">
+                            </label>
+                        </li>
+                        <li>
+                            <label for="SHB">
+                                <input type="submit" value="SHB" id="SHB" name="paymethod"><img
+                                    src="https://sandbox.vnpayment.vn/paymentv2/images/bank/shb_logo.png" width="200"
+                                    height="40" alt="SHB">
+                            </label>
+                        </li>
                     </ul>
                 </div>
-                <button type="button" class="btn btn-default" onclick="history.back()">Quay lại</button>
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" onclick="history.back()">Quay lại</button>
+                </div>
+
 
             </form>
         </div>

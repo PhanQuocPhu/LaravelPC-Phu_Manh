@@ -163,7 +163,7 @@
                                         <h6>Tổng cộng: </h6>
                                     </div>
                                     <div class="col-sm-6 text-right ">
-                                        <h4>{{ number_format(str_replace(',', '', $total) * 100, 0, '.', '.') }}đ
+                                        <h4>{{ number_format(str_replace(',', '', $total), 0, '.', '.') }}đ
                                         </h4>
                                     </div>
                                 </div>

@@ -9,13 +9,13 @@
             @foreach ($articles as $article)
                 <div class="row Post">
                     <div class="col-md-4 ">
-                        <a href="{{route('get.detail.article', [$article->a_slug, $article->id])}}">
+                        <a href="{{ route('get.detail.article', [$article->a_slug, $article->id]) }}">
                             <img src="{{ pare_url_file($article->a_avatar) }}" alt="" class="Post-img">
                         </a>
                     </div>
                     <div class="col-md-8 Ar-new-content-contain">
                         <h3 class="">
-                            <a href="{{route('get.detail.article', [$article->a_slug, $article->id])}}">
+                            <a href="{{ route('get.detail.article', [$article->a_slug, $article->id]) }}">
                                 {{ $article->a_name }}
                             </a>
                         </h3>

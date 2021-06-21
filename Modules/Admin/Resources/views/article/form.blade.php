@@ -13,10 +13,12 @@
                 @endif
             </div>
             <div class="form-group">
+                <input type="text" class="form-control" value="{{ get_data_user('admins', 'id') }}" name="a_author_id" hidden>
+            </div>
+            <div class="form-group">
                 <label for="a_description" class="form-label">Mô tả:</label>
-                <textarea name="a_description" class="form-control" id="" cols="30" rows="3" placeholder="Mô tả ngắn">
-                    {{ old('a_description', isset($article->a_description) ? $article->a_description : '') }}
-                </textarea>
+                <textarea name="a_description" class="form-control" id="" cols="30" rows="3"
+                    placeholder="Mô tả ngắn">{{ old('a_description', isset($article->a_description) ? $article->a_description : '') }}</textarea>
                 @if ($errors->has('a_description'))
                     <span class="font-weight-bold font-italic text-danger small">
                         {{ $errors->first('a_description') }}

@@ -17,7 +17,7 @@ class AdminTransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('user:id,name', 'payment')->paginate(10);
+        $transactions = Transaction::with('user:id,name', 'payment')->get();
         $viewData = [
             'transactions' => $transactions,
         ];
@@ -103,8 +103,7 @@ class AdminTransactionController extends Controller
                 case 'delete':
                     $transaction->delete();
                     break;
-                case 'paid':
-                    {
+                case 'paid': {
                         $transaction->tr_payment = Transaction::PAYMENT_DONE;
                         $transaction->save();
                     }

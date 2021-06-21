@@ -42,6 +42,7 @@ class AdminArticleController extends Controller
     }
     public function insertOrUpdate($requestArticle, $id='')
     {
+        /* dd($requestArticle->all()); */
         $article = new Article();
         if ($id) {
             $article = Article::find($id);
@@ -52,7 +53,7 @@ class AdminArticleController extends Controller
         $article->a_content = $requestArticle->a_content;
         $article->a_title_seo = $requestArticle->a_title_seo ? $requestArticle->a_title_seo : $requestArticle->a_name;
         $article->a_description_seo = $requestArticle->a_description_seo ? $requestArticle->a_description_seo : $requestArticle->a_name;
-
+        $article->a_author_id = $requestArticle->a_author_id;
         if ($requestArticle->hasFile('a_avatar')) 
         {
             $file = upload_image('a_avatar');

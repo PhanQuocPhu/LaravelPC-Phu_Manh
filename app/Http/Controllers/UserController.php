@@ -65,7 +65,7 @@ class UserController extends FrontendController
     {
         //Thông tin các đơn hàng trong quá khứ
         $transactions = Transaction::where('tr_user_id', get_data_user('web'));
-        $transactions = $transactions->addSelect('id', 'tr_total', 'tr_address', 'tr_phone', 'tr_status', 'created_at')->paginate(10);
+        $transactions = $transactions->addSelect('id', 'tr_total', 'tr_address', 'tr_phone', 'tr_status', 'created_at')->paginate(5);
         /* $listTransactions = $transactions; */
         //Tổng số đơn hàng
         $totalTrans = Transaction::where('tr_user_id', get_data_user('web'))
@@ -95,8 +95,8 @@ class UserController extends FrontendController
             $orders = Order::with('product')->where('or_transaction_id', $id)->get();
             $transnote = Transaction::find($id);
             $viewData = [
-                'orders'=>$orders,
-                'transnote'=>$transnote
+                'orders' => $orders,
+                'transnote' => $transnote
             ];
             $html = view('user.components.order', $viewData)->render();
             return response()->json($html);

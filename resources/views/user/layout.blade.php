@@ -20,17 +20,18 @@
     <!-- Custom styles for this template-->
     <link href=" {{ asset('theme_admin/css/sb-admin-2.min.css') }}" rel="stylesheet" type="text/css">
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href=" {{ asset('theme_admin/css/chart.css') }}" rel="stylesheet" type="text/css">
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <style>
     .account-settings {
-        margin-top: 20px ;
+        margin-top: 20px;
         padding-bottom: 1rem;
         text-align: center;
     }
+
     .account-settings .user-profile {
         margin: 0 0 1rem 0;
         padding-bottom: 1rem;
@@ -150,7 +151,7 @@
 
                 <br>
                 <!-- Begin Page Content -->
-                <div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 mx-auto" id="HomeContent" >
+                <div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-2 mx-auto" id="HomeContent">
                     @yield('content')
                 </div>
 
@@ -232,7 +233,6 @@
         $("#input_img").change(function() {
             readURL(this);
         });
-
     </script>
 
 
@@ -255,12 +255,7 @@
     <!-- Custom scripts for all pages-->
     <script src=" {{ asset('theme_admin/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src=" {{ asset('theme_admin/vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src=" {{ asset('theme_admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src=" {{ asset('theme_admin/js/demo/chart-pie-demo.js') }}"></script>
     @yield('script')
 
 

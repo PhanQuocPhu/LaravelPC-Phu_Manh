@@ -35,7 +35,7 @@
                                     <td>{{ $article->id }}</td>
                                     <td>
                                         <img src="{{ pare_url_file($article->a_avatar) }}" alt=""
-                                            class="img img-responsive" style="height: 80px; width:80px">
+                                            class="img img-responsive" style="height: 80px; width:120px">
                                     </td>
                                     <td>
                                         {{ $article->a_name }}
@@ -49,12 +49,12 @@
                                         {{ $article->created_at }}
                                     </td>
                                     <td>
-                                        <a style="padding: 5px 10px" class="border-right"
+                                        <a style="width:30px; height:30px; padding:1px" class="btn btn-primary text-center"
                                             href="{{ route('admin.get.edit.article', $article->id) }}"><i
-                                                class="far fa-edit text-primary"></i></a>
-                                        <a style="padding: 5px 10px" class="border-left"
+                                                class="far fa-edit text-white"></i></a>
+                                        <a style="width:30px; height:30px; padding:1px" class="btn btn-danger text-center"
                                             href="{{ route('admin.get.action.article', ['delete', $article->id]) }}"><i
-                                                class="far fa-trash-alt text-danger"></i></a>
+                                                class="far fa-trash-alt text-white"></i></a>
                                     </td>
 
                                 </tr>

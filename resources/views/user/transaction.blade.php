@@ -42,7 +42,7 @@
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Tổng số đơn hàng</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    {{$totalTrans}}
+                                    {{ $totalTrans }}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -65,7 +65,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
                                         <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                            {{$totalTrans - $totalTransDone}}  
+                                            {{ $totalTrans - $totalTransDone }}
                                         </div>
                                     </div>
                                     {{-- <div class="col">
@@ -94,7 +94,7 @@
                                     Đơn hàng thành công
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    {{$totalTransDone}}    
+                                    {{ $totalTransDone }}
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -107,63 +107,71 @@
         </div>
 
         <!-- Content Row -->
-        <div id="Tr_Data">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Địa chỉ</th>
-                            <th scope="col">Số điện thoại</th>
-                            <th scope="col">Tổng giá trị</th>
-                            <th scope="col">Ngày đặt hàng</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (isset($transactions))
-                            @foreach ($transactions as $transaction)
-                                <tr>
-                                    <td>{{ $transaction->id }}</td>
-                                    <td>
-                                        {{ $transaction->tr_address }}
-                                    </td>
-                                    <td>
-                                        {{ $transaction->tr_phone }}
-                                    </td>
-                                    <td>
-                                        {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
-                                    </td>
-                                    <td>
-                                        {{ $transaction->created_at->format('d-m-y') }}
-                                    </td>
-                                    <td>
-                                        @if ($transaction->tr_status == 1)
-                                            <p class="badge badge-success" href="#" id="tr_status"> Đã xử lý</p>
-                                        @else
-                                            <p class="badge badge-secondary " href="#" id="tr_status"> Đang chờ</p>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item" id="edit"
-                                            data-toggle="modal" data-target="#ModalOrder" data-id="{{ $transaction->id }}"
-                                            href="{{ route('user.get.view.order', $transaction->id) }}"><i
-                                                class="far fa-eye text-primary"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <div class="alert alert-warning" role="alert">
-                                    This is a warning alert—check it out!
-                                </div>
+                                <th scope="col">ID</th>
+                                <th scope="col">Thông tin đơn hàng</th>
+                                <th scope="col">Tổng giá trị</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Thao tác</th>
                             </tr>
-                        @endif
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @if (isset($transactions))
+                                @foreach ($transactions as $transaction)
+                                    <tr>
+                                        <td>{{ $transaction->id }}</td>
+                                        <td>
+                                            <ul>
+                                                <li><Strong>Địa chỉ: </Strong>{{ $transaction->tr_address }}</li>
+                                            </ul>
+                                            <ul>
+                                                <li><Strong>Số điện thoại: </Strong>{{ $transaction->tr_phone }}</li>
+                                            </ul>
+                                            <ul>
+                                                <li><Strong>Ngày đặt hàng: </Strong>
+                                                    {{ $transaction->created_at->format('d-m-y') }}</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            {{ number_format($transaction->tr_total, 0, '.', '.') }} vnđ
+                                        </td>
+                                        <td>
+                                            @if ($transaction->tr_status == 1)
+                                                <p class="badge badge-success" href="#" id="tr_status"> Đã xử lý</p>
+                                            @elseif ($transaction->tr_status == 2)
+                                                <p class="badge badge-warning" href="#" id="tr_status"> Đang giao hàng</p>
+                                            @else
+                                                <p class="badge badge-secondary " href="#" id="tr_status"> Đang chờ</p>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a style="padding: 5px 10px" class="btn btn-outline-primary js_order_item"
+                                                id="edit" data-toggle="modal" data-target="#ModalOrder"
+                                                data-id="{{ $transaction->id }}"
+                                                href="{{ route('user.get.view.order', $transaction->id) }}"><i
+                                                    class="far fa-eye text-primary"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <div class="alert alert-warning" role="alert">
+                                        This is a warning alert—check it out!
+                                    </div>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                    {{ $transactions->links('components.paginate') }}
+                </div>
             </div>
         </div>
+
     </div>
 
     <!-- Modal -->
@@ -191,6 +199,5 @@
                 });
             });
         })
-
     </script>
 @endsection

@@ -65,7 +65,7 @@
                                 <div class="col-xs-12">
                                     <strong>Tổng giá trị</strong>
                                     <div class="pull-right">
-                                        <span>{{ number_format(str_replace(',', '', Cart::subtotal(0)) * 100, 0, '.', '.') }}đ</span>
+                                        <span>{{ number_format(str_replace(',', '', Cart::subtotal(0)), 0, '.', '.') }}đ</span>
                                         <span>vnđ</span>
                                     </div>
                                 </div>

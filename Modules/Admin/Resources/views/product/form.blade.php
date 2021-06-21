@@ -15,9 +15,8 @@
             </div>
             <div class="form-group">
                 <label for="pro_description" class="form-label">Mô tả:</label>
-                <textarea name="pro_description" class="form-control" id="" cols="30" rows="3" placeholder="Mô tả ngắn">
-                    {{ old('pro_description', isset($product->pro_description) ? $product->pro_description : '') }}
-                </textarea>
+                <textarea name="pro_description" class="form-control" id="" cols="30" rows="3"
+                    placeholder="Mô tả ngắn">{{ old('pro_description', isset($product->pro_description) ? $product->pro_description : '') }}</textarea>
                 @if ($errors->has('pro_description'))
                     <span class="font-weight-bold font-italic text-danger small">
                         {{ $errors->first('pro_description') }}
@@ -27,8 +26,7 @@
             <div class="form-group">
                 <label for="pro_content" class="form-label">Nội dung:</label>
                 <textarea name="pro_content" class="form-control" id="pro_content" cols="30" rows="3"
-                    placeholder="Nội dung">
-                    {{ old('pro_content', isset($product->pro_content) ? $product->pro_content : '') }}
+                    placeholder="Nội dung">{{ old('pro_content', isset($product->pro_content) ? $product->pro_content : '') }}
                 </textarea>
             </div>
             <div class="form-group">
@@ -81,13 +79,15 @@
             {{-- Khuyến mãi --}}
             <div class="form-group">
                 <label for="pro_sale" class="form-label">% Khuyến mãi:</label>
-                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id=""  min="0" value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : '0') }}">
+                <input type="number" name="pro_sale" class="form-control" placeholder="% giảm giá" id="" min="0"
+                    value="{{ old('pro_sale', isset($product->pro_sale) ? $product->pro_sale : '0') }}">
             </div>
 
             {{-- Số lượng --}}
             <div class="form-group">
                 <label for="pro_sale" class="form-label">Số lượng sản phẩm:</label>
-                <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id=""  min="0" value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
+                <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id="" min="0"
+                    value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
             </div>
 
             {{-- Hình ảnh --}}
@@ -111,11 +111,10 @@
     <div class="button">
         <button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
     </div>
-    
+
 </form>
 @section('script')
     <script type="text/javascript">
         CKEDITOR.replace('pro_content');
-
     </script>
 @endsection

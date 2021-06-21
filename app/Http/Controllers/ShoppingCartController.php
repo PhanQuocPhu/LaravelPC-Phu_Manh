@@ -296,9 +296,19 @@ class ShoppingCartController extends FrontendController
                     DB::table('payments')->insert($dataPayment);
                     /* dd('done'); */
                 }
-                \Cart::destroy();
                 \DB::commit();
-                return view('vnpay.vnpay_return', compact('vnpayData'))->with('success', 'Đơn hàng của bạn đã được lưu');
+                $user = User::find(get_data_user('web'));
+                $products = \Cart::content();
+                $total = \Cart::subtotal();
+                $viewData = [
+                    'user' => $user,
+                    'products' => $products,
+                    'total' => $total,
+                    'transactionID' => $transactionID,
+                    'vnpayData' => $vnpayData,
+                ];
+                \Cart::destroy();
+                return view('vnpay.vnpay_return', $viewData)->with('success', 'Đơn hàng của bạn đã được lưu');
             } catch (\Exception $exception) {
                 /* dd('Exception'); */
                 \DB::rollBack();

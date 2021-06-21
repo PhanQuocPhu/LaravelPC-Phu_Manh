@@ -65,7 +65,7 @@
                 @include('components.article')
             </div>
             <div class="col-md-4">
-                RIGHT
+                
             </div>
         </div>
     </div>
