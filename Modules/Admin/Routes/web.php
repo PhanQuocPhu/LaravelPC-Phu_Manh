@@ -32,8 +32,11 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function () {
         Route::post('/update/{id}', 'AdminProductController@update');
         Route::get('/{action}/{id}', 'AdminProductController@action')->name('admin.get.action.product');
 
+        Route::get('/update/delete-image/{id}', 'AdminProductController@deleteImg')->name('admin.get.delete.product.image');
+
         //ajax
         Route::post('/ajax/{action}/{id}', 'AdminProductController@actionAjax')->name('admin.get.action.product.ajax');
+
     });
 
     //Quản lý banner

@@ -1,5 +1,19 @@
 {
     "recommendations": [
-        "shan.code-settings-sync"
+        "shan.code-settings-sync",
+        "thekalinga.bootstrap4-vscode",
+        "rifi2k.format-html-in-php",
+        "donjayamanne.jquerysnippets",
+        "ryannaddy.laravel-artisan",
+        "shufo.vscode-blade-formatter",
+        "onecentlin.laravel-blade",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "onecentlin.laravel5-snippets",
+        "techer.open-in-browser",
+        "christian-kohler.path-intellisense",
+        "sophisticode.php-formatter",
+        "kokororin.vscode-phpfmt",
+        "esbenp.prettier-vscode",
+        "vscode-icons-team.vscode-icons"
     ]
 }

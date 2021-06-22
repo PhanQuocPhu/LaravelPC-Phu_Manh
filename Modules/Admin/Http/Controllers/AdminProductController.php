@@ -5,6 +5,7 @@ namespace Modules\Admin\Http\Controllers;
 use App\Http\Requests\RequestProduct;
 use App\Models\Product;
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -33,62 +34,102 @@ class AdminProductController extends Controller
         return Category::all();
     }
 
+
+    //Thêm 
     public function create()
     {
         $categories = $this->getCategories();
         return view('admin::product.create', compact('categories'));
     }
+    public function store(RequestProduct $requestProduct)
+    {
+        $data = $this->GetData($requestProduct);
+        /* dd($data); */
+        $id = Product::insertGetId($data);
+        if ($id) {
+            if ($requestProduct->file) {
+                $this->SyncAlbum($requestProduct->file, $id);
+            }
+        }
+        return redirect()->back()->with('success', 'Lưu thành công');
+    }
 
+    //Sửa
     public function edit($id)
     {
         $product = Product::find($id);
         $categories = $this->getCategories();
-        return view('admin::product.update', compact('product', 'categories'));
+        $images = \DB::table('product_images')->where('pi_product_id', $id)->get();
+        $viewData=[
+            'product'=>$product,
+            'categories'=>$categories,
+            'images'=>$images ?? [],
+        ];
+        return view('admin::product.update', $viewData);
     }
-    
+
     public function update(RequestProduct $requestProduct, $id)
     {
-        $this->insertOrUpdate($requestProduct, $id);
+
+        $data = $this->GetData($requestProduct);
+        $product = Product::find($id);
+
+        $update = $product->update($data);
+        if ($update) {
+            if ($requestProduct->hasFile('file')) {
+                $this->SyncAlbum($requestProduct->file, $id);
+            }
+        }
 
         return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
-    public function store(RequestProduct $requestProduct)
+
+
+    public function SyncAlbum($files, $productId)
     {
-        $this->insertOrUpdate($requestProduct);
-        return redirect()->back()->with('success', 'Lưu thành công');
+        foreach ($files as $key => $fileImage) {
+            $ext = $fileImage->getClientOriginalExtension();
+            $extend = ['png', 'jpg', 'jpeg', 'PNG', 'JPG'];
+            if (!in_array($ext, $extend)) return false;
+            $filename = date('Y-m-d__') . Str::slug($fileImage->getClientOriginalName()) . '.' . $ext;
+            $path = public_path() . '/uploads/' . date('Y/m/d/');
+            if (!\File::exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $fileImage->move($path, $filename);
+            \DB::table('product_images')
+            ->insert([
+                'pi_name'=>$fileImage->getClientOriginalName(),
+                'pi_slug'=>$filename,
+                'pi_product_id'=>$productId,
+                'created_at'=>Carbon::now()
+            ]);
+        }
+    }
+    public function deleteImg($idImage)
+    {
+        \DB::table('product_images')->where('id', $idImage)->delete();
+        return redirect()->back()->with('success', 'Cập nhật thành công');
     }
 
-
-    public function insertOrUpdate($requestProduct, $id = '')
+    public function GetData($request)
     {
-        $product = new Product();
-        if ($id) {
-            $product = Product::find($id);
-        }
+        $data = $request->except('_token', 'pro_avatar', 'file');
+        $data['pro_slug'] = Str::slug($request->pro_name);
+        $data['created_at'] = Carbon::now();
+        $data['pro_title_seo'] = $request->pro_title_seo ? $request->pro_title_seo : $request->pro_name;
+        $data['pro_description_seo'] = $request->pro_description_seo ? $request->pro_description_seo : $request->pro_name;
+        if ($request->hasFile('pro_avatar')) {
+            $image = upload_image('pro_avatar');
 
-        $product->pro_name = $requestProduct->pro_name;
-        $product->pro_slug = Str::slug($requestProduct->pro_name);
-        $product->pro_category_id = $requestProduct->pro_category_id;
-        $product->pro_price = $requestProduct->pro_price;
-        $product->pro_sale = $requestProduct->pro_sale;
-        $product->pro_number = $requestProduct->pro_number;
-        $product->pro_description = $requestProduct->pro_description;
-        $product->pro_content = $requestProduct->pro_content;
-        $product->pro_title_seo = $requestProduct->pro_title_seo ? $requestProduct->pro_title_seo : $requestProduct->pro_name;
-        $product->pro_description_seo = $requestProduct->pro_description_seo ? $requestProduct->pro_description_seo : $requestProduct->pro_name;
-
-
-
-        if ($requestProduct->hasFile('avatar')) {
-            $file = upload_image('avatar');
-
-            if (isset($file['name'])) {
-                $product->pro_avatar = $file['name'];
+            if (isset($image['name'])) {
+                $data['pro_avatar'] = $image['name'];
             }
         }
-        $product->save();
+        return $data;
     }
+
 
     //Action
     public function action($action, $id)

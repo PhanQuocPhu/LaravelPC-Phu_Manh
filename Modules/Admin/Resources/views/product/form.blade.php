@@ -28,6 +28,11 @@
                 <textarea name="pro_content" class="form-control" id="pro_content" cols="30" rows="3"
                     placeholder="Nội dung">{{ old('pro_content', isset($product->pro_content) ? $product->pro_content : '') }}
                 </textarea>
+                @if ($errors->has('pro_content'))
+                    <span class="font-weight-bold font-italic text-danger small">
+                        {{ $errors->first('pro_content') }}
+                    </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="pro_title_seo" class="form-label">Meta title:</label>
@@ -35,16 +40,6 @@
                     value="{{ old('pro_title_seo', isset($product->pro_title_seo) ? $product->pro_title_seo : '') }}"
                     name="pro_title_seo">
             </div>
-            <div class="form-group">
-                <label for="pro_description_seo" class="form-label">Meta Description</label>
-                <input type="text" class="form-control" placeholder="Meta description"
-                    value="{{ old('pro_description_seo', isset($product->pro_description_seo) ? $product->pro_description_seo : '') }}"
-                    name="pro_description_seo">
-            </div>
-            {{-- <div class="form-group">
-                <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
-                    Nổi bật</label>
-            </div> --}}
         </div>
         <div class="col-sm-4">
             <div class="form-group">
@@ -85,27 +80,51 @@
 
             {{-- Số lượng --}}
             <div class="form-group">
-                <label for="pro_sale" class="form-label">Số lượng sản phẩm:</label>
+                <label for="pro_number" class="form-label">Số lượng sản phẩm:</label>
                 <input type="number" name="pro_number" class="form-control" placeholder="Số lượng" id="" min="0"
                     value="{{ old('pro_number', isset($product->pro_number) ? $product->pro_number : '0') }}">
             </div>
 
             {{-- Hình ảnh --}}
-            <div class="form-group">
+            <div class="form-group text-center">
                 @if (isset($product->pro_avatar))
-                    <img id="output_img" src=" {{ pare_url_file($product->pro_avatar) }}" class="img-fluid" alt="">
+                    <img id="output_img" src=" {{ pare_url_file($product->pro_avatar) }}" class="img-fluid col-sm-10"
+                        alt="">
                 @else
-                    <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="img-fluid" alt="">
+                    <img id="output_img" src="{{ asset('img/noimg.jpg') }}" class="img-fluid col-sm-10" alt="">
                 @endif
             </div>
             <div class="form-group">
-                <input type="file" name="avatar" class="form-control" id="input_img">
+                <input type="file" name="pro_avatar" class="" id="input_img">
             </div>
 
-            {{-- <div class="form-group">
-                <label class="form-check-label" for="hot"> <input type="checkbox" class="form-check-inline" name="hot">
-                    Nổi bật</label>
-            </div> --}}
+            {{-- Meta Descripstion --}}
+            <div class="form-group">
+                <label for="pro_description_seo" class="form-label">Meta Description</label>
+                <input type="text" class="form-control" placeholder="Meta description"
+                    value="{{ old('pro_description_seo', isset($product->pro_description_seo) ? $product->pro_description_seo : '') }}"
+                    name="pro_description_seo">
+            </div>
+        </div>
+    </div>
+    {{-- Album ảnh --}}
+    <div class="form-group">
+        <label for="file" class="form-label">Album ảnh</label>
+        @if ($images)
+            <div class="row">
+                @foreach ($images as $image)
+                    <div class="col-sm-2">
+                        <a href="{{route('admin.get.delete.product.image', $image->id)}}">
+                            <img class="img-fluid" src="{{ pare_url_file($image->pi_slug) }}" alt="">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="file-loading">
+            <input id="images" type="file" name="file[]" multiple class="file" data-overwrite-intial="false"
+                data-min-file-count="0">
         </div>
     </div>
     <div class="button">

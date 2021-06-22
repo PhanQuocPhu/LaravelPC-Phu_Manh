@@ -22,10 +22,43 @@
     <link href=" {{ asset('theme_admin/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
 
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <style>
+    .link-effect-3 {
+        a {
+            padding: 10px 0;
+            margin: 0 20px;
+            color: #797878;
+            text-shadow: none;
+            position: relative;
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                padding: 10px 0;
+                max-width: 0;
+                border-bottom: 2px solid #fff;
+                color: #fff;
+                content: attr(data-hover);
+                -webkit-transition: max-width 0.5s;
+                -moz-transition: max-width 0.5s;
+                transition: max-width 0.5s;
+            }
+
+            &:hover {
+                &::before {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+
     .account-settings {
         margin-top: 20px;
         padding-bottom: 1rem;
@@ -120,10 +153,17 @@
             <!-- Heading -->
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            <div class="text-center d-none d-md-inline ">
+                <button class="rounded-circle border-0 bg-secondary" id="sidebarToggle"></button>
             </div>
 
+            {{-- Back to mainpage --}}
+            <div class="text-center d-none d-md-inline">
+                <a class="" style="font-family: 'Roboto Condensed', sans-serif; font-size:12px;text-decoration:none; color:rgb(128, 127, 151)"
+                    href="{{ route('home') }}">
+                    <p> Tiếp tục mua sắm </p>
+                </a>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
