@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="-1">
     <meta name="keywords" content="">
-    <meta name="description" content="Chính sách bảo hành GearVN được cập nhật vào ngày 21.12.2020">
+    <meta name="description" content="Chính sách bảo hành PCPM được cập nhật vào ngày 21.12.2020">
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>
     <script id="script_viewport" type="text/javascript">

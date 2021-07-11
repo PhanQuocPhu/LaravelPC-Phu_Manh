@@ -39,6 +39,10 @@ Route::get('pages/chinh-sach-bao-hanh', [App\Http\Controllers\StaticPageControll
 Route::get('pages/huong-dan-tra-gop', [App\Http\Controllers\StaticPageController::class, 'getInstallment'])->name('get.buy.installment');
 Route::get('pages/chinh-sach-giao-hang', [App\Http\Controllers\StaticPageController::class, 'getShipping'])->name('get.shipping');
 
+//Mail
+Route::get('/mail', [App\Http\Controllers\SendMailController::class, 'index'])->name('send.mail');
+Route::post('/mail', [App\Http\Controllers\SendMailController::class, 'send_mail']);
+
 
 /* Bài viết */
 Route::get('bai-viet', [App\Http\Controllers\ArticleController::class, 'getListArticle'])->name('get.list.article');

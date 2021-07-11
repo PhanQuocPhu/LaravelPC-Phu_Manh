@@ -222,14 +222,14 @@
                 </div>
 
                 <div class="gearvn-header-navigation-right content-flex">
-                    <a href="https://gearvn.com/pages/gearvn-dai-tiec-online"
+                    <a href="{{ route('get.contact') }}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products "
                         style="margin-left: 0">
                         <div class="xxxkt">
                             <img src="//theme.hstatic.net/1000026716/1000440777/14/xk1.png?v=19892">
                             <img src="//theme.hstatic.net/1000026716/1000440777/14/xk1s.png?v=19892">
                         </div>
-                        SẢN PHẨM VỪA XEM
+                        LIÊN HỆ
                     </a>
                     <a href="{{ route('get.list.article') }}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
@@ -259,7 +259,7 @@
                         </div>
                         CHÍNH SÁCH BẢO HÀNH
                     </a>
-                    <a href="https://gearvn.com/pages/chinh-sach-giao-hang"
+                    <a href="{{route('get.shipping')}}"
                         class="gearvn-header-navigation-item recently-product-item header-navigation-recently-products ">
                         <div class="xxxkt">
 
@@ -309,15 +309,10 @@
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="5" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="6" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="7" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="8" class=""></li>
+                                    @foreach ($slideBanners as $key => $slideBanner)
+                                        <li data-target="#carousel-example-generic" data-slide-to="{{ $key }}"
+                                            class="{{ $key == 0 ? 'active' : '' }}"></li>
+                                    @endforeach
                                 </ol>
 
                                 <!-- Wrapper for slides -->
@@ -326,7 +321,6 @@
                                         <div
                                             class="item {{ $slideBanner->sb_img == $firstSb->sb_img ? 'active' : '' }}">
                                             <a href="{{ $slideBanner->sb_link }}">
-
                                                 <img class="w-100" src="{{ pare_url_file($slideBanner->sb_img) }}"
                                                     alt="...">
                                             </a>
@@ -377,9 +371,7 @@
 
 <br>
 
-
-
-<script>
+{{-- <script>
     jQuery('.ultimate-search').submit(function(e) {
 
         e.preventDefault();
@@ -1089,4 +1081,4 @@
         var goToLink = obj.getAttribute("href");
         window.location.href = goToLink;
     }
-</script>
+</script> --}}

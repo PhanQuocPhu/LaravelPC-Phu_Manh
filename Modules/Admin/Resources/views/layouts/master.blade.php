@@ -46,6 +46,7 @@
         rel="stylesheet" type="text/css" />
 
 
+
     {{-- Jquery --}}
     <script src=" {{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -55,7 +56,86 @@
 </head>
 
 <style>
+    .link-effect-3 {
+        a {
+            padding: 10px 0;
+            margin: 0 20px;
+            color: #797878;
+            text-shadow: none;
+            position: relative;
 
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                padding: 10px 0;
+                max-width: 0;
+                border-bottom: 2px solid #fff;
+                color: #fff;
+                content: attr(data-hover);
+                -webkit-transition: max-width 0.5s;
+                -moz-transition: max-width 0.5s;
+                transition: max-width 0.5s;
+            }
+
+            &:hover {
+                &::before {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+
+    .account-settings {
+        margin-top: 20px;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+
+    .account-settings .user-profile {
+        margin: 0 0 1rem 0;
+        padding-bottom: 1rem;
+        text-align: center;
+    }
+
+    .account-settings .user-profile .user-avatar {
+        margin: 0 0 1rem 0;
+    }
+
+    .account-settings .user-profile .user-avatar img {
+        width: 90px;
+        height: 90px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        border-radius: 100px;
+    }
+
+    .account-settings .user-profile h5.user-name {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .account-settings .user-profile h6.user-email {
+        margin: 0;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #9fa8b9;
+    }
+
+    .account-settings .about {
+        margin: 2rem 0 0 0;
+        text-align: center;
+    }
+
+    .account-settings .about h5 {
+        margin: 0 0 15px 0;
+        color: #007ae1;
+    }
+
+    .account-settings .about p {
+        font-size: 0.825rem;
+    }
 
 </style>
 
@@ -94,8 +174,13 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ get_data_user('admins', 'name') }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ pare_url_file(get_data_user('admins', 'avatar')) }}{{-- {{ asset('img/DefaultUser.png') }} --}}">
+                                @if (get_data_user('admins', 'avatar') == null)
+                                    <img class="img-profile rounded-circle" src="{{ asset('img/DefaultUser.png') }}">
+                                @else
+                                    <img class="img-profile rounded-circle"
+                                        src="{{ pare_url_file(get_data_user('admins', 'avatar')) }}">
+                                @endif
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -117,19 +202,7 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin alert -->
-                @if (\Session::has('success'))
-                    <div class="alert alert-success" role="alert"
-                        style="position: fixed; right:20px; z-index: 99999999999999;">
-                        <strong>Success!</strong> {{ \Session::get('success') }}
-                    </div>
-                @endif
-                @if (\Session::has('error'))
-                    <div class="alert alert-danger" role="alert"
-                        style="position: fixed; right:20px; z-index: 99999999999999;">
-                        <strong>Error</strong> {{ \Session::get('error') }}
-                    </div>
-                @endif
+                @include('admin::layouts.alert')
 
                 <!-- End alert -->
                 <!-- Begin Page Content -->
@@ -188,7 +261,6 @@
 </body>
 
 <footer>
-
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -218,60 +290,8 @@
         });
     </script>
 
-
-    {{-- Bootstrap file Input --}}
-    <!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you
-    wish to resize images before upload. This must be loaded before fileinput.min.js -->
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/plugins/piexif.min.js"
-        type="text/javascript"></script>
-    <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
-        This must be loaded before fileinput.min.js -->
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/plugins/sortable.min.js"
-        type="text/javascript"></script>
-    <!-- the main fileinput plugin script JS file -->
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/fileinput.min.js"></script>
-    <!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/locales/LANG.js"></script>
-
-
-    {{-- Ck-editor --}}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-
-    {{-- Jquery confirm --}}
-    <script src="  {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js') }}"></script>
-
-
-    {{-- Chart --}}
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src=" {{ asset('theme_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src=" {{ asset('theme_admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src=" {{ asset('theme_admin/js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src=" {{ asset('theme_admin/vendor/chart.js/Chart.min.js') }}"></script>
-    {{-- Tabble --}}
-    <script src="{{ asset('theme_admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('theme_admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-
-    <!-- Page level custom scripts -->
-    <script src=" {{ asset('theme_admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src=" {{ asset('theme_admin/js/demo/chart-pie-demo.js') }}"></script>
-    {{-- Table --}}
-    <script src=" {{ asset('theme_admin/js/demo/datatables-demo.js') }}"></script>
+    @include('admin::layouts.script')
     @yield('script')
-
-
 </footer>
 
 </html>

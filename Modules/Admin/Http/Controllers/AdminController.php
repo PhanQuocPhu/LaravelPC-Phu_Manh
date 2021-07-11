@@ -2,12 +2,14 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\HelpersClass\Date;
 use App\Models\Contact;
 use App\Models\Rating;
 use App\Models\Transaction;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -35,6 +37,45 @@ class AdminController extends Controller
         $notdoneCont = Contact::where('c_status', Contact::STATUS_DEFAULT)->get()->count();
 
 
+        //Thống kê trạng thái đơn hàng
+        //Đơn chưa xử lý
+        $transDefault = Transaction::where('tr_status', Transaction::STATUS_DEFAULT)->select('id')->count();
+        //Đơn đã hoàn thành
+        $transDone = Transaction::where('tr_status', Transaction::STATUS_DONE)->select('id')->count();
+        //Đơn đang vận chuyển
+        $transShipping = Transaction::where('tr_status', Transaction::STATUS_SHIPPING)->select('id')->count();
+
+        
+        $statusTrans = [
+            [
+                'Hoàn thành', $transDone, false
+            ],
+            [
+                'Đang vận chuyển', $transShipping, false
+            ],
+            [
+                'Đang chờ', $transDefault, false
+            ]
+        ];
+        /* dd($statusTrans); */
+
+        //Ngày trong tháng
+        $listDate = Date::getListDayInMonth();
+        //Doanh thu các ngày trong tháng
+        $moneyDaily = Transaction::whereMonth('updated_at', date('m'))->where('tr_status', Transaction::STATUS_DONE)
+            ->select(\DB::raw('sum(tr_total) as totalMoney'), \DB::raw('DATE(updated_at) day'))->groupBy('day')->get()->toArray();
+        $arrDailyMoney = [];
+        foreach ($listDate as $day) {
+            $total = 0;
+            foreach ($moneyDaily as $key => $revenue) {
+                if ($revenue['day'] == $day) {
+                    $total = $revenue['totalMoney'];
+                    break;
+                }
+            }
+            $arrDailyMoney[] = (int)$total;
+        }
+        //dd($arrDailyMoney);
         $viewData = [
             'ratings' => $ratings,
             'contacts' => $contacts,
@@ -42,6 +83,9 @@ class AdminController extends Controller
             'moneyMonth' => $moneyMonth,
             'notdoneTrans' => $notdoneTrans,
             'notdoneCont' => $notdoneCont,
+            'statusTrans' => json_encode($statusTrans),
+            'listDate'  => json_encode($listDate),
+            'arrDailyMoney' => json_encode($arrDailyMoney),
         ];
 
         return view('admin::index', $viewData);
@@ -67,16 +111,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Show the specified resource.
      * @param int $id
      * @return Renderable
@@ -94,26 +128,5 @@ class AdminController extends Controller
     public function edit($id)
     {
         return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

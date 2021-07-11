@@ -40,7 +40,7 @@
                     <li><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>Thời gian duyệt hồ
                                 sơ:</strong> từ 10-30 phút.</span></li>
                     <li><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>Lưu ý: </strong><em>khách
-                                hàng vẫn nhận đủ các chương trình khuyến mãi mà GearVN đang áp dụng đối với từng sản
+                                hàng vẫn nhận đủ các chương trình khuyến mãi mà PCPM đang áp dụng đối với từng sản
                                 phẩm.</em></span></li>
                 </ul>
                 <p><span style="font-size: 15pt; color: #ff0000;"
@@ -48,10 +48,10 @@
                             điện thoại</strong></span></p>
                 <ul start="2">
                     <li><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><em>Hình thức này khách hàng không
-                                cần phải đến GearVN trước để chờ đợi duyệt hồ sơ, nếu hồ sơ hợp lệ thì mới mang đủ giấy tờ
-                                đến GearVN để hoàn tất hồ sơ và nhận sản phẩm.</em></span>
+                                cần phải đến PCPM trước để chờ đợi duyệt hồ sơ, nếu hồ sơ hợp lệ thì mới mang đủ giấy tờ
+                                đến PCPM để hoàn tất hồ sơ và nhận sản phẩm.</em></span>
                         <p><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>+ Bước 1:</strong> Đặt
-                                sản phẩm được bán theo giá niêm yết tại website và showroom GearVN theo phương thức trả góp
+                                sản phẩm được bán theo giá niêm yết tại website và showroom PCPM theo phương thức trả góp
                                 không cần thế chấp tài sản tại <a href="http://www.gearvn.com" rel="dofollow"
                                     data-mce-href="http://www.gearvn.com">http://www.gearvn.com</a></span></p>
                         <p><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>+ Bước 2:</strong> Chờ
@@ -59,15 +59,15 @@
                                 giờ, đặt sau giờ này sẽ nhận cuộc gọi trước 12 giờ hôm sau.</span></p>
                         <p><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;">Cuộc gọi này sẽ xác nhận các
                                 thông tin cá nhân cần thiết để nhập vào hồ sơ đăng ký trả góp và thông báo thời gian để mang
-                                hồ sơ gốc đến GearVN.</span></p>
+                                hồ sơ gốc đến PCPM.</span></p>
                         <p><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>+ Bước 3:</strong> Mang
-                                các giấy tờ gốc đến GearVN theo lịch hẹn và chờ nhận kết quả xét duyệt trong khoảng thời
+                                các giấy tờ gốc đến PCPM theo lịch hẹn và chờ nhận kết quả xét duyệt trong khoảng thời
                                 gian 15-30 phút, sau đó nhận hàng. Giấy tờ gốc sẽ được trả lại khách hàng sau khi đã đối
                                 chiếu.</span></p>
                     </li>
                     <li>
                         <p><span style="font-size: 15pt;" data-mce-style="font-size: 15pt;"><strong>Hoặc liên
-                                </strong><strong>hệ chuyên viên tư vấn: HOTLINE GEARVN 1800.6975<br></strong></span></p>
+                                </strong><strong>hệ chuyên viên tư vấn: HOTLINE PCPM 1800.6975<br></strong></span></p>
                     </li>
                 </ul>
                 <p><span style="font-size: 15pt; color: #ff0000;"

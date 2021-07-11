@@ -17,9 +17,13 @@
 
     </style>
 
+    
     <!-- breadcrumbs area start -->
     <div class="breadcrumbs">
         <div class="container">
+            <h3>
+                {{ $cateProduct->c_name }}
+            </h3>
             <div class="row">
                 <div class="col-md-12">
                     <div class="container-inner">
@@ -51,9 +55,15 @@
                                     <div class="orderby-wrapper">
                                         <label>Sắp xếp theo: </label>
                                         <select name="orderby" id="orderby" class="orderby">
-                                            <option {{Request::get('orderby') == "price" || !Request::get('orderby') ?  "selected = 'selected" : ""}} value="price">Giá tăng dần</option>
-                                            <option {{Request::get('orderby') == "price-desc" ?  "selected = 'selected" : ""}} value="price-desc">Giá giảm dần</option>
-                                            <option {{Request::get('orderby') == "popularity" ?  "selected = 'selected" : ""}} value="popularity">Độ yêu thích</option>
+                                            <option
+                                                {{ Request::get('orderby') == 'price' || !Request::get('orderby') ? "selected = 'selected" : '' }}
+                                                value="price">Giá tăng dần</option>
+                                            <option
+                                                {{ Request::get('orderby') == 'price-desc' ? "selected = 'selected" : '' }}
+                                                value="price-desc">Giá giảm dần</option>
+                                            <option
+                                                {{ Request::get('orderby') == 'popularity' ? "selected = 'selected" : '' }}
+                                                value="popularity">Độ yêu thích</option>
                                         </select>
                                 </form>
                             </div>
@@ -141,7 +151,6 @@
                 $('#order-by').submit();
             });
         });
-
     </script>
 
 @endsection

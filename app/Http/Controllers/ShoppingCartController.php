@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Transaction;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
 use function GuzzleHttp\Promise\all;
@@ -185,9 +187,31 @@ class ShoppingCartController extends FrontendController
             'total' => $total,
             'transactionId' => $transactionId,
         ];
+        $emails = get_data_user('web', 'email') ?? '';
+        //Gửi mail
+        \Mail::to($emails)->send(new SendMail($viewData));
         \Cart::destroy();
         return view('shopping.pay_return', $viewData)/*  redirect('/') */;
     }
+
+    public function saveInfoShoppingCart1(Request $request)
+    {
+        $user = User::find(get_data_user('web'));
+        $products = \Cart::content();
+        $transactionId = 1;
+        $total = \Cart::subtotal();
+        $viewData = [
+            'user' => $user,
+            'products' => $products,
+            'total' => $total,
+            'transactionId' => $transactionId,
+        ];
+        $emails = get_data_user('web', 'email') ?? '';
+        //Gửi mail
+        \Mail::to($emails)->send(new SendMail($viewData));
+        dd('OK');
+    }
+
 
 
     //Thanh toán online
@@ -308,6 +332,9 @@ class ShoppingCartController extends FrontendController
                     'vnpayData' => $vnpayData,
                 ];
                 \Cart::destroy();
+                $emails = get_data_user('web', 'email') ?? '';
+                //Gửi mail
+                \Mail::to($emails)->send(new SendMail($viewData));
                 return view('vnpay.vnpay_return', $viewData)->with('success', 'Đơn hàng của bạn đã được lưu');
             } catch (\Exception $exception) {
                 /* dd('Exception'); */

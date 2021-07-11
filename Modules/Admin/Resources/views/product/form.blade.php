@@ -4,7 +4,7 @@
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="pro_name" class="form-label">Tên sản phẩm:</label>
-                <input type="text" class="form-control" placeholder="Tên Danh Mục"
+                <input type="text" class="form-control" placeholder="Tên sản phẩm"
                     value="{{ old('pro_name', isset($product->pro_name) ? $product->pro_name : '') }}"
                     name="pro_name">
                 @if ($errors->has('pro_name'))
@@ -40,6 +40,13 @@
                     value="{{ old('pro_title_seo', isset($product->pro_title_seo) ? $product->pro_title_seo : '') }}"
                     name="pro_title_seo">
             </div>
+             {{-- Meta Descripstion --}}
+             <div class="form-group">
+                <label for="pro_description_seo" class="form-label">Meta Description</label>
+                <input type="text" class="form-control" placeholder="Meta description"
+                    value="{{ old('pro_description_seo', isset($product->pro_description_seo) ? $product->pro_description_seo : '') }}"
+                    name="pro_description_seo">
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
@@ -49,7 +56,7 @@
                     @if (isset($categories))
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}"
-                                {{ old('pro_category_id', (isset($product->pro_category_id) ? $product->pro_category_id : '') == $category->id ? "selected='selected'" : '') }}>
+                                {{ old('pro_category_id', (isset($product->pro_category_id) ? $product->pro_category_id : '') == $category->id ? "selected" : '') }}>
                                 {{ $category->c_name }} </option>
                         @endforeach
                     @endif
@@ -97,31 +104,26 @@
             <div class="form-group">
                 <input type="file" name="pro_avatar" class="" id="input_img">
             </div>
-
-            {{-- Meta Descripstion --}}
-            <div class="form-group">
-                <label for="pro_description_seo" class="form-label">Meta Description</label>
-                <input type="text" class="form-control" placeholder="Meta description"
-                    value="{{ old('pro_description_seo', isset($product->pro_description_seo) ? $product->pro_description_seo : '') }}"
-                    name="pro_description_seo">
-            </div>
         </div>
     </div>
+
     {{-- Album ảnh --}}
     <div class="form-group">
         <label for="file" class="form-label">Album ảnh</label>
-        @if ($images)
+        @if (isset($images))
             <div class="row">
                 @foreach ($images as $image)
-                    <div class="col-sm-2">
-                        <a href="{{route('admin.get.delete.product.image', $image->id)}}">
-                            <img class="img-fluid" src="{{ pare_url_file($image->pi_slug) }}" alt="">
-                        </a>
+                <div class="col-sm-2">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ pare_url_file($image->pi_slug) }}" alt="Card image cap">
+                        <div class="card-body text-center">
+                            <a href="{{ route('admin.get.delete.product.image', $image->id) }}" class="btn btn-danger">Delete</a>
+                        </div>
                     </div>
+                </div>
                 @endforeach
             </div>
         @endif
-
         <div class="file-loading">
             <input id="images" type="file" name="file[]" multiple class="file" data-overwrite-intial="false"
                 data-min-file-count="0">

@@ -20,7 +20,7 @@ class StaticPageController extends FrontendController
     }
     public function getShipping()
     {
-        dd('ha ha');
+        return view('Static.shipping');
     }
 
 

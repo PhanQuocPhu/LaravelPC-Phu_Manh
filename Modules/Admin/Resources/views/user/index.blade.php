@@ -42,16 +42,15 @@
                                     <td>{{ $user->phone }}</td>
 
                                     <td>
-                                        <a style="padding: 5px 10px" class="border-right"
+                                        <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
                                             href="{{ route('admin.get.edit.user', $user->id) }}"><i
-                                                class="far fa-edit text-primary"></i></a>
-                                        <a style="padding: 5px 10px" class="border-left del_item"
+                                                class="far fa-edit text-primary"></i> </a>
+                                        <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
                                             href="{{ route('admin.get.action.user', ['delete', $user->id]) }}"><i
-                                                class="far fa-trash-alt text-danger"></i></a>
+                                                class="far fa-trash-alt  text-danger"></i> </a>
                                     </td>
                                 </tr>
                             @endforeach
-                            {{ $articles->links('components.paginate') }}
                         @endif
                     </tbody>
                 </table>

@@ -115,10 +115,11 @@
                                     <td>
                                         <a style="padding: 5px 10px" class="btn btn-outline-primary" id="edit"
                                             href="{{ route('admin.get.edit.product', $product->id) }}"><i
-                                                class="far fa-edit text-primary"></i> Edit</a>
+                                                class="far fa-edit text-primary"></i> </a>
                                         <a style="padding: 5px 10px" class="btn btn-outline-danger del_item" id="delete"
-                                            href="{{-- {{ route('admin.get.action.product', ['delete', $product->id]) }} --}} {{ route('admin.get.action.product.ajax', ['delete', $product->id]) }}"><i
-                                                class="far fa-trash-alt text-danger"></i> Delete</a>
+                                            href="{{ route('admin.get.action.product.ajax', ['delete', $product->id]) }}"><i
+                                                class="far fa-trash-alt  text-danger"></i> </a>
+                                        
                                     </td>
                                 </tr>
                             @endforeach
@@ -197,6 +198,5 @@
                 }
             });
         });
-
     </script>
 @stop

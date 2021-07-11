@@ -47,16 +47,17 @@ class ProductDetailController extends FrontendController
                     }
                 }
             }
+            $images = \DB::table('product_images')->where('pi_product_id', $id)->get();
             $viewData = [
                 'productDetail' => $productDetail,
                 'cateProduct' => $cateProduct,
                 'ratings' => $ratings,
                 'arrayRatings' => $arrayRatings,
+                'images' => $images,
             ];
 
             return view('product.detail', $viewData);
         }
         return redirect('/');
-
     }
 }

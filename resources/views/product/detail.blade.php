@@ -98,15 +98,47 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="zoomWrapper">
-                            <div id="img-1" class="zoomWrapper single-zoom">
+                            <div id="img-1" class="zoomWrapper single-zoom" >
                                 <a href="#">
-                                    <img id="zoom1" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
-                                        data-zoom-image="" alt="big-1">
+                                    <img id="zoom1" 
+                                        src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}" style="max-height: 515px;"
+                                        data-zoom-image="{{ asset(pare_url_file($productDetail->pro_avatar)) }}" 
+                                        alt="big-1">
                                 </a>
                             </div>
-
+                            @if (isset($images))
+                                <div class="single-zoom-thumb">
+                                    <ul class="bxslider" id="gallery_01">
+                                        <li class="">
+                                            <a href="#" class="elevatezoom-gallery active"
+                                                data-image="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
+                                                data-zoom-image="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"><img
+                                                    src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}" /></a>
+                                        </li>
+                                        @foreach ($images as $key => $image)
+                                            <li class="">
+                                                <a href="#" class="elevatezoom-gallery {{-- {{ $key == 0 ? 'active' : '' }} --}}"
+                                                    data-image="{{ asset(pare_url_file($image->pi_slug)) }}"
+                                                    data-zoom-image="{{ asset(pare_url_file($image->pi_slug)) }}"><img
+                                                        src="{{ asset(pare_url_file($image->pi_slug)) }}" /></a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                {{-- <div class="row">
+                                    <div class="col-sm-3">
+                                        <img class="galery" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}">
+                                    </div>
+                                    @foreach ($images as $image)
+                                        <div class="col-sm-3">
+                                            <img class="galery" src="{{ asset(pare_url_file($image->pi_slug)) }}">
+                                        </div>
+                                    @endforeach
+                                </div> --}}
+                            @endif
                         </div>
                     </div>
+
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="product-list-wrapper">
                             <div class="single-product">
@@ -302,13 +334,13 @@
     <br>
 @stop
 @section('script')
+
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $('body').on('click', '.add-cart', function(event) {
             event.preventDefault();
             let $this = $(this);
@@ -321,6 +353,17 @@
                     alert("Thêm sản phẩm thành công");
                     $("#cart-count").html(response);
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $('.galery').click(function() {
+                // Change src attribute of image
+                let $this = $(this);
+                let src = $(this).attr("src");
+                $('#thumb').attr('src', src);
+                $('#thumb').attr('data-zoom-image', src);
+
             });
         });
 
@@ -380,7 +423,6 @@
                 }
 
             });
-
             //Lưu id sản phẩm
             let idProduct = $("#content_product").attr('data-id');
             //Lấy giá trị trong storage
@@ -401,6 +443,5 @@
                 console.log(products);
             }
         });
-
     </script>
 @endsection

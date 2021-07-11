@@ -22,28 +22,66 @@
 
     <!-- Bootstrap CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('shopping/css/bootstrap.min.css') }}">
 
     <!-- owl.carousel CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('shopping/css/owl.carousel.css') }}">
 
     <!-- owl.theme CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.theme.css') }} ">
+    <link rel="stylesheet" href="{{ asset('shopping/css/owl.theme.css') }}">
 
     <!-- owl.transitions CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/carousel/owl.transitions.css') }} ">
+    <link rel="stylesheet" href="{{ asset('shopping/css/owl.transitions.css') }}">
 
     <!-- font-awesome.min CSS
   ============================================ -->
     <link href=" {{ asset('theme_admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('shopping/css/font-awesome.min.css') }}">
+
+    <!-- meanmenu CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/css/meanmenu.min.css') }}">
 
     <!-- font-icon CSS
   ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/fonts/font-icon.css') }} ">
+    <link rel="stylesheet" href="{{ asset('shopping/fonts/font-icon.css') }}">
+
+    <!-- animate CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/css/animate.css') }}">
+
+    <!-- normalize CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/css/normalize.css') }}">
+
+    <!-- main CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/css/main.css') }}">
+
+    <!-- style CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/style.css') }}">
+
+    <!-- responsive CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('shopping/css/responsive.css') }}">
+
+
+
+
+
+
+    <!-- Login style CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/themestyle/loginstyle.css') }}">
+
+    <!-- header CSS
+  ============================================ -->
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/gearvn.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme_admin/css/header_new.css') }}">
 
     <!-- nivo slider CSS
   ============================================ -->
@@ -51,48 +89,17 @@
     <link rel="stylesheet" href="{{ asset('theme_admin/custom-slider/css/preview.css') }} " type="text/css"
         media="screen" />
 
-    <!-- animate CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/animate.css') }}">
-
-    <!-- mobile menu CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/meanmenu.min.css') }} ">
-
-    <!-- normalize CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/normalize.css') }}">
-
-    <!-- main CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/main.css') }} ">
-
-    <!-- style CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/themestyle/loginstyle.css') }}">
-
-    <!-- login style CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/style.css') }}">
-
-    <!-- header CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/gearvn.css') }}">
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/header_new.css') }}">
-    <!-- responsive CSS
-  ============================================ -->
-    <link rel="stylesheet" href="{{ asset('theme_admin/css/responsive.css') }}">
-
-
     {{-- Jquery confirm --}}
     <link href=" {{ asset('js/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css') }}" rel="stylesheet"
         type="text/css">
+
     {{-- Sweet Alert --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0" nonce="cDYxzErr"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0"
+nonce="cDYxzErr"></script>
 
 <body class="home-four" {{-- style="background-color: #f1f0f1 !important" --}}>
     <!--[if lt IE 8]>
@@ -169,7 +176,6 @@
                 $(this).remove();
             });
         }, 2000);
-
     </script>
 
     <!-- JS -->
@@ -177,51 +183,54 @@
     <!-- jquery-1.11.3.min js
   ============================================ -->
     <script src="{{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('shopping/js/jquery-1.11.3.min.js') }}"></script> --}}
 
     <!-- bootstrap js
   ============================================ -->
-    <script src="{{ asset('theme_admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('shopping/js/bootstrap.min.js') }}"></script>
+
+    <!-- owl.carousel.min js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/owl.carousel.min.js') }}"></script>
+
+    <!-- jquery scrollUp js 
+  ============================================ -->
+    <script src="{{ asset('shopping/js/jquery.scrollUp.min.js') }}"></script>
+
+    <!-- price-slider js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/price-slider.js') }}"></script>
+
+    <!-- elevateZoom js 
+  ============================================ -->
+    <script src="{{ asset('shopping/js/jquery.elevateZoom-3.0.8.min.js') }}"></script>
+
+    <!-- jquery.bxslider.min.js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/jquery.bxslider.min.js') }}"></script>
+
+    <!-- mobile menu js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/jquery.meanmenu.js') }}"></script>
+
+    <!-- wow js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/wow.js') }}"></script>
+
+    <!-- plugins js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/plugins.js') }}"></script>
+
+    <!-- main js
+  ============================================ -->
+    <script src="{{ asset('shopping/js/main.js') }}"></script>
+
+
 
     <!-- Nivo slider js
   ============================================ -->
     <script src="{{ asset('theme_admin/custom-slider/js/jquery.nivo.slider.js') }}" type="text/javascript"></script>
     <script src="{{ asset('theme_admin/custom-slider/home.js') }}" type="text/javascript"></script>
-
-    <!-- owl.carousel.min js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/owl.carousel.min.js') }}"></script>
-
-    <!-- jquery scrollUp js 
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/jquery.scrollUp.min.js') }}"></script>
-
-    <!-- price-slider js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/price-slider.js') }}"></script>
-
-    <!-- elevateZoom js 
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/jquery.elevateZoom-3.0.8.min.js') }}"></script>
-
-    <!-- jquery.bxslider.min.js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/jquery.bxslider.min.js') }}"></script>
-
-    <!-- mobile menu js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/jquery.meanmenu.js') }}"></script>
-
-    <!-- wow js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/wow.js') }}"></script>
-
-    <!-- plugins js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/plugins.js') }}"></script>
-
-    <!-- main js
-  ============================================ -->
-    <script src="{{ asset('theme_admin/js/main.js') }}"></script>
 
     @yield('script')
 </footer>
