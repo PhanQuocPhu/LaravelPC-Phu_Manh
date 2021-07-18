@@ -119,6 +119,7 @@
 
                     {{-- Mấy cái còn lại --}}
                     <div class="right_header">
+                        {{-- Thanh search --}}
                         <div class=" pd5 fl1 ">
                             <div id="search" class=" hidden-sm  hidden-xs">
                                 <div class="search">

@@ -60,4 +60,21 @@ class ProductDetailController extends FrontendController
         }
         return redirect('/');
     }
+    public function productList(Request $request)
+    {
+        if($request->q)
+        {
+            $products = Product::where([
+                'pro_active'=>Product::STATUS_PUBLIC
+            ])->where('pro_name', 'like', '%'.$request->q.'%');
+            $products = $products->paginate(3);
+            $viewData = [
+                'products' => $products,
+                'query' => $request->query()
+            ];
+
+            return view('product.index', $viewData);
+        }
+        /* dd($request->all()); */
+    }
 }

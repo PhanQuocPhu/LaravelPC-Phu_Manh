@@ -17,13 +17,18 @@
 
     </style>
 
-    
+
     <!-- breadcrumbs area start -->
     <div class="breadcrumbs">
         <div class="container">
-            <h3>
-                {{ $cateProduct->c_name }}
-            </h3>
+            @if (isset($cateProduct))
+                <h3>
+                    {{ $cateProduct->c_name }}
+                </h3>
+            @else
+                <h3>Kết quả tìm kiếm</h3>
+            @endif
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="container-inner">
@@ -32,7 +37,13 @@
                                 <a href="{{ route('home') }}">Home</a>
                                 <span><i class="fa fa-angle-right"></i></span>
                             </li>
-                            <li class="category3"><span>{{ $cateProduct->c_name }}</span></li>
+                            <li class="category3">
+                                @if (isset($cateProduct))
+                                    <span>{{ $cateProduct->c_name }}</span>
+                                @else
+                                    <span>Kết quả tìm kiếm</span>
+                                @endif
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -131,8 +142,13 @@
                                         </div>
                                     @endforeach
                                 @endif
-
                             </div>
+                            @if (isset($query))
+                                {{ $products->appends($query)->links('components.paginate') }}
+                            @else
+                                {{ $products->links('components.paginate') }}
+                            @endif
+
                         </div>
                     </div>
 

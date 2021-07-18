@@ -77,6 +77,7 @@ class AdminTransactionController extends Controller
             switch ($action) {
                 case 'done': {
                         $transaction->tr_status = Transaction::STATUS_DONE;
+                        $transaction->tr_payment = Transaction::PAYMENT_DONE;
                         $transaction->save();
                     }
                     break;

@@ -75,7 +75,7 @@
                             @csrf
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
-                                    <h5 class="mb-2 text-primary">ĐỔI MẬT KHẨU</h5>
+                                    
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">

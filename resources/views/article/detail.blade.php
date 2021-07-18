@@ -86,9 +86,9 @@
     <!-- breadcrumbs area end -->
 
     <div class="container">
-        <h1 style="color: black"> {{ $articleDetail->a_name }} </h1>
         <div class="row">
             <div class="col-md-8">
+                <h1 style="color: black"> {{ $articleDetail->a_name }} </h1>
                 <strong>{{ $articleDetail->a_description }}</strong>
                 <div class="quick-link" style="font-family: Helvetica Neue,Helvetica,Roboto,Arial,sans-serif !important;">
                     <ul>
@@ -105,7 +105,7 @@
                 {!! $articleDetail->a_content !!}
             </div>
             <div class="col-md-4">
-                RIGHT
+                
             </div>
         </div>
     </div>

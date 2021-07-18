@@ -32,8 +32,8 @@ Route::get('dang-xuat', [App\Http\Controllers\Auth\LoginController::class, 'getL
 //Liên quan tới trang chủ
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
-Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
+
+
 //Static page
 Route::get('pages/chinh-sach-bao-hanh', [App\Http\Controllers\StaticPageController::class, 'getGuarantee'])->name('get.guarantee');
 Route::get('pages/huong-dan-tra-gop', [App\Http\Controllers\StaticPageController::class, 'getInstallment'])->name('get.buy.installment');
@@ -71,6 +71,14 @@ Route::group(['prefix' => 'gio-hang', 'middleware' => 'CheckLoginUser'], functio
     Route::post('/thanh-toan/online', [App\Http\Controllers\ShoppingCartController::class, 'createPayment'])->name('payment.online');
     Route::get('/vnpay/return', [App\Http\Controllers\ShoppingCartController::class, 'vnpayReturn'])->name('vnpay.return');
 });
+
+
+//Lấy danh sách sản phẩm
+Route::get('danh-muc/{slug}-{id}', [App\Http\Controllers\CategoryController::class, 'getListProduct'])->name('get.list.product');
+
+//Chi tiết sản phẩm
+Route::get('san-pham/{slug}-{id}', [App\Http\Controllers\ProductDetailController::class, 'productDetail'])->name('get.detail.product');
+Route::get('search', [App\Http\Controllers\ProductDetailController::class, 'productList'])->name('get.search.product');
 
 /* Đánh giá sản phẩm */
 Route::group(['prefix' => 'ajax', 'middleware' => 'CheckLoginUser'], function () {
