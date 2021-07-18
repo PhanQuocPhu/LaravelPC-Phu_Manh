@@ -62,8 +62,8 @@ class AdminController extends Controller
         //Ngày trong tháng
         $listDate = Date::getListDayInMonth();
         //Doanh thu các ngày trong tháng
-        $moneyDaily = Transaction::whereMonth('updated_at', date('m'))->where('tr_status', Transaction::STATUS_DONE)
-            ->select(\DB::raw('sum(tr_total) as totalMoney'), \DB::raw('DATE(updated_at) day'))->groupBy('day')->get()->toArray();
+        /* $moneyDaily = Transaction::whereMonth('updated_at', date('m'))->where('tr_status', Transaction::STATUS_DONE)
+            ->select(\DB::raw('sum(tr_total) as totalMoney'), \DB::raw('DATE(updated_at) day'))->groupBy('day')->get()->toArray(); */
         $arrDailyMoney = [];
         foreach ($listDate as $day) {
             $total = 0;
