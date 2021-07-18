@@ -65,7 +65,7 @@ class AdminController extends Controller
         /* $moneyDaily = Transaction::whereMonth('updated_at', date('m'))->where('tr_status', Transaction::STATUS_DONE)
             ->select(\DB::raw('sum(tr_total) as totalMoney'), \DB::raw('DATE(updated_at) day'))->groupBy('day')->get()->toArray(); */
         $arrDailyMoney = [];
-        foreach ($listDate as $day) {
+        /* foreach ($listDate as $day) {
             $total = 0;
             foreach ($moneyDaily as $key => $revenue) {
                 if ($revenue['day'] == $day) {
@@ -74,7 +74,7 @@ class AdminController extends Controller
                 }
             }
             $arrDailyMoney[] = (int)$total;
-        }
+        } */
         //dd($arrDailyMoney);
         $viewData = [
             'ratings' => $ratings,
