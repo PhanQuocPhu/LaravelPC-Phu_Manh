@@ -124,7 +124,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h5>Thông tin hóa đơn</h5>
-                            <p>Mã đơn hàng: {{ $vnpayData['vnp_TxnRef'] }}<?php echo
+                            <p>Mã đơn hàng: {{ /* $vnpayData['vnp_TxnRef'] */ $transactionId }}<?php echo
                                 $_GET['vnp_TxnRef']; ?>
                             </p>
                             <p>Mã GD Tại VNPAY: {{ $vnpayData['vnp_TransactionNo'] }}</p>
@@ -143,7 +143,7 @@
                     <div class="card">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong>Đơn hàng #{{ $transactionID }}</strong>
+                                <strong>Đơn hàng #{{ $transactionId }}</strong>
                             </li>
                             <li class="list-group-item">
                                 <table class="product-table">

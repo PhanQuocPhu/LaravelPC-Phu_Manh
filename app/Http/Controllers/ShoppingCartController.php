@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Payment;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
@@ -219,7 +220,7 @@ class ShoppingCartController extends FrontendController
     {
         /* dd($request->toArray()); */
         $vnp_TxnRef = randString(15); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_HashSecret = env('VNP_HASH_SECRET');
+        $vnp_HashSecret = env('VNP_HASH_SECRET') /* "WMBMCMQCFDUJZRUYBWBSRHFCYIHKASVY" */;
         $vnp_OrderInfo = 'Thanh toán đơn hàng';
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = str_replace(',', '', \Cart::subtotal(0)) * 100;
@@ -229,7 +230,7 @@ class ShoppingCartController extends FrontendController
 
         $inputData = array(
             "vnp_Version" => "2.0.0",
-            "vnp_TmnCode" => env('VNP_TMN_CODE'),
+            "vnp_TmnCode" => env('VNP_TMN_CODE') /* "C7XFNHPJ" */,
             "vnp_Amount" => $vnp_Amount,
             "vnp_Command" => "pay",
             "vnp_CreateDate" => date('YmdHis'),
@@ -260,7 +261,7 @@ class ShoppingCartController extends FrontendController
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
 
-        $vnp_Url = env('VNP_URL') . "?" . $query;
+        $vnp_Url = env('VNP_URL') /* "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html" */ . "?" . $query;
 
         if (isset($vnp_HashSecret)) {
             /* dd($vnp_HashSecret); */
@@ -280,6 +281,7 @@ class ShoppingCartController extends FrontendController
 
             \DB::beginTransaction();
 
+            
             try {
                 $vnpayData = $request->all();
                 $data = session()->get('info_customer');
@@ -320,23 +322,26 @@ class ShoppingCartController extends FrontendController
                     DB::table('payments')->insert($dataPayment);
                     /* dd('done'); */
                 }
-                \DB::commit();
+                
                 $user = User::find(get_data_user('web'));
                 $products = \Cart::content();
                 $total = \Cart::subtotal();
+                /* dd($transactionID); */
                 $viewData = [
                     'user' => $user,
                     'products' => $products,
                     'total' => $total,
-                    'transactionID' => $transactionID,
+                    'transactionId' => $transactionID,
                     'vnpayData' => $vnpayData,
                 ];
-                \Cart::destroy();
+                /* dd($viewData); */
                 $emails = get_data_user('web', 'email') ?? '';
                 //Gửi mail
                 \Mail::to($emails)->send(new SendMail($viewData));
-                return view('vnpay.vnpay_return', $viewData)->with('success', 'Đơn hàng của bạn đã được lưu');
-            } catch (\Exception $exception) {
+                \DB::commit();
+                \Cart::destroy();
+                return view('vnpay.vnpay_return', $viewData)->with('success', 'Đơn hàng của bạn đã được lưu');  
+            } catch (Exception $exception) {
                 /* dd('Exception'); */
                 \DB::rollBack();
                 return redirect('/')->with('error', 'Đã xảy ra lỗi, không thể thanh toán đơn hàng');
