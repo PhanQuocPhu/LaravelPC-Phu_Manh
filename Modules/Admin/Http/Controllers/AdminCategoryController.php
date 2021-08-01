@@ -14,16 +14,18 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $categories = Category::select('id', 'c_name', 'c_icon', 'c_title_seo', 'c_active', 'c_home')->get();
-
+        /* dd($categories->all()); */
 
         $viewData = ['categories' => $categories];
 
         return view('admin::category.index', $viewData);
     }
+
     public function create()
     {
         return view('admin::category.create');
     }
+
     public function store(RequestCategory $requestCategory)
     {
         $this->insertOrUpdate($requestCategory);
@@ -50,9 +52,10 @@ class AdminCategoryController extends Controller
             if ($id) {
                 $category                   = Category::find($id);
             }
+
             $category->c_name               = $requestCategory->name;
             $category->c_slug               = Str::slug($requestCategory->name);
-            /* $category->c_icon               = Str::slug($requestCategory->icon); */
+            /* $category->c_icon            = Str::slug($requestCategory->icon); */
             $category->c_title_seo          = $requestCategory->c_title_seo ? $requestCategory->c_title_seo : $requestCategory->name;
             $category->c_description_seo    = $requestCategory->c_description_seo;
 

@@ -110,7 +110,7 @@ class AdminTransactionController extends Controller
                     }
                     break;
             }
-            $transactions = Transaction::with('user:id,name')->paginate(10);
+            $transactions = Transaction::with('user:id,name')->get();
             $viewData = [
                 'transactions' => $transactions,
             ];
@@ -161,7 +161,7 @@ class AdminTransactionController extends Controller
             'orders' => $orders,
             'transnote' => $transaction
         ];
-        $html = view('admin::components.order', $viewData)->render();
+        $html = view('admin::components.transaction_data', $viewData)->render();
         return response()->json($html);
     }
 }

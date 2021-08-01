@@ -281,9 +281,7 @@ class ShoppingCartController extends FrontendController
 
             \DB::beginTransaction();
 
-            
-            try {
-                $vnpayData = $request->all();
+            $vnpayData = $request->all();
                 $data = session()->get('info_customer');
                 /* dd($data); */
                 $transactionID = DB::table('transactions')->insertGetID($data);
@@ -341,6 +339,8 @@ class ShoppingCartController extends FrontendController
                 \DB::commit();
                 \Cart::destroy();
                 return view('vnpay.vnpay_return', $viewData)->with('success', 'Đơn hàng của bạn đã được lưu');  
+            try {
+                
             } catch (Exception $exception) {
                 /* dd('Exception'); */
                 \DB::rollBack();
