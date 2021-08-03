@@ -209,7 +209,8 @@
                                 },
                                 success: function(response) {
                                     $.alert('Đã lưu');
-                                    $('#md_content').html(response);
+                                    location.reload();
+                                    /* $('#md_content').html(response); */
                                     //Reload data trang đơn hàng
                                     /* $.ajax({
                                         url: url,

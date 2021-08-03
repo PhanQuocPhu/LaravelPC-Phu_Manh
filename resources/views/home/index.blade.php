@@ -213,7 +213,7 @@
                         url: url,
                         method: 'POST',
                         success: function(response) {
-                            Swal.fire('Saved!', '', 'success')
+                            Swal.fire('Thêm sản phẩm thành công', '', 'success')
                             $("#cart-count").html(response);
                         }
                     });

@@ -183,6 +183,7 @@ nonce="cDYxzErr"></script>
     <!-- jquery-1.11.3.min js
   ============================================ -->
     <script src="{{ asset('theme_admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {{-- <script src="{{ asset('shopping/js/jquery-1.11.3.min.js') }}"></script> --}}
 
     <!-- bootstrap js

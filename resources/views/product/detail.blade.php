@@ -98,11 +98,11 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="zoomWrapper">
-                            <div id="img-1" class="zoomWrapper single-zoom" >
+                            <div id="img-1" class="zoomWrapper single-zoom">
                                 <a href="#">
-                                    <img id="zoom1" 
-                                        src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}" style="max-height: 515px;"
-                                        data-zoom-image="{{ asset(pare_url_file($productDetail->pro_avatar)) }}" 
+                                    <img id="zoom1" src="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
+                                        style="max-height: 515px;"
+                                        data-zoom-image="{{ asset(pare_url_file($productDetail->pro_avatar)) }}"
                                         alt="big-1">
                                 </a>
                             </div>
@@ -151,8 +151,7 @@
                                         <?php
                                         $ageDetail = 0;
                                         if ($productDetail->pro_total_rating) {
-                                        $ageDetail = round($productDetail->pro_total_number /
-                                        $productDetail->pro_total_rating, 2);
+                                            $ageDetail = round($productDetail->pro_total_number / $productDetail->pro_total_rating, 2);
                                         }
                                         ?>
                                         <div class="pro-rating">
@@ -235,8 +234,7 @@
                                 <div class="list_rating" style="width: 60%; padding:20px">
                                     @if (isset($arrayRatings))
                                         @foreach ($arrayRatings as $key => $arrayRating)
-                                            <?php $itemAge = round(($arrayRating['total'] /
-                                            $productDetail->pro_total_rating) * 100, 0); ?>
+                                            <?php $itemAge = round(($arrayRating['total'] / $productDetail->pro_total_rating) * 100, 0); ?>
                                             <div class="item_rating" style="display: flex; align_items:center">
                                                 {{-- {{dd($arrayRating)}} --}}
                                                 <div style="width: 10%; font-size:14px">
@@ -346,14 +344,25 @@
             let $this = $(this);
             let url = $this.attr('href');
             /*  console.log(url); */
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function(response) {
-                    alert("Thêm sản phẩm thành công");
-                    $("#cart-count").html(response);
+            Swal.fire({
+                title: 'Thêm sản phẩm vào giỏ hàng ?',
+                /* showDenyButton: true, */
+                showCancelButton: true,
+                confirmButtonText: `Yes`,
+                /* denyButtonText: `No`, */
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        success: function(response) {
+                            Swal.fire('Thêm sản phẩm thành công', '', 'success')
+                            $("#cart-count").html(response);
+                        }
+                    });
                 }
             });
+
         });
 
         $(document).ready(function() {
