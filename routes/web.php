@@ -54,11 +54,13 @@ Route::prefix('shopping')->group(function () {
     //Basic
     Route::get('/add/{id}', [App\Http\Controllers\ShoppingCartController::class, 'addProduct'])->name('add.shopping.cart');
     Route::get('/delete/{id}', [App\Http\Controllers\ShoppingCartController::class, 'deleteProductItem'])->name('delete.shopping.cart');
+
     Route::get('/danh-sach', [App\Http\Controllers\ShoppingCartController::class, 'getListShoppingCart'])->name('get.list.shopping.cart');
 
     //Chuyển thành ajax
     Route::post('/add-ajax/{id}', [App\Http\Controllers\ShoppingCartController::class, 'addProductAjax'])->name('add.shopping.cart.ajax');
     Route::post('/delete-ajax/{id}', [App\Http\Controllers\ShoppingCartController::class, 'deleteProductItemAjax'])->name('delete.shopping.cart.ajax');
+    Route::post('/edit-ajax/{key}/{qty}', [App\Http\Controllers\ShoppingCartController::class, 'editProductQtyAjax'])->name('edit.shopping.cart.ajax');
 });
 
 /* Thanh toán */

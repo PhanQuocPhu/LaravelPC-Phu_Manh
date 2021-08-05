@@ -6,12 +6,12 @@ use App\Mail\SendMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\Payment;
+use App\Models\User;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\Payment;
-use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -86,6 +86,7 @@ class ShoppingCartController extends FrontendController
         ]);
         return response(\Cart::count());
     }
+    
     //Xóa
     public function deleteProductItem($key)
     {
@@ -101,6 +102,15 @@ class ShoppingCartController extends FrontendController
         return response()->json($html);
     }
 
+    //Thay đổi số lượng trong giỏ ajax
+    public function editProductQtyAjax($key, $qty)
+    {
+        \Cart::update($key, $qty);
+        $products = \Cart::content();
+        $html = view('shopping.content', compact('products'))->render();
+        return response()->json($html);
+    }
+    
     //Load dữ liệu ra html rồi bỏ vào ajax
     public function viewOrder(Request $request, $id)
     {

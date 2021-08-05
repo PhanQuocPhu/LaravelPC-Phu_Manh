@@ -54,7 +54,14 @@
                                             class="img img-responsive" style="height: 80px; width:80px">
                                     </td>
                                     <td>{{ number_format($product->price, 0, '.', '.') }}</td>
-                                    <td>{{ $product->qty }}</td>
+                                    <td>
+                                        <a class="btn btn-danger edit-cart"
+                                            href="{{ route('edit.shopping.cart.ajax', [$key, $product->qty - 1]) }}">-</a>
+                                        <input type="text" readonly value="{{ $product->qty }}"
+                                            style="width: 33px; height: 33px; border: 0; text-align: center;">
+                                        <a class="btn btn-success edit-cart"
+                                            href="{{ route('edit.shopping.cart.ajax', [$key, $product->qty + 1]) }}">+</a>
+                                    </td>
                                     <td>{{ number_format($product->qty * $product->price, 0, '.', '.') }}</td>
                                     <td>
                                         <a style="padding: 5px 10px" class="border-left delete-cart"
@@ -105,7 +112,18 @@
                 url: url,
                 method: 'POST',
                 success: function(response) {
-                    alert("Đã xóa sản phẩm khỏi giỏ hàng");
+                    $('#cart-content').html(response);
+                }
+            });
+        });
+        $('body').on('click', '.edit-cart', function(event) {
+            event.preventDefault()
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function(response) {
                     $('#cart-content').html(response);
                 }
             });
