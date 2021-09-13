@@ -7,7 +7,7 @@
 
         </div>
         <p>Xin chào {{ $data['user']->name }}</p>
-        <p>Cảm ơn Anh/chị đã đặt hàng tại <strong>PCPM - Pc Phú Mạnh</strong>!</p>
+        <p>Cảm ơn Anh/chị đã đặt hàng tại <strong>PCPM - Laravel</strong>!</p>
         <p>Đơn hàng của Anh/chị đã được tiếp nhận, chúng tôi sẽ nhanh chóng liên hệ với Anh/chị.</p>
     </div>
     <hr>
@@ -206,6 +206,6 @@
                 target="_blank">16110180@student.hcmute.edu.vn</a>
         </p>
         <p style="text-align:right"><i>Trân trọng,</i></p>
-        <p style="text-align:right"><strong>Ban quản trị cửa hàng PCPM - PC Phú Mạnh</strong></p>
+        <p style="text-align:right"><strong>Ban quản trị cửa hàng PCPM - PC Laravel</strong></p>
     </div>
 </div>

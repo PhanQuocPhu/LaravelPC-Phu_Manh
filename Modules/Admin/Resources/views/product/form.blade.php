@@ -136,6 +136,7 @@
 </form>
 @section('script')
     <script type="text/javascript">
+        CKEDITOR.replace('pro_description');
         CKEDITOR.replace('pro_content');
     </script>
 @endsection

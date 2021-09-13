@@ -5,8 +5,8 @@
                 <!--<h3>PCPM.COM - HI-END PC & GAMING GEAR</h3> -->
                 <h5>Công ty TNHH Thương Mại PCPM </h5>
                 <div class="custom">
-                    <h5 class="title-footer-2"> Email cskh: 16110180@student.hcmute.edu.vn<br></h5>
-                    <h5 class="title-footer-2"> Email tư vấn: 16110151@student.hcmute.edu.vn<br></h5>
+                    <h5 class="title-footer-2"> Email cskh: example@gmail.com<br></h5>
+                    <h5 class="title-footer-2"> Email tư vấn:  example@gmail.com<br></h5>
                     <p style="font-size: 14px">
                         <b>HỆ THỐNG TỔNG ĐÀI MIỄN PHÍ:</b> (Làm việc từ 8h00 - 22h00)<br>
                     <table style="width: 296px;">
@@ -88,8 +88,7 @@
                         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555"
                             class="fb-xfbml-parse-ignore"><a
-                                href="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555">Pc Phú -
-                                Mạnh</a></blockquote>
+                                href="https://www.facebook.com/Pc-Ph%C3%BA-M%E1%BA%A1nh-101276915530555">Pc Laravel</a></blockquote>
                     </div>
                 </div>
 

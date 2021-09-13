@@ -163,9 +163,7 @@
                                     </div>
                                     <div class="product-desc">
                                         <strong>Thông tin chung: </strong>
-                                        <p>
-                                            {{ $productDetail->pro_description }}
-                                        </p>
+                                        <p>{!! $productDetail->pro_description !!}</p>
                                     </div>
                                     <div class="price-boxes row">
                                         <span class="col-md-2" style="display: inline-block; font-size:16px;">
